@@ -1,0 +1,17 @@
+//
+//  AppDelegate.h
+//  RTA
+//
+//  Created by tangwei1 on 16/10/10.
+//  Copyright © 2016年 tomwey. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
+
+
+@end
+
