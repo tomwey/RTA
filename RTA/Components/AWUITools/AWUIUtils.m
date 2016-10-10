@@ -134,6 +134,21 @@ void AWAppRateus(NSString* appId)
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
+void AWAppOpenQQ(NSString *qq)
+{
+    static UIWebView *webView = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+        [AWAppWindow() addSubview:webView];
+    });
+    
+    NSString *string = [NSString stringWithFormat:@"mqq://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq];
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
+}
+
 NSString* AWAppVersion()
 {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];

@@ -160,6 +160,12 @@ UIImage* AWSimpleResizeImage(UIImage* srcImage, CGSize newSize);
 void AWAppRateus(NSString* appId);
 
 /**
+ * 打开QQ应用到指定的聊天界面
+ * @param qq QQ号
+ */
+void AWAppOpenQQ(NSString *qq);
+
+/**
  * 创建图片按钮
  * @param imageName 图片名字
  * @param target 按钮点击事件目标

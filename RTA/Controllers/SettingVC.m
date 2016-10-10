@@ -102,7 +102,12 @@
 
 - (void)openNFC
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@""]];
+    NSURL *nfcAppURL = [NSURL URLWithString:NFC_APP_URL];
+    if ( [[UIApplication sharedApplication] canOpenURL:nfcAppURL] ) {
+        [[UIApplication sharedApplication] openURL:nfcAppURL];
+    } else {
+        [self showAlertWithTitle:@"提示" message:@"您还未安装该应用"];
+    }
 }
 
 - (void)gotoInvite
@@ -129,7 +134,7 @@
 
 - (void)openQQ
 {
-    
+    AWAppOpenQQ(OFFICIAL_QQ);
 }
 
 - (void)gotoWechat
@@ -139,12 +144,28 @@
 
 - (void)openPhone
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@""]];
+    NSString *phone = [NSString stringWithFormat:@"tel:%@", OFFICIAL_TELPHONE];
+    NSURL *phoneURL = [NSURL URLWithString:phone];
+    
+    if ( [[UIApplication sharedApplication] canOpenURL:phoneURL] ) {
+        [[UIApplication sharedApplication] openURL:phoneURL];
+    } else {
+        [self showAlertWithTitle:@"提示" message:@"您的设备不支持打电话功能"];
+    }
 }
 
 - (void)gotoVersion
 {
     
+}
+
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message
+{
+    [[[UIAlertView alloc] initWithTitle:title
+                                message:message
+                               delegate:nil
+                      cancelButtonTitle:nil
+                      otherButtonTitles:@"确定",nil] show];
 }
 
 @end

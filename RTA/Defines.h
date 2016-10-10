@@ -40,6 +40,11 @@
 
 #define HOME_HAIRLINE_COLOR   MAIN_BG_COLOR//AWColorFromRGB(240, 240, 242)
 
+#define NFC_APP_URL       @""
+#define OFFICIAL_TELPHONE @""
+#define OFFICIAL_QQ       @"529195758"
+#define OFFICIAL_WECHAT   @""
+
 #import "UIViewController+CreateFactory.h"
 
 // Models
