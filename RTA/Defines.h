@@ -42,6 +42,11 @@
 
 #define HOME_HAIRLINE_COLOR   MAIN_BG_COLOR//AWColorFromRGB(240, 240, 242)
 
+#define WX_APP_ID     @"wx0a45255c7eb48647"
+#define WX_APP_SECRET @"31130acde0e69ede9e6850f86f0050d8"
+
+#define UMENG_KEY     @"57feef1d67e58e04c2000198"
+
 #define NFC_APP_URL       @""
 #define OFFICIAL_TELPHONE @"18108037442"
 #define OFFICIAL_QQ       @"2757801355"
@@ -60,6 +65,10 @@
 
 ////// API接口
 #define API_HOST      @"http://182.150.21.101:9091/RTI/RTIWCF.svc"
+
+#define API_KEY    @"27654725447"
+#define API_SECRET @"dfjhskdhsiwnvhkjhdguwnvbxmn"
+#define AES_KEY    @"666AA4DF3533497D973D852004B975BC"
 
 // 获取官方信息接口
 #define GET_RT_RESULT @"GetRTResult"
@@ -91,13 +100,18 @@
 // 更新头像
 #define UPLOAD_PIC @"UploadPic"
 
+#import "ParamUtil.h"
+
 #import "UIViewController+CreateFactory.h"
+#import "UIViewController+NetworkService.h"
 
 #import "AppDelegate.h"
 
 #import "CustomNavBar.h"
 
 #import "AWButton.h"
+
+#import "NetworkService.h"
 
 // Models
 #import "User.h"

@@ -15,6 +15,9 @@
  */
 @property (nonatomic, readonly) NSString* md5Hash;
 
+- (NSData *)aes256_encrypt:(NSString *)key;
+- (NSData *)aes256_decrypt:(NSString *)key;
+
 @end
 
 @interface NSString (MD5)
@@ -23,5 +26,8 @@
  * 计算字符串的md5
  */
 @property (nonatomic, readonly) NSString* md5Hash;
+
+- (NSString *)aes256_encrypt:(NSString *)key;
+- (NSString *)aes256_decrypt:(NSString *)key;
 
 @end

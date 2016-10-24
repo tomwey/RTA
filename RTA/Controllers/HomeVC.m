@@ -28,6 +28,9 @@
     self.navBar.title = @"实时";
     
     [self addLeftBarItemWithView:nil];
+    
+//    [self.networkService POST:@"GetStationByLngAndLat"
+//                       params:@{} completion:<#^(id result, NSError *error)completion#>]
 }
 
 @end

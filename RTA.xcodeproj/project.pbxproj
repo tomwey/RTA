@@ -151,6 +151,8 @@
 		97F131931DAB3C1E00806E8A /* default_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F131911DAB3C1E00806E8A /* default_avatar@2x.png */; };
 		97F131941DAB3C1E00806E8A /* default_avatar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F131921DAB3C1E00806E8A /* default_avatar@3x.png */; };
 		97F131981DAB400000806E8A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F131971DAB400000806E8A /* MBProgressHUD.m */; };
+		99C66E5D1DBE584B00C8E2F9 /* UIViewController+NetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C66E5C1DBE584B00C8E2F9 /* UIViewController+NetworkService.m */; };
+		99C66E601DBE5E6F00C8E2F9 /* ParamUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C66E5F1DBE5E6F00C8E2F9 /* ParamUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -387,6 +389,10 @@
 		97F131921DAB3C1E00806E8A /* default_avatar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_avatar@3x.png"; sourceTree = "<group>"; };
 		97F131961DAB400000806E8A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		97F131971DAB400000806E8A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		99C66E5B1DBE584B00C8E2F9 /* UIViewController+NetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NetworkService.h"; sourceTree = "<group>"; };
+		99C66E5C1DBE584B00C8E2F9 /* UIViewController+NetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NetworkService.m"; sourceTree = "<group>"; };
+		99C66E5E1DBE5E6F00C8E2F9 /* ParamUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParamUtil.h; path = RTA/Controllers/ParamUtil.h; sourceTree = SOURCE_ROOT; };
+		99C66E5F1DBE5E6F00C8E2F9 /* ParamUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParamUtil.m; path = RTA/Controllers/ParamUtil.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -460,6 +466,8 @@
 			children = (
 				97F131041DAB1D9000806E8A /* UIViewController+CreateFactory.h */,
 				97F131051DAB1D9000806E8A /* UIViewController+CreateFactory.m */,
+				99C66E5B1DBE584B00C8E2F9 /* UIViewController+NetworkService.h */,
+				99C66E5C1DBE584B00C8E2F9 /* UIViewController+NetworkService.m */,
 				97F130EF1DAB1A9400806E8A /* BaseVC.h */,
 				97F130F01DAB1A9400806E8A /* BaseVC.m */,
 				97F130F11DAB1A9400806E8A /* BaseNavBarVC.h */,
@@ -817,6 +825,8 @@
 		97F130EE1DAB190F00806E8A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				99C66E5E1DBE5E6F00C8E2F9 /* ParamUtil.h */,
+				99C66E5F1DBE5E6F00C8E2F9 /* ParamUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1119,6 +1129,7 @@
 				97F130991DAB18C500806E8A /* NSDataAdditions.m in Sources */,
 				97F130E71DAB18D300806E8A /* UIButton+AFNetworking.m in Sources */,
 				97F1309D1DAB18C500806E8A /* MACircleProgressIndicator.m in Sources */,
+				99C66E5D1DBE584B00C8E2F9 /* UIViewController+NetworkService.m in Sources */,
 				97F130D91DAB18D300806E8A /* AFHTTPRequestOperation.m in Sources */,
 				97579A8B1DBDCE5C00D99981 /* LoginVC.m in Sources */,
 				97F130A11DAB18C500806E8A /* AWLocationManager.m in Sources */,
@@ -1128,6 +1139,7 @@
 				97F130961DAB18C500806E8A /* APIRequest.m in Sources */,
 				97579A9D1DBDE05000D99981 /* PasswordVC.m in Sources */,
 				97F130A31DAB18C500806E8A /* AWRefreshBaseView.m in Sources */,
+				99C66E601DBE5E6F00C8E2F9 /* ParamUtil.m in Sources */,
 				97F12FF21DAB15AA00806E8A /* AppDelegate.m in Sources */,
 				97F130901DAB18C500806E8A /* APIConfig.m in Sources */,
 				97579A971DBDD63F00D99981 /* AWButton.m in Sources */,
