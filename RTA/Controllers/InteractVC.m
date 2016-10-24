@@ -10,7 +10,7 @@
 #import "Defines.h"
 #import <WebKit/WebKit.h>
 
-@interface InteractVC () <UIWebViewDelegate, WKNavigationDelegate>
+@interface InteractVC () <WKNavigationDelegate>
 
 @property (nonatomic, strong) WKWebView *webView;
 
@@ -29,6 +29,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [self.webView removeObserver:self forKeyPath:@"loading"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -37,18 +42,11 @@
     
     [self addLeftBarItemWithView:nil];
     
-//    self.webView = [[UIWebView alloc] initWithFrame:self.contentView.bounds];
-//    [self.contentView addSubview:self.webView];
-//    
-//    self.webView.scalesPageToFit = YES;
-//    
-//    self.webView.delegate = self;
-//    
-//    self.webView.scrollView.showsVerticalScrollIndicator = YES;
-    
     self.webView = [[WKWebView alloc] initWithFrame:self.contentView.bounds];
     [self.contentView addSubview:self.webView];
     self.webView.navigationDelegate = self;
+    
+    self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
     
     [self.webView addObserver:self
                    forKeyPath:@"loading"
@@ -74,8 +72,6 @@
     if ( self.loadFail ) {
         [self startLoad];
     }
-    
-//    self.webView.scrollView.contentInset = UIEdgeInsetsZero;
 }
 
 - (void)startLoad
@@ -96,41 +92,6 @@
         WebViewVC *vc = [[WebViewVC alloc] initWithURL:navigationAction.request.URL title:@"详情"];
         [self.tabBarController.navigationController pushViewController:vc animated:YES];
     }
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
- navigationType:(UIWebViewNavigationType)navigationType
-{
-    NSLog(@"request: %@, type: %d", request, navigationType);
-    if ( [[[request URL] absoluteString] isEqualToString:SQUARE_LIST_URL] ) {
-        return YES;
-    }
-    
-    WebViewVC *vc = [[WebViewVC alloc] initWithURL:request.URL title:@"详情"];
-    [self.tabBarController.navigationController pushViewController:vc animated:YES];
-    
-    return NO;
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    //    [self finishLoading:LoadingStateSuccessResult];
-    [MBProgressHUD hideHUDForView:self.contentView animated:YES];
-    
-    self.loadFail = NO;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
-{
-    //    [self finishLoading:LoadingStateFail];
-    [MBProgressHUD hideHUDForView:self.contentView animated:YES];
-    
-    self.loadFail = YES;
 }
 
 @end

@@ -10,17 +10,9 @@
 #import "Defines.h"
 #import <WebKit/WebKit.h>
 
-@interface InquireVC () <UIWebViewDelegate>
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
+@interface InquireVC () <WKNavigationDelegate>
 
 @property (nonatomic, strong) WKWebView *webView;
-
-#else
-
-@property (nonatomic, strong) UIWebView *webView;
-
-#endif
 
 @property (nonatomic, assign) BOOL loadFail;
 
@@ -38,6 +30,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [self.webView removeObserver:self forKeyPath:@"loading"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,14 +43,27 @@
     
     [self addLeftBarItemWithView:nil];
     
-    self.webView = [[WKWebView alloc] initWithFrame:self.contentView.bounds];//[[UIWebView alloc] initWithFrame:self.contentView.bounds];
+    self.webView = [[WKWebView alloc] initWithFrame:self.contentView.bounds];
     [self.contentView addSubview:self.webView];
+    self.webView.navigationDelegate = self;
     
-//    self.webView.scalesPageToFit = YES;
+    self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
     
-//    self.webView.delegate = self;
+    [self.webView addObserver:self
+                   forKeyPath:@"loading"
+                      options:NSKeyValueObservingOptionNew
+                      context:NULL];
     
     [self startLoad];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    if ( self.webView.isLoading ) {
+        
+    } else {
+        [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -73,39 +83,26 @@
     [self.webView loadRequest:[NSURLRequest requestWithURL:pageURL]];
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-//    [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
- navigationType:(UIWebViewNavigationType)navigationType
-{
-    NSLog(@"request: %@, type: %d", request, navigationType);
-    if ( [[[request URL] absoluteString] hasSuffix:@"/search.html"] ) {
-        return YES;
+    if ( [[navigationAction.request.URL absoluteString] hasSuffix:@"/search.html"] ) {
+        decisionHandler(WKNavigationActionPolicyAllow);
+    } else {
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
+        WebViewVC *vc = [[WebViewVC alloc] initWithURL:navigationAction.request.URL title:@"换乘列表"];
+        [self.tabBarController.navigationController pushViewController:vc animated:YES];
     }
-    
-    WebViewVC *vc = [[WebViewVC alloc] initWithURL:request.URL title:@"换乘列表"];
-    [self.tabBarController.navigationController pushViewController:vc animated:YES];
-    
-    return NO;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
 {
-//    [self finishLoading:LoadingStateSuccessResult];
-    [MBProgressHUD hideHUDForView:self.contentView animated:YES];
-    
     self.loadFail = NO;
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
-//    [self finishLoading:LoadingStateFail];
     self.loadFail = YES;
-    
-    [MBProgressHUD hideHUDForView:self.contentView animated:YES];
 }
 
 @end
