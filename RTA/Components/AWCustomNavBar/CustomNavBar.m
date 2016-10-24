@@ -320,6 +320,7 @@ static CGFloat const kContentViewTag  = 1011014;
         self.navigationController.navigationBarHidden = YES;
         
         navBar = [[CustomNavBar alloc] init];
+        navBar.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 64);
         
         // 设置默认属性
         navBar.backgroundColor = [UIColor whiteColor];
@@ -344,6 +345,10 @@ static CGFloat const kContentViewTag  = 1011014;
                                           CGRectGetHeight(self.view.bounds) - CGRectGetHeight(navBar.frame))];
         contentView.tag = kContentViewTag;
         [self.view addSubview:contentView];
+        
+        [self.view sendSubviewToBack:contentView];
+        
+        [self.view bringSubviewToFront:navBar];
     }
     
     return navBar;

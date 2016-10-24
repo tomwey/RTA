@@ -280,7 +280,8 @@ UIButton* AWCreateImageButton(NSString* imageName, id target, SEL action)
 UIButton* AWCreateImageButtonWithSize(NSString* imageName, CGSize size, id target, SEL action)
 {
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    UIImage *image = [UIImage imageNamed:imageName];
+    [button setImage:image forState:UIControlStateNormal];
     [button sizeToFit];
     
     button.exclusiveTouch = YES;
@@ -288,7 +289,13 @@ UIButton* AWCreateImageButtonWithSize(NSString* imageName, CGSize size, id targe
     CGRect bounds = CGRectMake(0, 0, size.width, size.height);
     if ( CGRectContainsRect(bounds, button.bounds) ) {
         button.bounds = bounds;
-    }
+    } else if ( image.size.width < 34 ) {
+        CGRect bounds = button.bounds;
+        bounds.size.width = 34;
+        button.bounds = bounds;
+        
+        [button setImageEdgeInsets:UIEdgeInsetsMake(0, image.size.width / 2 - 34 / 2, 0, 0)];
+    };
     
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     

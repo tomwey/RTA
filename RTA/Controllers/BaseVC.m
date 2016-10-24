@@ -38,10 +38,10 @@
     [self.loadingView finishLoading:state];
 }
 
-- (UIView *)contentView
-{
-    return self.view;
-}
+//- (UIView *)contentView
+//{
+//    return self.view;
+//}
 
 - (LoadingView *)loadingView
 {

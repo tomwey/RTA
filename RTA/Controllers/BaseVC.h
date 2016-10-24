@@ -11,7 +11,7 @@
 
 @interface BaseVC : UIViewController
 
-@property (nonatomic, strong, readonly) UIView *contentView;
+//@property (nonatomic, strong, readonly) UIView *contentView;
 
 - (void)startLoading:(void (^)(void))reloadCallback;
 

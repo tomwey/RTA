@@ -29,16 +29,13 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.navBar.backgroundImage = AWImageFromColor(NAV_BAR_BG_COLOR);
+    self.navBar.backgroundColor = NAV_BAR_BG_COLOR;
     self.navBar.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor] };
     
     // 添加默认的返回按钮
     __weak typeof(self) me = self;
-//    [self addLeftBarItemWithImage:@"btn_back.png" callback:^{
-//        [me back];
-//    }];
-    [self addLeftBarItemWithTitle:@"返回" size:CGSizeMake(40, 40) callback:^{
-        [me back];
+    [self addLeftBarItemWithImage:@"btn_back.png" callback:^{
+      [me back];
     }];
     
     // 添加手势滑动
@@ -47,27 +44,27 @@
     [self.contentView addGestureRecognizer:swipe];
 }
 
-- (UIView *)contentView
-{
-    return self.internalContentView;
-}
-
-- (UIView *)internalContentView
-{
-    if ( !_internalContentView ) {
-        _internalContentView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        [self.view addSubview:_internalContentView];
-        [self.view sendSubviewToBack:_internalContentView];
-        UIImage *image = [[UINavigationBar appearance] backgroundImageForBarMetrics:UIBarMetricsDefault];
-        _internalContentView.top = !!image ? 0 : 64;
-        _internalContentView.height -= 64;
-        
-        if ( self.tabBarController ) {
-            _internalContentView.height -= 49;
-        }
-    }
-    return _internalContentView;
-}
+//- (UIView *)contentView
+//{
+//    return self.internalContentView;
+//}
+//
+//- (UIView *)internalContentView
+//{
+//    if ( !_internalContentView ) {
+//        _internalContentView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//        [self.view addSubview:_internalContentView];
+//        [self.view sendSubviewToBack:_internalContentView];
+//        UIImage *image = [[UINavigationBar appearance] backgroundImageForBarMetrics:UIBarMetricsDefault];
+//        _internalContentView.top = !!image ? 0 : 64;
+//        _internalContentView.height -= 64;
+//        
+//        if ( self.tabBarController ) {
+//            _internalContentView.height -= 49;
+//        }
+//    }
+//    return _internalContentView;
+//}
 
 - (void)back
 {
@@ -92,7 +89,7 @@
         self.navBar.leftItem = nil;
         return nil;
     } else {
-        UIButton *btn = AWCreateImageButton(imageName, self, @selector(btnClicked:));
+        UIButton *btn = AWCreateImageButton(imageName, self, @selector(btnBack1Clicked:));
         btn.tag = kNavBarLeftItemTag;
         self.navBar.leftItem = btn;//[[UIBarButtonItem alloc] initWithCustomView:btn];
         return btn;
@@ -108,7 +105,7 @@
         self.navBar.rightItem = nil;
         return nil;
     } else {
-        UIButton *btn = AWCreateImageButton(imageName, self, @selector(btnClicked:));
+        UIButton *btn = AWCreateImageButton(imageName, self, @selector(btnBack1Clicked:));
         btn.tag = kNavBarRightItemTag;
         self.navBar.rightItem = btn;//[[UIBarButtonItem alloc] initWithCustomView:btn];
         return btn;
@@ -128,7 +125,7 @@
                                            title,
                                            nil,
                                            self,
-                                           @selector(btnClicked:));
+                                           @selector(btnBack1Clicked:));
         btn.tag = kNavBarLeftItemTag;
         self.navBar.leftItem = btn;//[[UIBarButtonItem alloc] initWithCustomView:btn];
         return btn;
@@ -148,7 +145,7 @@
                                            title,
                                            nil,
                                            self,
-                                           @selector(btnClicked:));
+                                           @selector(btnBack1Clicked:));
         btn.tag = kNavBarRightItemTag;
         self.navBar.rightItem = btn;//[[UIBarButtonItem alloc] initWithCustomView:btn];
         return btn;
@@ -175,7 +172,7 @@
     }
 }
 
-- (void)btnClicked:(UIButton *)sender
+- (void)btnBack1Clicked:(UIButton *)sender
 {
     switch (sender.tag) {
         case kNavBarLeftItemTag: {

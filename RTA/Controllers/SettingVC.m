@@ -117,7 +117,8 @@
 
 - (void)gotoInvite
 {
-    
+    UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"InviteVC" params:nil];
+    [AWAppWindow().navController pushViewController:vc animated:YES];
 }
 
 - (void)clearCache
