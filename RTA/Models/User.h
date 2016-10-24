@@ -27,5 +27,6 @@
 - (NSString *)nickname;
 - (NSString *)formatBirth;
 - (NSString *)formatSex;
+- (NSString *)formatUsername;
 
 @end

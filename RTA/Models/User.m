@@ -58,12 +58,17 @@
 {
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.dateFormat = @"MM/dd";
-    return [df stringFromDate:self.birthday];
+    return self.birthday ? [df stringFromDate:self.birthday] : @"未设置";
 }
 
 - (NSString *)formatSex
 {
-    return [self.sex integerValue] == 0 ? @"男" : @"女";
+    return self.sex ? ([self.sex integerValue] == 0 ? @"男" : @"女") : @"未设置";
+}
+
+- (NSString *)formatUsername
+{
+    return self.name ?: self.hackMobile;
 }
 
 @end

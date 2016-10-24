@@ -32,6 +32,8 @@
     self.navBar.backgroundColor = NAV_BAR_BG_COLOR;
     self.navBar.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor] };
     
+    self.contentView.backgroundColor = AWColorFromRGB(251, 251, 251);
+    
     // 添加默认的返回按钮
     __weak typeof(self) me = self;
     [self addLeftBarItemWithImage:@"btn_back.png" callback:^{

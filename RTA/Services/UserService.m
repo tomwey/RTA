@@ -41,6 +41,8 @@
  */
 - (User *)currentUser
 {
+    self.user = [[User alloc] initWithDictionary:@{@"mobile": @"13312345677"}];
+    
     User *user = self.user ?: [self userFromDetached];
 #if DEBUG
     NSLog(@"uid: %@, token: %@", user.name, user.token);

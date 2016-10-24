@@ -97,6 +97,8 @@
 
 #import "CustomNavBar.h"
 
+#import "AWButton.h"
+
 // Models
 #import "User.h"
 
