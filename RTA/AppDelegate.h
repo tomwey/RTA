@@ -15,3 +15,9 @@
 
 @end
 
+@interface UIWindow (NavBar)
+
+@property (nonatomic, strong, readonly) UINavigationController *navController;
+
+@end
+

@@ -7,6 +7,7 @@
 //
 
 #import "InquireVC.h"
+#import "Defines.h"
 
 @implementation InquireVC
 
@@ -24,7 +25,9 @@
 {
     [super viewDidLoad];
     
-    self.title = @"查询";
+    self.navBar.title = @"查询";
+    
+    [self addLeftBarItemWithView:nil];
 }
 
 @end

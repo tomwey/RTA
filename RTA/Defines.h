@@ -41,16 +41,67 @@
 #define HOME_HAIRLINE_COLOR   MAIN_BG_COLOR//AWColorFromRGB(240, 240, 242)
 
 #define NFC_APP_URL       @""
-#define OFFICIAL_TELPHONE @""
-#define OFFICIAL_QQ       @"529195758"
-#define OFFICIAL_WECHAT   @""
+#define OFFICIAL_TELPHONE @"18108037442"
+#define OFFICIAL_QQ       @"2757801355"
+
+#define OFFICIAL_WECHAT_URL   @"http://tdzh.cddzgj.com:9091/weixin.html"
+#define FEEDBACK_URL          @"http://tdzh.cddzgj.com:9091/RTH/feedback.html"
+
+// 公交换乘地址
+#define TRANSFER_URL          @"http://tdzh.cddzgj.com:9091/RTH/search.html"
+
+// 广场列表地址
+#define SQUARE_LIST_URL       @"http://tdzh.cddzgj.com:9091/RTH/squarelist.html"
+
+// 线路详情地址
+#define LINE_DETAIL_URL       @"http://tdzh.cddzgj.com:9091/lineDetails.html?stationid=S0126&lineno=6&lineType=0"
+
+////// API接口
+#define API_HOST      @"http://182.150.21.101:9091/RTI/RTIWCF.svc"
+
+// 获取官方信息接口
+#define GET_RT_RESULT @"GetRTResult"
+
+// 用户登陆
+#define USER_LOGIN    @"UserLogin" // pwd, loginname
+
+// 用户注册
+#define ADD_USER_INFO @"AddUserInfo" // pwd, tel
+
+// 更新用户信息
+#define UPDATE_USER_INFO @"UpdateUserInfo" // userid, key, value (key可以为：username, sex, birthday)
+
+// SendVerCode
+#define SEND_VER_CODE    @"SendVerCode" // tel
+
+// 验证验证码
+#define CHECK_VER_CODE   @"CheckVerCode" // tel, vercode
+
+// 判断用户是否存在
+#define IS_EXIST_USER_INFO @"IsExitUserInfo" // tel
+
+// 首页获取站点
+#define GET_STATION_BY_LNG_AND_LAT @"GetStationByLngAndLat" // lng, lat
+
+// 根据最近的站台获取车辆线路
+#define GET_BUS_LINE_QUERY_RESULT  @"GetBusLineQueryResult" // stationid, lng, lat
+
+// 更新头像
+#define UPLOAD_PIC @"UploadPic"
 
 #import "UIViewController+CreateFactory.h"
+
+#import "AppDelegate.h"
+
+#import "CustomNavBar.h"
 
 // Models
 #import "User.h"
 
 // Views
 #import "SettingTableHeader.h"
+
+// Controllers
+#import "WebViewVC.h"
 
 #endif /* Defines_h */

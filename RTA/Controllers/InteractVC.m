@@ -7,6 +7,7 @@
 //
 
 #import "InteractVC.h"
+#import "Defines.h"
 
 @implementation InteractVC
 
@@ -24,7 +25,9 @@
 {
     [super viewDidLoad];
     
-    self.title = @"广场";
+    self.navBar.title = @"广场";
+    
+    [self addLeftBarItemWithView:nil];
 }
 
 @end

@@ -29,9 +29,15 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    self.navBar.backgroundImage = AWImageFromColor(NAV_BAR_BG_COLOR);
+    self.navBar.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor] };
+    
     // 添加默认的返回按钮
     __weak typeof(self) me = self;
-    [self addLeftBarItemWithImage:@"btn_back.png" callback:^{
+//    [self addLeftBarItemWithImage:@"btn_back.png" callback:^{
+//        [me back];
+//    }];
+    [self addLeftBarItemWithTitle:@"返回" size:CGSizeMake(40, 40) callback:^{
         [me back];
     }];
     
@@ -83,12 +89,12 @@
     
     imageName = [imageName trim];
     if ( [imageName length] == 0 ) {
-        self.navigationItem.leftBarButtonItem = nil;
+        self.navBar.leftItem = nil;
         return nil;
     } else {
         UIButton *btn = AWCreateImageButton(imageName, self, @selector(btnClicked:));
         btn.tag = kNavBarLeftItemTag;
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+        self.navBar.leftItem = btn;//[[UIBarButtonItem alloc] initWithCustomView:btn];
         return btn;
     }
 }
@@ -99,12 +105,12 @@
     
     imageName = [imageName trim];
     if ( [imageName length] == 0 ) {
-        self.navigationItem.rightBarButtonItem = nil;
+        self.navBar.rightItem = nil;
         return nil;
     } else {
         UIButton *btn = AWCreateImageButton(imageName, self, @selector(btnClicked:));
         btn.tag = kNavBarRightItemTag;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+        self.navBar.rightItem = btn;//[[UIBarButtonItem alloc] initWithCustomView:btn];
         return btn;
     }
 }
@@ -115,7 +121,7 @@
     
     title = [title trim];
     if ( title.length == 0 || CGSizeEqualToSize(size, CGSizeZero) ) {
-        self.navigationItem.leftBarButtonItem = nil;
+        self.navBar.leftItem = nil;
         return nil;
     } else {
         UIButton *btn = AWCreateTextButton(CGRectMake(0, 0, size.width, size.height),
@@ -124,7 +130,7 @@
                                            self,
                                            @selector(btnClicked:));
         btn.tag = kNavBarLeftItemTag;
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+        self.navBar.leftItem = btn;//[[UIBarButtonItem alloc] initWithCustomView:btn];
         return btn;
     }
 }
@@ -135,7 +141,7 @@
     
     title = [title trim];
     if ( title.length == 0 || CGSizeEqualToSize(size, CGSizeZero) ) {
-        self.navigationItem.leftBarButtonItem = nil;
+        self.navBar.rightItem = nil;
         return nil;
     } else {
         UIButton *btn = AWCreateTextButton(CGRectMake(0, 0, size.width, size.height),
@@ -144,7 +150,7 @@
                                            self,
                                            @selector(btnClicked:));
         btn.tag = kNavBarRightItemTag;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+        self.navBar.rightItem = btn;//[[UIBarButtonItem alloc] initWithCustomView:btn];
         return btn;
     }
 }
@@ -152,20 +158,20 @@
 - (void)addLeftBarItemWithView:(UIView *)aView
 {
     if ( aView == nil ) {
-        self.navigationItem.leftBarButtonItem = nil;
+        self.navBar.leftItem = nil;
     } else {
-        self.navigationItem.leftBarButtonItem =
-        [[UIBarButtonItem alloc] initWithCustomView:aView];
+        self.navBar.leftItem = aView;
+        //[[UIBarButtonItem alloc] initWithCustomView:aView];
     }
 }
 
 - (void)addRightBarItemWithView:(UIView *)aView
 {
     if ( aView == nil ) {
-        self.navigationItem.rightBarButtonItem = nil;
+        self.navBar.rightItem = nil;
     } else {
-        self.navigationItem.rightBarButtonItem =
-        [[UIBarButtonItem alloc] initWithCustomView:aView];
+        self.navBar.rightItem = aView;
+        //[[UIBarButtonItem alloc] initWithCustomView:aView];
     }
 }
 

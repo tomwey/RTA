@@ -33,13 +33,12 @@
 {
     [super viewDidLoad];
     
-    self.title = @"我的";
-    
     self.dataSource = [[NSArray alloc] initWithContentsOfFile:
                        [[NSBundle mainBundle] pathForResource:@"Settings.plist" ofType:nil]];
     
-    self.tableView = [[UITableView alloc] initWithFrame:self.contentView.bounds style:UITableViewStyleGrouped];
-    [self.contentView addSubview:self.tableView];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    [self.view addSubview:self.tableView];
+    self.tableView.height -= 49;
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -69,15 +68,21 @@
     static NSString *cellId = @"cell.id";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if ( !cell ) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     id obj = self.dataSource[indexPath.section][indexPath.row];
     
+    if ( ![obj valueForKey:@"action"] ) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
     cell.imageView.image = [UIImage imageNamed:[[obj valueForKey:@"icon"] description]];
     cell.textLabel.text  = [[obj valueForKey:@"label"] description];
     cell.textLabel.textColor = AWColorFromRGB(135, 135, 135);
+    
+    cell.detailTextLabel.text = [obj valueForKey:@"value"];
     
     return cell;
 }
@@ -129,7 +134,8 @@
 
 - (void)gotoFeedback
 {
-    
+    WebViewVC *page = [[WebViewVC alloc] initWithURL:[NSURL URLWithString:FEEDBACK_URL] title:@"意见反馈"];
+    [AWAppWindow().navController pushViewController:page animated:YES];
 }
 
 - (void)openQQ
@@ -139,7 +145,8 @@
 
 - (void)gotoWechat
 {
-    
+    WebViewVC *page = [[WebViewVC alloc] initWithURL:[NSURL URLWithString:OFFICIAL_WECHAT_URL] title:@"官方微信"];
+    [AWAppWindow().navController pushViewController:page animated:YES];
 }
 
 - (void)openPhone

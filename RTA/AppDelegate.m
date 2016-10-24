@@ -24,9 +24,9 @@
     [NSURLCache setSharedURLCache:urlCache];
     
     // 导航条
-    [[UINavigationBar appearance] setBackgroundImage:AWImageFromColor(NAV_BAR_BG_COLOR)
-                                       forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
+//    [[UINavigationBar appearance] setBackgroundImage:AWImageFromColor(NAV_BAR_BG_COLOR)
+//                                       forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -37,18 +37,23 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
     UITabBarController *tabBar = [[UITabBarController alloc] init];
     
-    UIViewController *homeVC = [UIViewController createControllerEmbedNavigationControllerWithName:@"HomeVC"];
-    UIViewController *inquireVC = [UIViewController createControllerEmbedNavigationControllerWithName:@"InquireVC"];
-    UIViewController *interactVC = [UIViewController createControllerEmbedNavigationControllerWithName:@"InteractVC"];
-    UIViewController *settingVC = [UIViewController createControllerEmbedNavigationControllerWithName:@"SettingVC"];
+    UIViewController *homeVC = [UIViewController createControllerWithName:@"HomeVC"];
+    UIViewController *inquireVC = [UIViewController createControllerWithName:@"InquireVC"];
+    UIViewController *interactVC = [UIViewController createControllerWithName:@"InteractVC"];
+    UIViewController *settingVC = [UIViewController createControllerWithName:@"SettingVC"];
     
     tabBar.viewControllers = @[homeVC, inquireVC, interactVC, settingVC];
     
     tabBar.selectedIndex = 0;
     
-    self.window.rootViewController = tabBar;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tabBar];
+    nav.navigationBarHidden = YES;
+    
+    self.window.rootViewController = nav;
     
     [self.window makeKeyAndVisible];
     
@@ -75,6 +80,15 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+@end
+
+@implementation UIWindow (NavBar)
+
+- (UINavigationController *)navController
+{
+    return (UINavigationController *)self.rootViewController;
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "HomeVC.h"
+#import "Defines.h"
 
 @implementation HomeVC
 
@@ -24,7 +25,9 @@
 {
     [super viewDidLoad];
     
-    self.title = @"实时";
+    self.navBar.title = @"实时";
+    
+    [self addLeftBarItemWithView:nil];
 }
 
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97AC4C8F1DBDA2EA00DBBA74 /* btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AC4C8D1DBDA2EA00DBBA74 /* btn_back@2x.png */; };
+		97AC4C901DBDA2EA00DBBA74 /* btn_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AC4C8E1DBDA2EA00DBBA74 /* btn_back@3x.png */; };
+		97BF23D51DBD8E1C0009F46C /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF23D41DBD8E1C0009F46C /* WebViewVC.m */; };
 		97F12FEF1DAB15AA00806E8A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F12FEE1DAB15AA00806E8A /* main.m */; };
 		97F12FF21DAB15AA00806E8A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F12FF11DAB15AA00806E8A /* AppDelegate.m */; };
 		97F130901DAB18C500806E8A /* APIConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F1303C1DAB18C500806E8A /* APIConfig.m */; };
@@ -131,6 +134,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		97AC4C8D1DBDA2EA00DBBA74 /* btn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@2x.png"; sourceTree = "<group>"; };
+		97AC4C8E1DBDA2EA00DBBA74 /* btn_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@3x.png"; sourceTree = "<group>"; };
+		97BF23D31DBD8E1C0009F46C /* WebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewVC.h; sourceTree = "<group>"; };
+		97BF23D41DBD8E1C0009F46C /* WebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
 		97F12FEA1DAB15AA00806E8A /* RTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97F12FEE1DAB15AA00806E8A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		97F12FF01DAB15AA00806E8A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -402,6 +409,8 @@
 				97F130FF1DAB1CAE00806E8A /* InteractVC.m */,
 				97F131011DAB1CB900806E8A /* SettingVC.h */,
 				97F131021DAB1CB900806E8A /* SettingVC.m */,
+				97BF23D31DBD8E1C0009F46C /* WebViewVC.h */,
+				97BF23D41DBD8E1C0009F46C /* WebViewVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -746,6 +755,8 @@
 		97F1310B1DAB214000806E8A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				97AC4C8D1DBDA2EA00DBBA74 /* btn_back@2x.png */,
+				97AC4C8E1DBDA2EA00DBBA74 /* btn_back@3x.png */,
 				97F1314D1DAB2C5400806E8A /* setting_user_bg.png */,
 				97F131891DAB3BD700806E8A /* setting_user_bg@2x.png */,
 				97F1318A1DAB3BD700806E8A /* setting_user_bg@3x.png */,
@@ -888,6 +899,7 @@
 				97F1313B1DAB218A00806E8A /* mine@3x.png in Resources */,
 				97F131751DAB2DE800806E8A /* icon_nfc@2x.png in Resources */,
 				97F131731DAB2DE800806E8A /* icon_invite@3x.png in Resources */,
+				97AC4C901DBDA2EA00DBBA74 /* btn_back@3x.png in Resources */,
 				97F131341DAB218A00806E8A /* interact@2x.png in Resources */,
 				97F131771DAB2DE800806E8A /* icon_phone.png in Resources */,
 				97F131741DAB2DE800806E8A /* icon_nfc.png in Resources */,
@@ -899,6 +911,7 @@
 				97F1312C1DAB218A00806E8A /* inquire_selected@3x.png in Resources */,
 				97F131271DAB218A00806E8A /* home.png in Resources */,
 				97F131311DAB218A00806E8A /* interact_selected@2x.png in Resources */,
+				97AC4C8F1DBDA2EA00DBBA74 /* btn_back@2x.png in Resources */,
 				97F131931DAB3C1E00806E8A /* default_avatar@2x.png in Resources */,
 				97F1313D1DAB21B800806E8A /* Default-568h@2x.png in Resources */,
 				97F1317D1DAB2DE800806E8A /* icon_version.png in Resources */,
@@ -957,6 +970,7 @@
 				97F130A61DAB18C500806E8A /* AWTableViewDataSource.m in Sources */,
 				97F131061DAB1D9000806E8A /* UIViewController+CreateFactory.m in Sources */,
 				97F130981DAB18C500806E8A /* CustomNavBar.m in Sources */,
+				97BF23D51DBD8E1C0009F46C /* WebViewVC.m in Sources */,
 				97F130DE1DAB18D300806E8A /* AFURLConnectionOperation.m in Sources */,
 				97F130A81DAB18C500806E8A /* UITableView+LoadEmptyOrErrorHandle.m in Sources */,
 				97F131981DAB400000806E8A /* MBProgressHUD.m in Sources */,
@@ -1141,6 +1155,7 @@
 				97F130031DAB15AA00806E8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
