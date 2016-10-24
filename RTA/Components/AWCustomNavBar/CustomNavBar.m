@@ -346,6 +346,12 @@ static CGFloat const kContentViewTag  = 1011014;
         contentView.tag = kContentViewTag;
         [self.view addSubview:contentView];
         
+        if ( self.tabBarController ) {
+            CGRect frame = contentView.frame;
+            frame.size.height -= 49;
+            contentView.frame = frame;
+        }
+        
         [self.view sendSubviewToBack:contentView];
         
         [self.view bringSubviewToFront:navBar];

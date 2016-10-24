@@ -20,6 +20,7 @@
 		97579AA31DBDED8C00D99981 /* UpdateNicknameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579AA21DBDED8C00D99981 /* UpdateNicknameVC.m */; };
 		97579AA61DBDF29C00D99981 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579AA51DBDF29C00D99981 /* DatePicker.m */; };
 		97579AA91DBDF2A800D99981 /* SexPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579AA81DBDF2A800D99981 /* SexPicker.m */; };
+		97579AAB1DBE087900D99981 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97579AAA1DBE087900D99981 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		97AC4C8F1DBDA2EA00DBBA74 /* btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AC4C8D1DBDA2EA00DBBA74 /* btn_back@2x.png */; };
 		97AC4C901DBDA2EA00DBBA74 /* btn_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AC4C8E1DBDA2EA00DBBA74 /* btn_back@3x.png */; };
 		97AC4C931DBDA9FD00DBBA74 /* InviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AC4C921DBDA9FD00DBBA74 /* InviteVC.m */; };
@@ -175,6 +176,7 @@
 		97579AA51DBDF29C00D99981 /* DatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePicker.m; sourceTree = "<group>"; };
 		97579AA71DBDF2A800D99981 /* SexPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexPicker.h; sourceTree = "<group>"; };
 		97579AA81DBDF2A800D99981 /* SexPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SexPicker.m; sourceTree = "<group>"; };
+		97579AAA1DBE087900D99981 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		97AC4C8D1DBDA2EA00DBBA74 /* btn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@2x.png"; sourceTree = "<group>"; };
 		97AC4C8E1DBDA2EA00DBBA74 /* btn_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@3x.png"; sourceTree = "<group>"; };
 		97AC4C911DBDA9FD00DBBA74 /* InviteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteVC.h; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97579AAB1DBE087900D99981 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +413,7 @@
 		97F12FE11DAB15AA00806E8A = {
 			isa = PBXGroup;
 			children = (
+				97579AAA1DBE087900D99981 /* WebKit.framework */,
 				97F12FEC1DAB15AA00806E8A /* RTA */,
 				97F12FEB1DAB15AA00806E8A /* Products */,
 			);
