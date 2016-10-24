@@ -46,7 +46,7 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    [[MBProgressHUD showHUDAddedTo:self.contentView animated:YES] setLabelText:@"加载中 ..."];
+    [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

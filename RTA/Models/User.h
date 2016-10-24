@@ -16,6 +16,8 @@
 @property (nonatomic, copy, readonly) NSDate   *birthday;
 @property (nonatomic, copy, readonly) NSNumber *sex;
 
+@property (nonatomic, copy, readonly) NSString *token;
+
 - (instancetype)initWithDictionary:(NSDictionary *)jsonResult;
 
 @end

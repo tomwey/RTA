@@ -359,11 +359,4 @@ static CGFloat const kContentViewTag  = 1011014;
     return [self.view viewWithTag:kContentViewTag] ?: self.view;
 }
 
-//- (void)setTitle:(NSString *)title
-//{
-//    self.navBar.title = title;
-//}
-//
-//- (NSString *)title { return self.navBar.title; }
-
 @end

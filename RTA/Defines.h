@@ -32,6 +32,8 @@
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 
+#import "APIManager.h"
+
 #define IOS_DEFAULT_NAVBAR_BOTTOM_LINE_COLOR  AWColorFromRGB(163, 164, 165)
 #define IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR AWColorFromRGB(187, 188, 193)
 
@@ -97,6 +99,8 @@
 
 // Models
 #import "User.h"
+
+#import "UserService.h"
 
 // Views
 #import "SettingTableHeader.h"

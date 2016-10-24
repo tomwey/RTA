@@ -16,6 +16,8 @@
 @property (nonatomic, copy, readwrite) NSDate   *birthday;
 @property (nonatomic, copy, readwrite) NSNumber *sex;
 
+@property (nonatomic, copy, readwrite) NSString *token;
+
 @end
 
 @implementation User
@@ -32,6 +34,8 @@
         
         self.birthday = [df dateFromString:[jsonResult[@"birth"] description]];
         self.sex = jsonResult[@"sex"];
+        
+        self.token = jsonResult[@"userid"];
     }
     return self;
 }

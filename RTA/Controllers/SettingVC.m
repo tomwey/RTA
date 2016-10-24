@@ -51,6 +51,8 @@
     self.tableHeader.didSelectCallback = ^(SettingTableHeader *sender) {
         [me gotoUserProfile];
     };
+    
+    self.tableHeader.currentUser = [[UserService sharedInstance] currentUser];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -96,13 +98,23 @@
     
     SEL selector = NSSelectorFromString(action);
     if ( [self respondsToSelector:selector] ) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self performSelector:selector withObject:nil];
+#pragma clang diagnostic pop
     }
 }
 
 - (void)gotoUserProfile
 {
+    UIViewController *vc = nil;
+    if ( ![[UserService sharedInstance] currentUser] ) {
+        vc = [[AWMediator sharedInstance] openVCWithName:@"LoginVC" params:nil];
+    } else {
+        vc = [[AWMediator sharedInstance] openVCWithName:@"UserVC" params:nil];
+    }
     
+    [[AWAppWindow() navController] pushViewController:vc animated:YES];
 }
 
 - (void)openNFC
