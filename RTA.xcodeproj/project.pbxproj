@@ -18,6 +18,8 @@
 		97579A9D1DBDE05000D99981 /* PasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579A9C1DBDE05000D99981 /* PasswordVC.m */; };
 		97579AA01DBDE11700D99981 /* MobileInputVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579A9F1DBDE11700D99981 /* MobileInputVC.m */; };
 		97579AA31DBDED8C00D99981 /* UpdateNicknameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579AA21DBDED8C00D99981 /* UpdateNicknameVC.m */; };
+		97579AA61DBDF29C00D99981 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579AA51DBDF29C00D99981 /* DatePicker.m */; };
+		97579AA91DBDF2A800D99981 /* SexPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579AA81DBDF2A800D99981 /* SexPicker.m */; };
 		97AC4C8F1DBDA2EA00DBBA74 /* btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AC4C8D1DBDA2EA00DBBA74 /* btn_back@2x.png */; };
 		97AC4C901DBDA2EA00DBBA74 /* btn_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AC4C8E1DBDA2EA00DBBA74 /* btn_back@3x.png */; };
 		97AC4C931DBDA9FD00DBBA74 /* InviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AC4C921DBDA9FD00DBBA74 /* InviteVC.m */; };
@@ -169,6 +171,10 @@
 		97579A9F1DBDE11700D99981 /* MobileInputVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileInputVC.m; sourceTree = "<group>"; };
 		97579AA11DBDED8C00D99981 /* UpdateNicknameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateNicknameVC.h; sourceTree = "<group>"; };
 		97579AA21DBDED8C00D99981 /* UpdateNicknameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateNicknameVC.m; sourceTree = "<group>"; };
+		97579AA41DBDF29C00D99981 /* DatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePicker.h; sourceTree = "<group>"; };
+		97579AA51DBDF29C00D99981 /* DatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePicker.m; sourceTree = "<group>"; };
+		97579AA71DBDF2A800D99981 /* SexPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexPicker.h; sourceTree = "<group>"; };
+		97579AA81DBDF2A800D99981 /* SexPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SexPicker.m; sourceTree = "<group>"; };
 		97AC4C8D1DBDA2EA00DBBA74 /* btn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@2x.png"; sourceTree = "<group>"; };
 		97AC4C8E1DBDA2EA00DBBA74 /* btn_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@3x.png"; sourceTree = "<group>"; };
 		97AC4C911DBDA9FD00DBBA74 /* InviteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteVC.h; sourceTree = "<group>"; };
@@ -515,6 +521,10 @@
 				97F130F61DAB1BE000806E8A /* LoadingView.m */,
 				97F131831DAB2F5E00806E8A /* SettingTableHeader.h */,
 				97F131841DAB2F5E00806E8A /* SettingTableHeader.m */,
+				97579AA41DBDF29C00D99981 /* DatePicker.h */,
+				97579AA51DBDF29C00D99981 /* DatePicker.m */,
+				97579AA71DBDF2A800D99981 /* SexPicker.h */,
+				97579AA81DBDF2A800D99981 /* SexPicker.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1058,6 +1068,7 @@
 				97F130A61DAB18C500806E8A /* AWTableViewDataSource.m in Sources */,
 				97F131061DAB1D9000806E8A /* UIViewController+CreateFactory.m in Sources */,
 				97F130981DAB18C500806E8A /* CustomNavBar.m in Sources */,
+				97579AA61DBDF29C00D99981 /* DatePicker.m in Sources */,
 				97BF23D51DBD8E1C0009F46C /* WebViewVC.m in Sources */,
 				97F130DE1DAB18D300806E8A /* AFURLConnectionOperation.m in Sources */,
 				97F130A81DAB18C500806E8A /* UITableView+LoadEmptyOrErrorHandle.m in Sources */,
@@ -1079,6 +1090,7 @@
 				97F130941DAB18C500806E8A /* APIFileParam.m in Sources */,
 				97579AA01DBDE11700D99981 /* MobileInputVC.m in Sources */,
 				97579A851DBDCBAE00D99981 /* UserService.m in Sources */,
+				97579AA91DBDF2A800D99981 /* SexPicker.m in Sources */,
 				97F130DC1DAB18D300806E8A /* AFNetworkReachabilityManager.m in Sources */,
 				97F130FA1DAB1C8800806E8A /* HomeVC.m in Sources */,
 				97F130E01DAB18D300806E8A /* AFURLResponseSerialization.m in Sources */,

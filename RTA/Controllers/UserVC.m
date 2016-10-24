@@ -21,6 +21,8 @@ UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 
+@property (nonatomic, weak) UIImageView *avatarView;
+
 @end
 
 @implementation UserVC
@@ -88,6 +90,8 @@ UINavigationControllerDelegate>
         }
         
         [avatarView setImageWithURL:[NSURL URLWithString:self.user.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar.png"]];
+        
+        self.avatarView = avatarView;
     } else if ( indexPath.row == 1 ) {
         cell.textLabel.text = @"用户名";
         cell.detailTextLabel.text = [self.user formatUsername];
@@ -119,8 +123,20 @@ UINavigationControllerDelegate>
         [self.navigationController pushViewController:vc animated:YES];
     } else if ( indexPath.row == 2 ) {
         // 设置性别
-    } else if ( indexPath.row == 2 ) {
+        [[[SexPicker alloc] init] showInView:self.contentView selectedBlock:^(SexPicker *sender, id selectedObj) {
+            NSLog(@"selected sex: %@", selectedObj);
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            cell.detailTextLabel.text = selectedObj[@"label"];
+        }];
+    } else if ( indexPath.row == 3 ) {
         // 设置生日
+        [[[DatePicker alloc] init] showInView:self.contentView selectedBlock:^(DatePicker *sender, NSDate *selectedDate) {
+            NSLog(@"date: %@", selectedDate);
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            df.dateFormat = @"yyyy-MM-dd";
+            cell.detailTextLabel.text = [df stringFromDate:selectedDate];
+        }];
     }
 }
 
@@ -170,6 +186,8 @@ UINavigationControllerDelegate>
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    
+    self.avatarView.image = editedImage;
     
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
 }

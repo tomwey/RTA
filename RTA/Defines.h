@@ -106,6 +106,8 @@
 
 // Views
 #import "SettingTableHeader.h"
+#import "DatePicker.h"
+#import "SexPicker.h"
 
 // Controllers
 #import "WebViewVC.h"
