@@ -61,7 +61,7 @@
 #define SQUARE_LIST_URL       @"http://tdzh.cddzgj.com:9091/RTH/squarelist.html"
 
 // 线路详情地址
-#define LINE_DETAIL_URL       @"http://tdzh.cddzgj.com:9091/lineDetails.html?stationid=S0126&lineno=6&lineType=0"
+#define LINE_DETAIL_URL       @"http://tdzh.cddzgj.com:9091/lineDetails.html"
 
 ////// API接口
 #define API_HOST      @"http://182.150.21.101:9091/RTI/RTIWCF.svc"

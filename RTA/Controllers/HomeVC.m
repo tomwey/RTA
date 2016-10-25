@@ -180,8 +180,16 @@
 {
     if ( !_dataSource ) {
         _dataSource = AWTableViewDataSourceCreate(nil, @"BusCell", @"cell.id");
+        
+        __weak typeof(self) me = self;
         _dataSource.itemDidSelectBlock = ^(UIView<AWTableDataConfig> *sender, id selectedData) {
-            NSLog(@"select: %@", selectedData);
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?stationid=%@&lineno=%@&lineType=%@",
+                                               LINE_DETAIL_URL,
+                                               [selectedData valueForKey:@"StationID"],
+                                               [[[selectedData valueForKey:@"BusLine"] description] trim],
+                                               [selectedData valueForKey:@"LineType"]]];
+            WebViewVC *page = [[WebViewVC alloc] initWithURL:url title:@"路线详情"];
+            [me.tabBarController.navigationController pushViewController:page animated:YES];
         };
     }
     return _dataSource;

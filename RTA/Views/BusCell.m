@@ -121,10 +121,10 @@
     self.distanceLabel.position = CGPointMake(self.containerView.width - self.busLineLabel.left - self.distanceLabel.width,
                                               self.busLineLabel.midY - self.distanceLabel.height / 2);
     
-    self.lineView.center = CGPointMake(self.distanceLabel.left - 3, self.distanceLabel.midY);
+    self.lineView.superview.center = CGPointMake(self.distanceLabel.left - 3, self.distanceLabel.midY);
     
     [self.currentStationLabel sizeToFit];
-    self.currentStationLabel.center = CGPointMake(self.lineView.left - 3 - self.currentStationLabel.width / 2, self.lineView.midY);
+    self.currentStationLabel.center = CGPointMake(self.lineView.superview.left - 4 - self.currentStationLabel.width / 2, self.lineView.superview.midY);
     
     self.endStationLabel.frame = self.busLineLabel.frame;
     self.endStationLabel.width = self.containerView.width * 0.6;
@@ -231,9 +231,14 @@
 - (AWHairlineView *)lineView
 {
     if ( !_lineView ) {
-        _lineView = [[AWHairlineView alloc] initWithLineColor:AWColorFromRGB(193, 193, 193)];
-        _lineView.frame = CGRectMake(0, 0, 1, 20);
-        [self.containerView addSubview:_lineView];
+        UIView *lineContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 15)];
+        [self.containerView addSubview:lineContainer];
+        lineContainer.clipsToBounds = YES;
+        lineContainer.backgroundColor = [UIColor clearColor];
+        
+        _lineView = [[AWHairlineView alloc] initWithLineColor:AWColorFromRGB(134, 134, 134)];
+        _lineView.frame = CGRectInset(lineContainer.bounds, 0, -1);
+        [lineContainer addSubview:_lineView];
     }
     return _lineView;
 }
