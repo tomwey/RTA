@@ -154,6 +154,11 @@ void AWSetAllTouchesDisabled(BOOL yesOrNo);
 UIImage* AWSimpleResizeImage(UIImage* srcImage, CGSize newSize);
 
 /**
+ * 获取未缓存的图片
+ */
+UIImage *AWImageNoCached(NSString *imageName);
+
+/**
  * 评论app
  * @param appId Apple ID
  */

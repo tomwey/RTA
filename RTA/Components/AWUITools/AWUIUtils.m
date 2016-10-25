@@ -216,6 +216,16 @@ UIImage* AWSimpleResizeImage(UIImage* srcImage, CGSize newSize)
     return newImage;
 }
 
+/**
+ * 获取未缓存的图片
+ */
+UIImage *AWImageNoCached(NSString *imageName)
+{
+    NSString *imageFile = [[NSBundle mainBundle] pathForResource:imageName ofType:nil];
+    UIImage *image = [UIImage imageWithContentsOfFile:imageFile];
+    return image;
+}
+
 void AWSaveImageToPhotosAlbum(UIImage* anImage, NSString* groupName, SaveImageCompletionBlock completionBlock)
 {
     static ALAssetsLibrary* photoLibrary = nil;

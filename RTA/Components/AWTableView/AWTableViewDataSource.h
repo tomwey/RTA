@@ -29,6 +29,13 @@
 /** 设置当前表视图 */
 @property (nonatomic, assign) UITableView* tableView;
 
+/**
+ * 设置对象点击回调
+ * @param sender cell或者grid对象本身
+ * @param selectedData 当前对象绑定的数据
+ */
+@property (nonatomic, copy) void (^itemDidSelectBlock)(UIView<AWTableDataConfig> *sender, id selectedData);
+
 - (instancetype)initWithArray:(NSArray *)dataSource cellClass:(NSString *)cellClassName identifier:(NSString *)identifier;
 + (instancetype)dataSourceWithArray:(NSArray *)dataSource cellClass:(NSString *)cellClassName identifier:(NSString *)identifier;
 

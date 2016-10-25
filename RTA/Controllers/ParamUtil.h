@@ -10,3 +10,5 @@
 
 NSString *stringByParams(NSDictionary *params);
 
+NSString *AESEncryptStringFromParams(NSDictionary *params);
+

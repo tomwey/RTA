@@ -6,25 +6,24 @@
 //  Copyright © 2016 tomwey. All rights reserved.
 //
 
-#import "UIViewController+NetworkService.h"
-#import "NetworkService.h"
+#import "UIViewController+RTIDataService.h"
 #import <objc/runtime.h>
 
-@implementation UIViewController (NetworkService)
+@implementation UIViewController (RTIDataService)
 
 static char kNetworkServiceKey;
 
-- (NetworkService *)networkService
+- (RTIDataService *)dataService
 {
     id obj = objc_getAssociatedObject(self, &kNetworkServiceKey);
     if ( !obj ) {
-        obj = [[NetworkService alloc] init];
+        obj = [[RTIDataService alloc] init];
         objc_setAssociatedObject(obj,
                                  &kNetworkServiceKey,
                                  obj,
                                  OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    return (NetworkService *)obj;
+    return (RTIDataService *)obj;
 }
 
 @end

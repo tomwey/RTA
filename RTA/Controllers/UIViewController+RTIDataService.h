@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RTIDataService.h"
 
-@class NetworkService;
-@interface UIViewController (NetworkService)
+@interface UIViewController (RTIDataService)
 
-@property (nonatomic, strong, readonly) NetworkService *networkService;
+@property (nonatomic, strong, readonly) RTIDataService *dataService;
 
 @end

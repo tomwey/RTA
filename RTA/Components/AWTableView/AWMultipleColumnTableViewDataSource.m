@@ -73,7 +73,7 @@
         
         NSInteger index = indexPath.row * self.numberOfItemsPerRow + i;
         if ( index < [self.dataSource count] ) {
-            [view configData:[self.dataSource objectAtIndex:index]];
+            [view configData:[self.dataSource objectAtIndex:index] selectBlock:self.itemDidSelectBlock];
         }
     }
     

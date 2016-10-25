@@ -100,10 +100,19 @@
 // 更新头像
 #define UPLOAD_PIC @"UploadPic"
 
+#define BUS_LIST_TITLE_BLACK_COLOR AWColorFromRGB(83,83,83)
+#define BUS_LIST_TITLE_GRAY_COLOR  AWColorFromRGB(135,135,135)
+#define BUS_LIST_CONTAINER_BORDER_GRAY_COLOR  AWColorFromRGB(208,208,208)
+
+#define BUS_LIST_FONT_SMALL 15
+
 #import "ParamUtil.h"
 
+#import "AWLocationManager.h"
+
 #import "UIViewController+CreateFactory.h"
-#import "UIViewController+NetworkService.h"
+#import "UIViewController+RTIDataService.h"
+#import "UITableView+RefreshControl.h"
 
 #import "AppDelegate.h"
 

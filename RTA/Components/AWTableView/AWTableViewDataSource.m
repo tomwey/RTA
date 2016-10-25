@@ -11,7 +11,7 @@
 // 此种作法仅仅是为了让编译器通过编译
 @interface UITableViewCell (AWTableDataConfig) <AWTableDataConfig>
 
-- (void)configData:(id)data;
+- (void)configData:(id)data selectBlock:(void (^)(UIView <AWTableDataConfig> *sender, id selectedData))selectBlock;
 
 @end
 
@@ -74,7 +74,7 @@
     // 配置数据到视图
     if ( indexPath.row < [self.dataSource count] ) {
         id data = [self.dataSource objectAtIndex:indexPath.row];
-        [cell configData:data];
+        [cell configData:data selectBlock:self.itemDidSelectBlock];
     }
     
     return cell;
@@ -89,7 +89,7 @@
 
 @implementation UITableViewCell (AWTableDataConfig)
 
-- (void)configData:(id)data
+- (void)configData:(id)data selectBlock:(void (^)(UIView<AWTableDataConfig> *sender, id selectedData))selectBlock
 {
     // 仅仅是为了让编译器通过编译
 }
