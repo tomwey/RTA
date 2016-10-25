@@ -11,6 +11,9 @@
 
 @interface LoginVC () <UITextFieldDelegate>
 
+@property (nonatomic, weak) UITextField *userField;
+@property (nonatomic, weak) UITextField *passField;
+
 @end
 
 @implementation LoginVC
@@ -42,6 +45,8 @@
     
     userField.delegate = self;
     
+    self.userField = userField;
+    
     UIImageView *iconView = AWCreateImageView(@"icon_user.png");
     [inputBGView addSubview:iconView];
     iconView.center = CGPointMake(10 + iconView.width / 2, userField.midY);
@@ -70,6 +75,8 @@
     passField.returnKeyType = UIReturnKeyDone;
     
     passField.delegate = self;
+    
+    self.passField = passField;
     
     // 忘记密码
     UIButton *forgetBtn = AWCreateTextButton(CGRectMake(0, 0, 88, 37),
@@ -122,7 +129,42 @@
 
 - (void)doLogin
 {
+    if ( [self.userField.text trim].length == 0 ) {
+        [self.contentView makeToast:@"手机号不能为空"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
     
+    NSString* reg = @"^1[3|4|5|7|8][0-9]\\d{4,8}$";
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", reg];
+    if ( ![predicate evaluateWithObject:self.userField.text] ) {
+        [self.contentView makeToast:@"手机号不正确"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
+    
+    if ( [self.passField.text trim].length == 0 ) {
+        [self.contentView makeToast:@"密码不能为空"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
+    [[UserService sharedInstance] loginWithMobile:self.userField.text
+                                         password:self.passField.text
+                                       completion:^(User *aUser, NSError *error)
+    {
+        [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
+        if ( !error ) {
+            [self.contentView makeToast:@"登录成功"
+                               duration:2.0
+                               position:CSToastPositionTop];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
 }
 
 @end

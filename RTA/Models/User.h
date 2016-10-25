@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface User : NSObject
+@interface User : NSObject <NSCoding>
 
 @property (nonatomic, copy, readonly) NSString *mobile;
 @property (nonatomic, copy, readonly) NSString *avatar;
@@ -28,5 +28,7 @@
 - (NSString *)formatBirth;
 - (NSString *)formatSex;
 - (NSString *)formatUsername;
+
+- (BOOL)validateMobile;
 
 @end

@@ -6,10 +6,10 @@
 //  Copyright © 2016 tomwey. All rights reserved.
 //
 
-#import "UIViewController+RTIDataService.h"
+#import "NSObject+RTIDataService.h"
 #import <objc/runtime.h>
 
-@implementation UIViewController (RTIDataService)
+@implementation NSObject (RTIDataService)
 
 static char kNetworkServiceKey;
 

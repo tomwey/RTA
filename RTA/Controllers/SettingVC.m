@@ -51,8 +51,6 @@
     self.tableHeader.didSelectCallback = ^(SettingTableHeader *sender) {
         [me gotoUserProfile];
     };
-    
-    self.tableHeader.currentUser = [[UserService sharedInstance] currentUser];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -60,6 +58,8 @@
     [super viewWillAppear:animated];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    self.tableHeader.currentUser = [[UserService sharedInstance] currentUser];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

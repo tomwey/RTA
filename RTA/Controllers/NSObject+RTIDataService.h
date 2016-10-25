@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RTIDataService.h"
 
-@interface UIViewController (RTIDataService)
+@interface NSObject (RTIDataService)
 
 @property (nonatomic, strong, readonly) RTIDataService *dataService;
 

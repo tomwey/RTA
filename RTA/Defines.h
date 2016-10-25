@@ -111,7 +111,7 @@
 #import "AWLocationManager.h"
 
 #import "UIViewController+CreateFactory.h"
-#import "UIViewController+RTIDataService.h"
+#import "NSObject+RTIDataService.h"
 #import "UITableView+RefreshControl.h"
 
 #import "AppDelegate.h"
@@ -121,6 +121,8 @@
 #import "AWButton.h"
 
 #import "NetworkService.h"
+
+#import "UIView+Toast.h"
 
 // Models
 #import "User.h"

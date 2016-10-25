@@ -8,6 +8,7 @@
 
 #import "UserService.h"
 #import "User.h"
+#import "NSObject+RTIDataService.h"
 #import "NetworkService.h"
 
 @interface UserService ()
@@ -41,7 +42,7 @@
  */
 - (User *)currentUser
 {
-    self.user = [[User alloc] initWithDictionary:@{@"mobile": @"13312345677"}];
+//    self.user = [[User alloc] initWithDictionary:@{@"mobile": @"13312345677"}];
     
     User *user = self.user ?: [self userFromDetached];
 #if DEBUG
@@ -84,9 +85,9 @@
                password:(NSString *)password
              completion:(void (^)(User *aUser, NSError *error))completion
 {
-    [self.socialService POST:@"/account/login"
-                      params:@{ @"mobile": mobile ?: @"",
-                                @"password": password ?: @""
+    [self.dataService   POST:@"UserLogin"
+                      params:@{ @"loginname": mobile ?: @"",
+                                @"pwd": password ?: @""
                                 }
                   completion:^(id result, NSError *inError)
      {
@@ -114,6 +115,8 @@
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"logined.user"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    self.user = nil;
     
     if ( completion ) {
         completion(@{}, nil);
@@ -145,7 +148,7 @@
             completion(nil, inError);
         }
     } else {
-        User *user = [[User alloc] initWithDictionary:result[@"data"]];
+        User *user = [[User alloc] initWithDictionary:result];
         [self saveUser:user];
         if ( completion ) {
             completion(user, nil);

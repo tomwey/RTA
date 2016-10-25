@@ -26,6 +26,7 @@
 		97579AB21DBF28A000D99981 /* station_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97579AB01DBF28A000D99981 /* station_bg@2x.png */; };
 		97579AB51DBF2FD700D99981 /* UITableView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579AB41DBF2FD700D99981 /* UITableView+RefreshControl.m */; };
 		97579AB81DBF30F800D99981 /* BusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579AB71DBF30F800D99981 /* BusCell.m */; };
+		97579ABC1DBF573C00D99981 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 97579ABB1DBF573C00D99981 /* UIView+Toast.m */; };
 		97AC4C8F1DBDA2EA00DBBA74 /* btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AC4C8D1DBDA2EA00DBBA74 /* btn_back@2x.png */; };
 		97AC4C901DBDA2EA00DBBA74 /* btn_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AC4C8E1DBDA2EA00DBBA74 /* btn_back@3x.png */; };
 		97AC4C931DBDA9FD00DBBA74 /* InviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AC4C921DBDA9FD00DBBA74 /* InviteVC.m */; };
@@ -156,7 +157,7 @@
 		97F131931DAB3C1E00806E8A /* default_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F131911DAB3C1E00806E8A /* default_avatar@2x.png */; };
 		97F131941DAB3C1E00806E8A /* default_avatar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F131921DAB3C1E00806E8A /* default_avatar@3x.png */; };
 		97F131981DAB400000806E8A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F131971DAB400000806E8A /* MBProgressHUD.m */; };
-		99C66E5D1DBE584B00C8E2F9 /* UIViewController+RTIDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C66E5C1DBE584B00C8E2F9 /* UIViewController+RTIDataService.m */; };
+		99C66E5D1DBE584B00C8E2F9 /* NSObject+RTIDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C66E5C1DBE584B00C8E2F9 /* NSObject+RTIDataService.m */; };
 		99C66E601DBE5E6F00C8E2F9 /* ParamUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C66E5F1DBE5E6F00C8E2F9 /* ParamUtil.m */; };
 /* End PBXBuildFile section */
 
@@ -192,6 +193,8 @@
 		97579AB41DBF2FD700D99981 /* UITableView+RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+RefreshControl.m"; sourceTree = "<group>"; };
 		97579AB61DBF30F800D99981 /* BusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusCell.h; sourceTree = "<group>"; };
 		97579AB71DBF30F800D99981 /* BusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusCell.m; sourceTree = "<group>"; };
+		97579ABA1DBF573C00D99981 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		97579ABB1DBF573C00D99981 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		97AC4C8D1DBDA2EA00DBBA74 /* btn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@2x.png"; sourceTree = "<group>"; };
 		97AC4C8E1DBDA2EA00DBBA74 /* btn_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@3x.png"; sourceTree = "<group>"; };
 		97AC4C911DBDA9FD00DBBA74 /* InviteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteVC.h; sourceTree = "<group>"; };
@@ -402,8 +405,8 @@
 		97F131921DAB3C1E00806E8A /* default_avatar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_avatar@3x.png"; sourceTree = "<group>"; };
 		97F131961DAB400000806E8A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		97F131971DAB400000806E8A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		99C66E5B1DBE584B00C8E2F9 /* UIViewController+RTIDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RTIDataService.h"; sourceTree = "<group>"; };
-		99C66E5C1DBE584B00C8E2F9 /* UIViewController+RTIDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RTIDataService.m"; sourceTree = "<group>"; };
+		99C66E5B1DBE584B00C8E2F9 /* NSObject+RTIDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RTIDataService.h"; sourceTree = "<group>"; };
+		99C66E5C1DBE584B00C8E2F9 /* NSObject+RTIDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RTIDataService.m"; sourceTree = "<group>"; };
 		99C66E5E1DBE5E6F00C8E2F9 /* ParamUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParamUtil.h; path = RTA/Controllers/ParamUtil.h; sourceTree = SOURCE_ROOT; };
 		99C66E5F1DBE5E6F00C8E2F9 /* ParamUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParamUtil.m; path = RTA/Controllers/ParamUtil.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -427,6 +430,15 @@
 				97579A961DBDD63F00D99981 /* AWButton.m */,
 			);
 			path = AWButton;
+			sourceTree = "<group>";
+		};
+		97579AB91DBF573C00D99981 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				97579ABA1DBF573C00D99981 /* UIView+Toast.h */,
+				97579ABB1DBF573C00D99981 /* UIView+Toast.m */,
+			);
+			path = Toast;
 			sourceTree = "<group>";
 		};
 		97F12FE11DAB15AA00806E8A = {
@@ -479,8 +491,8 @@
 			children = (
 				97F131041DAB1D9000806E8A /* UIViewController+CreateFactory.h */,
 				97F131051DAB1D9000806E8A /* UIViewController+CreateFactory.m */,
-				99C66E5B1DBE584B00C8E2F9 /* UIViewController+RTIDataService.h */,
-				99C66E5C1DBE584B00C8E2F9 /* UIViewController+RTIDataService.m */,
+				99C66E5B1DBE584B00C8E2F9 /* NSObject+RTIDataService.h */,
+				99C66E5C1DBE584B00C8E2F9 /* NSObject+RTIDataService.m */,
 				97F130EF1DAB1A9400806E8A /* BaseVC.h */,
 				97F130F01DAB1A9400806E8A /* BaseVC.m */,
 				97F130F11DAB1A9400806E8A /* BaseNavBarVC.h */,
@@ -559,6 +571,7 @@
 		97F130391DAB18C500806E8A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				97579AB91DBF573C00D99981 /* Toast */,
 				97F1303A1DAB18C500806E8A /* AWAPIManager */,
 				97579A941DBDD62B00D99981 /* AWButton */,
 				97F1304B1DAB18C500806E8A /* AWButtonLoading */,
@@ -1154,11 +1167,12 @@
 				97F130991DAB18C500806E8A /* NSDataAdditions.m in Sources */,
 				97F130E71DAB18D300806E8A /* UIButton+AFNetworking.m in Sources */,
 				97F1309D1DAB18C500806E8A /* MACircleProgressIndicator.m in Sources */,
-				99C66E5D1DBE584B00C8E2F9 /* UIViewController+RTIDataService.m in Sources */,
+				99C66E5D1DBE584B00C8E2F9 /* NSObject+RTIDataService.m in Sources */,
 				97F130D91DAB18D300806E8A /* AFHTTPRequestOperation.m in Sources */,
 				97579A8B1DBDCE5C00D99981 /* LoginVC.m in Sources */,
 				97F130A11DAB18C500806E8A /* AWLocationManager.m in Sources */,
 				97579AAE1DBF164B00D99981 /* RTIDataService.m in Sources */,
+				97579ABC1DBF573C00D99981 /* UIView+Toast.m in Sources */,
 				97F130A01DAB18C500806E8A /* AWKeyboardManager.m in Sources */,
 				97F130951DAB18C500806E8A /* APIManager.m in Sources */,
 				97F131851DAB2F5E00806E8A /* SettingTableHeader.m in Sources */,
