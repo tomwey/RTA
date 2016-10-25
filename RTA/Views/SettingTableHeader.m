@@ -51,7 +51,7 @@
     NSURL *url = !!currentUser.avatar ? [NSURL URLWithString:currentUser.avatar] : nil;
     [self.avatarView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_avatar.png"]];
     
-    self.nickname.text = currentUser.nickname;
+    self.nickname.text = currentUser ? [currentUser formatUsername] : @"请登录";
 }
 
 - (void)layoutSubviews

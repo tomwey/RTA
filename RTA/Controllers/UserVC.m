@@ -32,7 +32,7 @@ UINavigationControllerDelegate>
     // Do any additional setup after loading the view.
     self.navBar.title = @"用户信息";
     
-    self.tableView = [[UITableView alloc] initWithFrame:self.contentView.bounds style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:self.contentView.bounds style:UITableViewStyleGrouped];
     [self.contentView addSubview:self.tableView];
     
     self.tableView.dataSource = self;
@@ -61,46 +61,65 @@ UINavigationControllerDelegate>
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    if ( section == 0 ) {
+        return 4;
+    }
+    
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell.id"];
+    NSString *cellId = indexPath.section == 0 ? @"cell.id" : @"cell.id2";
+    UITableViewCellStyle style = indexPath.section == 0 ? UITableViewCellStyleValue1 : UITableViewCellStyleDefault;
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if ( !cell ) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell.id"];
+        cell = [[UITableViewCell alloc] initWithStyle:style reuseIdentifier:cellId];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    if ( indexPath.row == 0 ) {
-        cell.textLabel.text = @"头像";
-        UIImageView *avatarView = (UIImageView *)[cell.contentView viewWithTag:1011];
-        if ( !avatarView ) {
-            avatarView = AWCreateImageView(nil);
-            avatarView.frame = CGRectMake(0, 0, 48, 48);
-            [cell.contentView addSubview:avatarView];
-            avatarView.tag = 1011;
+    if ( indexPath.section == 0 ) {
+        if ( indexPath.row == 0 ) {
+            cell.textLabel.text = @"头像";
+            UIImageView *avatarView = (UIImageView *)[cell.contentView viewWithTag:1011];
+            if ( !avatarView ) {
+                avatarView = AWCreateImageView(nil);
+                avatarView.frame = CGRectMake(0, 0, 48, 48);
+                [cell.contentView addSubview:avatarView];
+                avatarView.tag = 1011;
+                
+                avatarView.cornerRadius = avatarView.height / 2;
+                
+                avatarView.center = CGPointMake(self.contentView.width - 20 - 15 - avatarView.width / 2,
+                                                self.tableView.rowHeight / 2 );
+            }
             
-            avatarView.cornerRadius = avatarView.height / 2;
+            [avatarView setImageWithURL:[NSURL URLWithString:self.user.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar.png"]];
             
-            avatarView.center = CGPointMake(self.contentView.width - 20 - 15 - avatarView.width / 2,
-                                            self.tableView.rowHeight / 2 );
+            self.avatarView = avatarView;
+        } else if ( indexPath.row == 1 ) {
+            cell.textLabel.text = @"用户名";
+            cell.detailTextLabel.text = [self.user formatUsername];
+        } else if ( indexPath.row == 2 ) {
+            cell.textLabel.text = @"性别";
+            cell.detailTextLabel.text = [self.user formatSex];
+        } else if ( indexPath.row == 3 ) {
+            cell.textLabel.text = @"生日";
+            cell.detailTextLabel.text = [self.user formatBirth];
         }
-        
-        [avatarView setImageWithURL:[NSURL URLWithString:self.user.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar.png"]];
-        
-        self.avatarView = avatarView;
-    } else if ( indexPath.row == 1 ) {
-        cell.textLabel.text = @"用户名";
-        cell.detailTextLabel.text = [self.user formatUsername];
-    } else if ( indexPath.row == 2 ) {
-        cell.textLabel.text = @"性别";
-        cell.detailTextLabel.text = [self.user formatSex];
-    } else if ( indexPath.row == 3 ) {
-        cell.textLabel.text = @"生日";
-        cell.detailTextLabel.text = [self.user formatBirth];
+    } else {
+        cell.textLabel.text = @"退出登录";
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.textColor = [UIColor redColor];
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     return cell;
@@ -110,32 +129,50 @@ UINavigationControllerDelegate>
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ( indexPath.row == 0 ) {
-        // 修改头像
-        UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self
-                                               cancelButtonTitle:@"取消"
-                                          destructiveButtonTitle:nil
-                                               otherButtonTitles:@"拍照", @"选择图片", nil];
-        [as showInView:self.contentView];
-    } else if ( indexPath.row == 1 ) {
-        // 设置用户名
-        UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"UpdateNicknameVC" params:nil];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if ( indexPath.row == 2 ) {
-        // 设置性别
-        [[[SexPicker alloc] init] showInView:self.contentView selectedBlock:^(SexPicker *sender, id selectedObj) {
-            NSLog(@"selected sex: %@", selectedObj);
-            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-            cell.detailTextLabel.text = selectedObj[@"label"];
-        }];
-    } else if ( indexPath.row == 3 ) {
-        // 设置生日
-        [[[DatePicker alloc] init] showInView:self.contentView selectedBlock:^(DatePicker *sender, NSDate *selectedDate) {
-            NSLog(@"date: %@", selectedDate);
-            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-            NSDateFormatter *df = [[NSDateFormatter alloc] init];
-            df.dateFormat = @"yyyy-MM-dd";
-            cell.detailTextLabel.text = [df stringFromDate:selectedDate];
+    if ( indexPath.section == 0 ) {
+        if ( indexPath.row == 0 ) {
+            // 修改头像
+            UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self
+                                                   cancelButtonTitle:@"取消"
+                                              destructiveButtonTitle:nil
+                                                   otherButtonTitles:@"拍照", @"选择图片", nil];
+            [as showInView:self.contentView];
+        } else if ( indexPath.row == 1 ) {
+            // 设置用户名
+            UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"UpdateNicknameVC" params:nil];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if ( indexPath.row == 2 ) {
+            // 设置性别
+            [[[SexPicker alloc] init] showInView:self.contentView selectedBlock:^(SexPicker *sender, id selectedObj) {
+                NSLog(@"selected sex: %@", selectedObj);
+                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                cell.detailTextLabel.text = selectedObj[@"label"];
+            }];
+        } else if ( indexPath.row == 3 ) {
+            // 设置生日
+            [[[DatePicker alloc] init] showInView:self.contentView selectedBlock:^(DatePicker *sender, NSDate *selectedDate) {
+                NSLog(@"date: %@", selectedDate);
+                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                df.dateFormat = @"yyyy-MM-dd";
+                cell.detailTextLabel.text = [df stringFromDate:selectedDate];
+            }];
+        }
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"退出登录" message:@"你确定吗？"
+                                  delegate:self
+                         cancelButtonTitle:nil
+                          otherButtonTitles:@"确定",@"取消", nil] show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( buttonIndex == 0 ) {
+        [[UserService sharedInstance] logout:^(id result, NSError *error) {
+            if ( !error ) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }];
     }
 }
