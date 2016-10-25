@@ -41,7 +41,7 @@
  */
 - (User *)currentUser
 {
-    self.user = [[User alloc] initWithDictionary:@{@"mobile": @"13312345677"}];
+//    self.user = [[User alloc] initWithDictionary:@{@"mobile": @"13312345677"}];
     
     User *user = self.user ?: [self userFromDetached];
 #if DEBUG

@@ -54,9 +54,10 @@
     
     codeBtn.titleAttributes = @{ NSFontAttributeName: AWSystemFontWithSize(14, NO) };
     
-    UIView *hairLine = [[AWHairlineView alloc] initWithLineColor:IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR];
-    [inputBGView addSubview:hairLine];
-    hairLine.frame = CGRectMake(-1, inputBGView.height / 2, inputBGView.width + 1, 1);
+    UIView *hairLine = [AWHairlineView horizontalLineWithWidth:inputBGView.width
+                                                         color:IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR
+                                                        inView:inputBGView];
+    hairLine.center = CGPointMake(inputBGView.width / 2, inputBGView.height / 2);
     
     // 验证码
     UITextField *codeField = [[UITextField alloc] initWithFrame:CGRectMake(10, 54 + 10, inputBGView.width - 20, 34)];

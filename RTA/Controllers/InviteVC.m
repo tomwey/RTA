@@ -49,14 +49,14 @@
     
     CGFloat width = ( self.contentView.width - inviteLabel.width ) / 2 + 2;
     
-    UIView *line1 = [[AWHairlineView alloc] initWithLineColor:tipLabel.textColor];
-    [self.contentView addSubview:line1];
-    line1.frame = CGRectMake(0, 0, width + 1, 1);
-    line1.center = CGPointMake(line1.width / 2 - 1, inviteLabel.midY);
+    UIView *line1 = [AWHairlineView horizontalLineWithWidth:width
+                                                      color:tipLabel.textColor
+                                                     inView:self.contentView];
+    line1.center = CGPointMake(line1.width / 2, inviteLabel.midY);
     
-    UIView *line2 = [[AWHairlineView alloc] initWithLineColor:tipLabel.textColor];
-    [self.contentView addSubview:line2];
-    line2.frame = CGRectMake(0, 0, width + 1, 1);
+    UIView *line2 = [AWHairlineView horizontalLineWithWidth:width
+                                                      color:tipLabel.textColor
+                                                     inView:self.contentView];
     line2.center = CGPointMake(line2.width / 2 + inviteLabel.right - 1, inviteLabel.midY);
     
     [self.contentView bringSubviewToFront:inviteLabel];

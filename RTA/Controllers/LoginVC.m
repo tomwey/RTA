@@ -49,9 +49,10 @@
     userField.left = iconView.right + 10;
     userField.width -= iconView.width - 10;
     
-    UIView *hairLine = [[AWHairlineView alloc] initWithLineColor:IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR];
-    [inputBGView addSubview:hairLine];
-    hairLine.frame = CGRectMake(-1, inputBGView.height / 2, inputBGView.width + 1, 1);
+    UIView *hairLine = [AWHairlineView horizontalLineWithWidth:inputBGView.width
+                                                         color:IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR
+                                                        inView:inputBGView];
+    hairLine.center = CGPointMake(hairLine.width / 2, inputBGView.height / 2);
     
     // 密码
     UITextField *passField = [[UITextField alloc] initWithFrame:CGRectMake(10, 54 + 10, inputBGView.width - 20, 34)];
