@@ -111,6 +111,55 @@
     }];
 }
 
+- (void)updateUserProfile:(NSDictionary *)params completion:(void (^)(User *aUser, NSError *error))completion
+{
+    NSMutableDictionary *newParam = [params mutableCopy];
+    [newParam setObject:[self currentUser].token forKey:@"userid"];
+    
+    if ( [newParam[@"key"] isEqualToString:@"birthday"] ) {
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        df.dateFormat = @"yyyy-MM-dd";
+        [newParam setObject:[df stringFromDate:[params objectForKey:@"value"]] forKey:@"value"];
+    }
+    
+    [self.dataService POST:@"UpdateUserInfo" params:newParam completion:^(id result, NSError *error) {
+//        NSLog(@"");
+        if ( completion ) {
+            if ( error ) {
+                completion(nil, error);
+            } else {
+                
+                User *user = [self currentUser];
+                if ( [params[@"key"] isEqualToString:@"username"] ) {
+                    [user updateName:[params[@"value"] description]];
+                }
+                
+                if ( [params[@"key"] isEqualToString:@"sex"] ) {
+                    [user updateSex:params[@"value"]];
+                }
+                
+                if ( [params[@"key"] isEqualToString:@"birthday"] ) {
+                    [user updateBirth:params[@"value"]];
+                }
+                
+                if ( [params[@"key"] isEqualToString:@"avatar"] ) {
+                    [user updateAvatar:result[@"HeadUrl"]];
+                }
+                
+                [self saveUser:user];
+                
+                completion(user, nil);
+            }
+        }
+    }];
+}
+
+- (void)updateAvatar:(NSDictionary *)params
+          completion:(void (^)(User *aUser, NSError *error))completion
+{
+    
+}
+
 - (void)logout:(void (^)(id result, NSError *error))completion
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"logined.user"];

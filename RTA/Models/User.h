@@ -20,6 +20,14 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)jsonResult;
 
+- (void)updateName:(NSString *)name;
+
+- (void)updateBirth:(NSDate *)birth;
+
+- (void)updateAvatar:(NSString *)avatar;
+
+- (void)updateSex:(NSNumber *)sex;
+
 @end
 
 @interface User (Deco)

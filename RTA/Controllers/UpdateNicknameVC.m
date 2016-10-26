@@ -11,6 +11,8 @@
 
 @interface UpdateNicknameVC ()
 
+@property (nonatomic, weak) UITextField *nicknameField;
+
 @end
 
 @implementation UpdateNicknameVC
@@ -25,6 +27,7 @@
                                                                            self.contentView.width - 30,
                                                                            37)];
     [self.contentView addSubview:textField];
+    self.nicknameField = textField;
     
     textField.text = [[[UserService sharedInstance] currentUser] name] ?:
                      [[[UserService sharedInstance] currentUser] mobile];
@@ -48,7 +51,22 @@
 
 - (void)save
 {
+    if ( self.nicknameField.text.trim.length == 0 ) {
+        [self.contentView makeToast:@"昵称不能为空" duration:2.0 position:CSToastPositionTop];
+        return;
+    }
     
+    [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
+    
+    [[UserService sharedInstance] updateUserProfile:@{ @"key": @"username", @"value": self.nicknameField.text } completion:^(User *aUser, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
+        if ( error ) {
+            [self.contentView makeToast:@"昵称设置失败" duration:2.0 position:CSToastPositionTop];
+        } else {
+            [self.contentView makeToast:@"昵称设置成功" duration:2.0 position:CSToastPositionTop];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
 }
 
 @end

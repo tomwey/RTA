@@ -54,4 +54,10 @@
  */
 - (void)logout:(void (^)(id result, NSError *error))completion;
 
+- (void)updateUserProfile:(NSDictionary *)params
+               completion:(void (^)(User *aUser, NSError *error))completion;
+
+- (void)updateAvatar:(NSDictionary *)params
+          completion:(void (^)(User *aUser, NSError *error))completion;
+
 @end

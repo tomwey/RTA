@@ -145,17 +145,47 @@ UINavigationControllerDelegate>
             // 设置性别
             [[[SexPicker alloc] init] showInView:self.contentView selectedBlock:^(SexPicker *sender, id selectedObj) {
                 NSLog(@"selected sex: %@", selectedObj);
-                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-                cell.detailTextLabel.text = selectedObj[@"label"];
+                
+                [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
+                
+                [[UserService sharedInstance] updateUserProfile:@{ @"key": @"sex", @"value": [selectedObj valueForKey:@"value"] } completion:^(User *aUser, NSError *error) {
+                    [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
+                    
+                    if ( !error ) {
+                        [self.contentView makeToast:@"性别设置成功" duration:2.0 position:CSToastPositionTop];
+                        
+                        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                        cell.detailTextLabel.text = selectedObj[@"label"];
+                    } else {
+                        [self.contentView makeToast:@"性别设置失败" duration:2.0 position:CSToastPositionTop];
+                    }
+                }];
             }];
         } else if ( indexPath.row == 3 ) {
             // 设置生日
             [[[DatePicker alloc] init] showInView:self.contentView selectedBlock:^(DatePicker *sender, NSDate *selectedDate) {
                 NSLog(@"date: %@", selectedDate);
-                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                
+                [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
+                
                 NSDateFormatter *df = [[NSDateFormatter alloc] init];
                 df.dateFormat = @"yyyy-MM-dd";
-                cell.detailTextLabel.text = [df stringFromDate:selectedDate];
+                
+                [[UserService sharedInstance] updateUserProfile:@{ @"key": @"birthday", @"value": selectedDate } completion:^(User *aUser, NSError *error) {
+                    [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
+                    
+                    if ( !error ) {
+                        [self.contentView makeToast:@"生日设置成功" duration:2.0 position:CSToastPositionTop];
+                        
+                        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                        
+                        cell.detailTextLabel.text = [df stringFromDate:selectedDate];
+
+                    } else {
+                        [self.contentView makeToast:@"生日设置失败" duration:2.0 position:CSToastPositionTop];
+                    }
+                }];
+                
             }];
         }
     } else {

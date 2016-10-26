@@ -68,8 +68,29 @@
     aUser.token = [[aDecoder decodeObjectForKey:@"token"] description];
     aUser.avatar = [[aDecoder decodeObjectForKey:@"avatar"] description];
     aUser.sex = [aDecoder decodeObjectForKey:@"sex"];
+    aUser.name = [[aDecoder decodeObjectForKey:@"name"] description];
     aUser.birthday = [aDecoder decodeObjectForKey:@"birthday"];
     return aUser;
+}
+
+- (void)updateName:(NSString *)name
+{
+    self.name = name;
+}
+
+- (void)updateBirth:(NSDate *)birth
+{
+    self.birthday = birth;
+}
+
+- (void)updateAvatar:(NSString *)avatar
+{
+    self.avatar = avatar;
+}
+
+- (void)updateSex:(NSNumber *)sex
+{
+    self.sex = sex;
 }
 
 @end
@@ -89,7 +110,7 @@
 - (NSString *)formatBirth
 {
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    df.dateFormat = @"MM/dd";
+    df.dateFormat = @"yyyy-MM-dd";
     return self.birthday ? [df stringFromDate:self.birthday] : @"未设置";
 }
 

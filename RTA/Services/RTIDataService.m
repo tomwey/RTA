@@ -49,7 +49,12 @@
                                                             if ( resp.statusCode == 200 ) {
                                                                 [self parseData:data];
                                                             } else {
-                                                                [self handleError:error];
+                                                                if ( resp.statusCode == 202 ) {
+                                                                    NSError *inError = [NSError errorWithDomain:@"参数异常" code:-202 userInfo:nil];
+                                                                    [self handleError:inError];
+                                                                } else {
+                                                                    [self handleError:error];
+                                                                }
                                                             }
                                                         }
                                                         

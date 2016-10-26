@@ -441,11 +441,19 @@
 			path = Toast;
 			sourceTree = "<group>";
 		};
-		97F12FE11DAB15AA00806E8A = {
+		97579ABD1DC031CB00D99981 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				97579AAA1DBE087900D99981 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		97F12FE11DAB15AA00806E8A = {
+			isa = PBXGroup;
+			children = (
 				97F12FEC1DAB15AA00806E8A /* RTA */,
+				97579ABD1DC031CB00D99981 /* Frameworks */,
 				97F12FEB1DAB15AA00806E8A /* Products */,
 			);
 			sourceTree = "<group>";
