@@ -8,8 +8,10 @@
 
 #import "InviteVC.h"
 #import "Defines.h"
+#import <MessageUI/MessageUI.h>
+#import <ShareSDK/ShareSDK.h>
 
-@interface InviteVC ()
+@interface InviteVC () <MFMessageComposeViewControllerDelegate>
 
 @end
 
@@ -23,8 +25,14 @@
     
     self.contentView.backgroundColor = AWColorFromRGB(251, 251, 251);
     
-    UIImageView *wxView = AWCreateImageView(@"wechat.png");
+    UIImageView *wxView = AWCreateImageView(nil);
+    wxView.frame = CGRectMake(0, 0, 258, 258);
+    if ( self.contentView.width == 320 ) {
+        wxView.frame = CGRectMake(0, 0, 180, 180);
+    }
     [self.contentView addSubview:wxView];
+    
+    [wxView setImageWithURL:[NSURL URLWithString:[[[VersionCheckService sharedInstance] appInfo] valueForKey:@"QRUrl"]]];
     
     wxView.center = CGPointMake(self.contentView.width / 2, 30 + wxView.height / 2);
     
@@ -117,21 +125,117 @@
 - (void)shareToWX
 {
     NSLog(@"1234");
+    [self shareToPlatform:SSDKPlatformSubTypeWechatSession];
 }
 
 - (void)shareToFriends
 {
-    NSLog(@"1234");
+//    NSLog(@"1234");
+    [self shareToPlatform:SSDKPlatformSubTypeWechatTimeline];
 }
 
 - (void)shareToQQ
 {
-    NSLog(@"1234");
+//    NSLog(@"1234");
+    [self shareToPlatform:SSDKPlatformSubTypeQQFriend];
+}
+
+- (void)shareToPlatform:(SSDKPlatformType)type// params:(NSMutableDictionary *)params
+{
+    NSMutableDictionary *params = [@{} mutableCopy];
+//    [params SSDKEnableUseClientShare];
+    
+    [params SSDKSetupShareParamsByText:nil
+                                images:[UIImage imageNamed:@"logo.png"]
+                                   url:[self shareLink]
+                                 title:@"不再傻等，掐点出门。哈密实时公交，您的掌上公交神器。"
+                                  type:SSDKContentTypeWebPage];
+    
+    [ShareSDK share:type
+         parameters:params
+     onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+         switch (state) {
+             case SSDKResponseStateSuccess:
+             {
+                 [self.contentView makeToast:@"分享成功" duration:2.0 position:CSToastPositionTop];
+             }
+                 break;
+             case SSDKResponseStateFail:
+             {
+                 NSLog(@"error: %@", error);
+                 if ( type == SSDKPlatformSubTypeWechatSession ||
+                     type == SSDKPlatformSubTypeWechatTimeline) {
+                     [self.contentView makeToast:@"还未安装微信客户端" duration:2.0 position:CSToastPositionTop];
+                 } else {
+                     [self.contentView makeToast:@"还未安装QQ客户端" duration:2.0 position:CSToastPositionTop];
+                 }
+                 
+             }
+                 break;
+             case SSDKResponseStateCancel:
+             {
+                 [self.contentView makeToast:@"分享取消" duration:2.0 position:CSToastPositionTop];
+             }
+                 break;
+                 
+             default:
+                 break;
+         }
+     }];
 }
 
 - (void)shareToMessage
 {
-    NSLog(@"1234");
+//    NSLog(@"1234");
+    if ( ![MFMessageComposeViewController canSendText] ) {
+        [[[UIAlertView alloc] initWithTitle:@"您的设备不支持发短信"
+                                   message:@""
+                                  delegate:nil
+                         cancelButtonTitle:nil
+                         otherButtonTitles:@"确定", nil] show];
+        return;
+    }
+    MFMessageComposeViewController *vc = [[MFMessageComposeViewController alloc] init];
+    vc.body = [self shareContent];
+    vc.messageComposeDelegate = self;
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    switch (result) {
+        case MessageComposeResultCancelled:
+        {
+            [self.contentView makeToast:@"取消发送" duration:2.0 position:CSToastPositionTop];
+        }
+            break;
+        case MessageComposeResultFailed:
+        {
+            [self.contentView makeToast:@"发送消息失败" duration:2.0 position:CSToastPositionTop];
+        }
+            break;
+        case MessageComposeResultSent:
+        {
+            [self.contentView makeToast:@"消息已发送" duration:2.0 position:CSToastPositionTop];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (NSURL *)shareLink
+{
+    NSString *url = [[[VersionCheckService sharedInstance] appInfo] valueForKey:@"QRUrl"];
+    return [NSURL URLWithString:url];
+}
+
+- (NSString *)shareContent
+{
+    return [NSString stringWithFormat:@"不再傻等，掐点出门。哈密实时公交，您的掌上公交神器。\n%@",
+            [[[VersionCheckService sharedInstance] appInfo] valueForKey:@"QRUrl"]];
 }
 
 @end

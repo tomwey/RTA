@@ -45,6 +45,9 @@
 #define WX_APP_ID     @"wx0a45255c7eb48647"
 #define WX_APP_SECRET @"31130acde0e69ede9e6850f86f0050d8"
 
+#define QQ_APP_ID     @"1105670217"
+#define QQ_APP_SECRET @"coZ8RFbWRAZKdpUB"
+
 #define UMENG_KEY     @"57feef1d67e58e04c2000198"
 
 #define NFC_APP_URL       @""

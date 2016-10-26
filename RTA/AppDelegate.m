@@ -8,8 +8,14 @@
 
 #import "AppDelegate.h"
 #import "Defines.h"
+#import "UMMobClick/MobClick.h"
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import "WXApi.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <WXApiDelegate>
 
 @end
 
@@ -59,7 +65,61 @@
     
     [[VersionCheckService sharedInstance] startCheckWithSilent:YES];
     
+    // 友盟统计
+    UMConfigInstance.appKey = UMENG_KEY;
+    UMConfigInstance.channelId = @"App Store";
+    [MobClick startWithConfigure:UMConfigInstance];
+    
+    // 初始化分享SDK
+    [self initShareSDK];
+    
     return YES;
+}
+
+- (void)initShareSDK
+{
+    [ShareSDK registerApp:@"185a719e32d25"
+          activePlatforms:@[@(SSDKPlatformTypeQQ), @(SSDKPlatformTypeWechat)]
+                 onImport:^(SSDKPlatformType platformType) {
+                     //
+                     switch (platformType) {
+                         case SSDKPlatformTypeQQ:
+                         {
+                             [ShareSDKConnector connectQQ:[QQApiInterface class]
+                                        tencentOAuthClass:[TencentOAuth class]];
+                         }
+                             break;
+                         case SSDKPlatformTypeWechat:
+                         {
+                             [ShareSDKConnector connectWeChat:[WXApi class] delegate:self];
+                         }
+                             break;
+                             
+                         default:
+                             break;
+                     }
+                 } onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
+                     switch (platformType) {
+                         case SSDKPlatformTypeWechat:
+                         {
+                             [appInfo SSDKSetupWeChatByAppId:WX_APP_ID appSecret:WX_APP_SECRET];
+                         }
+                             break;
+                         case SSDKPlatformTypeQQ:
+                         {
+                             [appInfo SSDKSetupQQByAppId:QQ_APP_ID appKey:QQ_APP_SECRET authType:SSDKAuthTypeBoth];
+                         }
+                             break;
+                             
+                         default:
+                             break;
+                     }
+                 }];
+}
+
+-(void)onResp:(BaseResp *)resp
+{
+    NSLog(@"The response of wechat.");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
