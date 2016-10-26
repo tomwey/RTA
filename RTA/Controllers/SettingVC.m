@@ -183,7 +183,7 @@
 
 - (void)gotoVersion
 {
-    
+    [[VersionCheckService sharedInstance] startCheckWithSilent:NO];
 }
 
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message

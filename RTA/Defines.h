@@ -127,7 +127,9 @@
 // Models
 #import "User.h"
 
+// Services
 #import "UserService.h"
+#import "VersionCheckService.h"
 
 // Views
 #import "SettingTableHeader.h"

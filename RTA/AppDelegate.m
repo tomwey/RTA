@@ -57,6 +57,8 @@
     
     [self.window makeKeyAndVisible];
     
+    [[VersionCheckService sharedInstance] startCheckWithSilent:YES];
+    
     return YES;
 }
 

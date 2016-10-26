@@ -37,6 +37,8 @@
 		97AC4C9D1DBDAF4400DBBA74 /* btn_wx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97AC4C991DBDAF4400DBBA74 /* btn_wx@2x.png */; };
 		97AC4CA61DBDC73500DBBA74 /* UserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AC4CA51DBDC73500DBBA74 /* UserVC.m */; };
 		97BF23D51DBD8E1C0009F46C /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF23D41DBD8E1C0009F46C /* WebViewVC.m */; };
+		97CF18601DC05CDA00ED8A73 /* VersionCheckService.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CF185F1DC05CDA00ED8A73 /* VersionCheckService.m */; };
+		97CF18631DC05FF300ED8A73 /* AppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CF18621DC05FF300ED8A73 /* AppInfo.m */; };
 		97F12FEF1DAB15AA00806E8A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F12FEE1DAB15AA00806E8A /* main.m */; };
 		97F12FF21DAB15AA00806E8A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F12FF11DAB15AA00806E8A /* AppDelegate.m */; };
 		97F130901DAB18C500806E8A /* APIConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F1303C1DAB18C500806E8A /* APIConfig.m */; };
@@ -208,6 +210,10 @@
 		97AC4CA51DBDC73500DBBA74 /* UserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserVC.m; sourceTree = "<group>"; };
 		97BF23D31DBD8E1C0009F46C /* WebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewVC.h; sourceTree = "<group>"; };
 		97BF23D41DBD8E1C0009F46C /* WebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
+		97CF185E1DC05CDA00ED8A73 /* VersionCheckService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionCheckService.h; sourceTree = "<group>"; };
+		97CF185F1DC05CDA00ED8A73 /* VersionCheckService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionCheckService.m; sourceTree = "<group>"; };
+		97CF18611DC05FF300ED8A73 /* AppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfo.h; sourceTree = "<group>"; };
+		97CF18621DC05FF300ED8A73 /* AppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppInfo.m; sourceTree = "<group>"; };
 		97F12FEA1DAB15AA00806E8A /* RTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97F12FEE1DAB15AA00806E8A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		97F12FF01DAB15AA00806E8A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -536,6 +542,8 @@
 			children = (
 				97F131861DAB2F7900806E8A /* User.h */,
 				97F131871DAB2F7900806E8A /* User.m */,
+				97CF18611DC05FF300ED8A73 /* AppInfo.h */,
+				97CF18621DC05FF300ED8A73 /* AppInfo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -858,6 +866,8 @@
 				97579A841DBDCBAE00D99981 /* UserService.m */,
 				97579AAC1DBF164B00D99981 /* RTIDataService.h */,
 				97579AAD1DBF164B00D99981 /* RTIDataService.m */,
+				97CF185E1DC05CDA00ED8A73 /* VersionCheckService.h */,
+				97CF185F1DC05CDA00ED8A73 /* VersionCheckService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1142,6 +1152,7 @@
 				97F130F71DAB1BE000806E8A /* LoadingView.m in Sources */,
 				97F130DD1DAB18D300806E8A /* AFSecurityPolicy.m in Sources */,
 				97F130E41DAB18D300806E8A /* AFNetworkActivityIndicatorManager.m in Sources */,
+				97CF18601DC05CDA00ED8A73 /* VersionCheckService.m in Sources */,
 				97F130AC1DAB18C500806E8A /* AWTextField.m in Sources */,
 				97F130E51DAB18D300806E8A /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				97F130E91DAB18D300806E8A /* UIProgressView+AFNetworking.m in Sources */,
@@ -1184,6 +1195,7 @@
 				97F130A01DAB18C500806E8A /* AWKeyboardManager.m in Sources */,
 				97F130951DAB18C500806E8A /* APIManager.m in Sources */,
 				97F131851DAB2F5E00806E8A /* SettingTableHeader.m in Sources */,
+				97CF18631DC05FF300ED8A73 /* AppInfo.m in Sources */,
 				97F130961DAB18C500806E8A /* APIRequest.m in Sources */,
 				97579A9D1DBDE05000D99981 /* PasswordVC.m in Sources */,
 				97F130A31DAB18C500806E8A /* AWRefreshBaseView.m in Sources */,
