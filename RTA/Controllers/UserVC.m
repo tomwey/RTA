@@ -254,9 +254,27 @@ UINavigationControllerDelegate>
 {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
     
-    self.avatarView.image = editedImage;
+//    self.avatarView.image = editedImage;
     
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *imageString =
+    [UIImagePNGRepresentation(editedImage) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+//    NSLog(@"imageString: \n%@", imageString);
+    [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
+    [[UserService sharedInstance] updateAvatar:@{ @"image": imageString }
+                                    completion:^(User *aUser, NSError *error) {
+                                        [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
+                                        if ( !error ) {
+                                            [self.contentView makeToast:@"头像设置成功" duration:2.0 position:CSToastPositionTop];
+                                            
+                                            self.user = aUser;
+                                            
+                                            [self.tableView reloadData];
+                                        } else {
+                                            [self.contentView makeToast:@"头像设置失败" duration:2.0 position:CSToastPositionTop];
+                                        }
+                                    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

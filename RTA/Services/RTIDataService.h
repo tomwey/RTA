@@ -15,8 +15,12 @@
  completion:(void (^)(id result, NSError *error))completion;
 
 - (NSUInteger)POST:(NSString *)uri
-      params:(NSDictionary *)params
-  completion:(void (^)(id result, NSError *error))completion;
+            params:(NSDictionary *)params
+        completion:(void (^)(id result, NSError *error))completion;
+
+- (NSUInteger)POST2:(NSString *)uri
+            params:(NSDictionary *)params
+        completion:(void (^)(id result, NSError *error))completion;
 
 - (void)cancelAllRequests;
 

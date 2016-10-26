@@ -71,6 +71,56 @@
     return taskId;
 }
 
+- (NSUInteger)POST2:(NSString *)uri
+             params:(NSDictionary *)params
+         completion:(void (^)(id result, NSError *error))completion
+{
+    self.postCallback = completion;
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:self.sessionConfiguration];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", API_HOST, uri]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    request.HTTPMethod = @"POST";
+    [request setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    //    @{ @"lng": @"104.321233", @"lat": @"30.098123" }
+    request.HTTPBody = [stringByParams(params) dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:^(NSData * _Nullable data,
+                                                                    NSURLResponse * _Nullable response,
+                                                                    NSError * _Nullable error) {
+                                                    //                                                    NSLog(@"result: %@, error: %@", response, error);
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        if ( error ) {
+                                                            [self handleError:error];
+                                                        } else {
+                                                            NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
+                                                            if ( resp.statusCode == 200 ) {
+                                                                [self parseData:data];
+                                                            } else {
+                                                                if ( resp.statusCode == 202 ) {
+                                                                    NSError *inError = [NSError errorWithDomain:@"参数异常" code:-202 userInfo:nil];
+                                                                    [self handleError:inError];
+                                                                } else {
+                                                                    [self handleError:error];
+                                                                }
+                                                            }
+                                                        }
+                                                        
+                                                        [self.requestTasks removeObjectForKey:@([dataTask taskIdentifier])];
+                                                    });
+                                                }];
+    
+    [dataTask resume];
+    
+    NSUInteger taskId = [dataTask taskIdentifier];
+    
+    self.requestTasks[@(taskId)] = dataTask;
+    
+    return taskId;
+}
+
 - (void)handleError:(NSError *)error
 {
     if ( self.postCallback ) {

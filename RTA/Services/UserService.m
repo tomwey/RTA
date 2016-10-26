@@ -142,10 +142,6 @@
                     [user updateBirth:params[@"value"]];
                 }
                 
-                if ( [params[@"key"] isEqualToString:@"avatar"] ) {
-                    [user updateAvatar:result[@"HeadUrl"]];
-                }
-                
                 [self saveUser:user];
                 
                 completion(user, nil);
@@ -157,7 +153,25 @@
 - (void)updateAvatar:(NSDictionary *)params
           completion:(void (^)(User *aUser, NSError *error))completion
 {
-    
+    [self.dataService POST2:@"UploadPic"
+                     params:@{ @"userid": [self currentUser].token ?: @"",
+                               @"imgstream": params[@"image"]
+                               }
+                 completion:^(id result, NSError *error) {
+                     if ( !error ) {
+                         User *user = [self currentUser];
+                         [user updateAvatar:result[@"imgurl"]];
+                         [self saveUser:user];
+                         
+                         if ( completion ) {
+                             completion(user, nil);
+                         }
+                     } else {
+                         if ( completion ) {
+                             completion(nil, error);
+                         }
+                     }
+                 }];
 }
 
 - (void)logout:(void (^)(id result, NSError *error))completion
