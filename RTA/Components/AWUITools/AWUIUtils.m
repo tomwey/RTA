@@ -10,6 +10,39 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "sys/utsname.h"
 
+@interface NBTarget : NSObject <UIWebViewDelegate>
+
++ (instancetype)sharedInstance;
+
+@end
+
+@implementation NBTarget
+
++ (instancetype)sharedInstance
+{
+    static NBTarget *instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if ( !instance ) {
+            instance = [[self alloc] init];
+        }
+    });
+    return instance;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
+{
+    if ( error.code == 101 ) {
+        [[[UIAlertView alloc] initWithTitle:@"您还未安装QQ，不能打开"
+                                    message:@""
+                                  delegate:nil
+                         cancelButtonTitle:nil
+                         otherButtonTitles:@"确定", nil] show];
+    }
+}
+
+@end
+
 /**
  * 返回当前设备运行的iOS版本
  */
@@ -146,6 +179,7 @@ void AWAppOpenQQ(NSString *qq)
     NSString *string = [NSString stringWithFormat:@"mqq://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    webView.delegate = [NBTarget sharedInstance];
     [webView loadRequest:request];
 }
 

@@ -38,7 +38,7 @@
 
 - (void)startCheck
 {
-    [self startCheckWithSilent:self.silent];
+    [self startCheckWithSilent:YES];
 }
 
 - (void)startCheckWithSilent:(BOOL)isSilent
@@ -70,6 +70,8 @@
         
         [self checkVersion];
     } else {
+        self.checking = NO;
+        
         if ( !self.silent ) {
             [AWAppWindow() makeToast:@"获取版本信息失败" duration:2.0 position:CSToastPositionTop];
         } else {
@@ -92,23 +94,27 @@
 //    status = 101;
     if ( [AWAppVersion() compare:[[self.appInfo valueForKey:@"IosVersion"] description] options:NSNumericSearch] == NSOrderedAscending ) {
         // 有新版本更新
-        [[[UIAlertView alloc] initWithTitle:@"版本更新提示" message:@"有新版本，是否更新？"
+        [[[UIAlertView alloc] initWithTitle:@"有新版本，是否更新？" message:@""
                                    delegate:self
                           cancelButtonTitle:nil
                           otherButtonTitles: @"不了", @"立即更新", nil] show];
     } else {
         // 没有新版本
         if ( !self.silent ) {
-            [[[UIAlertView alloc] initWithTitle:@"版本更新提示" message:@"当前已经是最新版本"
+            [[[UIAlertView alloc] initWithTitle:@"当前版本已经是最新的了" message:@""
                                       delegate:nil
                              cancelButtonTitle:nil
                              otherButtonTitles:@"确定", nil] show];
+        } else {
+            self.checking = NO;
         }
     }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    self.checking = NO;
+    
     if ( buttonIndex == 1 ) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[self.appInfo valueForKey:@"IosDownload"] description]]];
     }

@@ -43,7 +43,7 @@
 			<key>label</key>
 			<string>客服QQ</string>
 			<key>value</key>
-			<string>2757801355</string>
+			<string>qq</string>
 			<key>action</key>
 			<string>openQQ</string>
 		</dict>
@@ -61,7 +61,7 @@
 			<key>label</key>
 			<string>客服电话</string>
 			<key>value</key>
-			<string>18108037442</string>
+			<string>mobile</string>
 			<key>action</key>
 			<string>openPhone</string>
 		</dict>
@@ -71,7 +71,7 @@
 			<key>label</key>
 			<string>当前版本</string>
 			<key>value</key>
-			<string>1.0</string>
+			<string>version</string>
 			<key>action</key>
 			<string>gotoVersion</string>
 		</dict>

@@ -91,7 +91,17 @@
     cell.textLabel.text  = [[obj valueForKey:@"label"] description];
     cell.textLabel.textColor = AWColorFromRGB(135, 135, 135);
     
-    cell.detailTextLabel.text = [obj valueForKey:@"value"];
+    NSString *value = [[obj valueForKey:@"value"] description];
+    
+    if ( [value isEqualToString:@"qq"] ) {
+        value = [[[[VersionCheckService sharedInstance] appInfo] valueForKey:@"QQ"] description];
+    } else if ( [value isEqualToString:@"mobile"] ) {
+        value = [[[[VersionCheckService sharedInstance] appInfo] valueForKey:@"Tel"] description];
+    } else if ( [value isEqualToString:@"version"] ) {
+        value = AWAppVersion();
+    }
+    
+    cell.detailTextLabel.text = value;
     
     return cell;
 }
@@ -160,7 +170,7 @@
 
 - (void)openQQ
 {
-    AWAppOpenQQ(OFFICIAL_QQ);
+    AWAppOpenQQ([[[[VersionCheckService sharedInstance] appInfo] valueForKey:@"QQ"] description]);
 }
 
 - (void)gotoWechat
@@ -171,10 +181,11 @@
 
 - (void)openPhone
 {
-    NSString *phone = [NSString stringWithFormat:@"tel:%@", OFFICIAL_TELPHONE];
+    NSString *phone = [NSString stringWithFormat:@"tel:%@", [[[[VersionCheckService sharedInstance] appInfo] valueForKey:@"Tel"] description]];
     NSURL *phoneURL = [NSURL URLWithString:phone];
     
-    if ( [[UIApplication sharedApplication] canOpenURL:phoneURL] ) {
+    if ( [AWDeviceName() rangeOfString:@"iPhone" options:NSCaseInsensitiveSearch].location != NSNotFound &&
+        [[UIApplication sharedApplication] canOpenURL:phoneURL] ) {
         [[UIApplication sharedApplication] openURL:phoneURL];
     } else {
         [self showAlertWithTitle:@"提示" message:@"您的设备不支持打电话功能"];
