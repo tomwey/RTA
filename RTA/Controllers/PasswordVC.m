@@ -11,6 +11,9 @@
 
 @interface PasswordVC () <UITextFieldDelegate>
 
+@property (nonatomic, weak) UITextField *password1Field;
+@property (nonatomic, weak) UITextField *password2Field;
+
 @end
 
 @implementation PasswordVC
@@ -40,6 +43,8 @@
     userField.secureTextEntry = YES;
     userField.delegate = self;
     
+    self.password1Field = userField;
+    
     UIView *hairLine = [AWHairlineView horizontalLineWithWidth:inputBGView.width
                                                          color:IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR
                                                         inView:inputBGView];
@@ -52,6 +57,8 @@
     codeField.returnKeyType = UIReturnKeyDone;
     codeField.secureTextEntry = YES;
     codeField.delegate = self;
+    
+    self.password2Field = codeField;
     
     // 确定按钮
     AWButton *okButton = [AWButton buttonWithTitle:@"完成" color:NAV_BAR_BG_COLOR];
@@ -80,7 +87,57 @@
 
 - (void)done
 {
+    if ( [self.password1Field.text trim].length == 0 ) {
+        [self.contentView makeToast:@"密码不能为空"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
     
+    if ( [self.password2Field.text trim].length == 0 ) {
+        [self.contentView makeToast:@"确认密码不能为空"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
+    
+    if ( self.password1Field.text.length < 6 ) {
+        [self.contentView makeToast:@"密码至少为6位"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
+    
+    if ( [self.password2Field.text isEqualToString:self.password1Field.text] == NO ) {
+        [self.contentView makeToast:@"两次密码输入不一致"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
+    
+    __weak typeof(self) me = self;
+    [self.dataService POST:ADD_USER_INFO params:@{ @"tel": self.params[@"mobile"] ?: @"",
+                                                   @"pwd": self.password1Field.text
+                                                   }
+                completion:^(id result, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:me.contentView animated:YES];
+        
+        if ( !error ) {
+            if ( [me.params[@"from"] isEqualToString:@"forget"] ) {
+                [me.contentView makeToast:@"密码设置成功" duration:2.0 position:CSToastPositionTop];
+                [me back];
+            } else {
+                [me.contentView makeToast:@"用户注册成功" duration:2.0 position:CSToastPositionTop];
+                [[UserService sharedInstance] saveUser:[[User alloc] initWithDictionary:result]];
+                [me.navigationController popToRootViewControllerAnimated:YES];
+            }
+            
+        } else {
+            [me.contentView makeToast:error.domain duration:2.0 position:CSToastPositionTop];
+        }
+    }];
 }
 
 @end

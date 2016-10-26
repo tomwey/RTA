@@ -18,6 +18,8 @@
  */
 - (User *)currentUser;
 
+- (void)saveUser: (User *)aUser;
+
 /**
  * 获取当前用户认证Token
  */

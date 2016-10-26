@@ -70,7 +70,7 @@
                       inComponent:0
                          animated:YES];
         
-        self.currentSelectedSex = [@{} mutableCopy];
+        self.currentSelectedSex = [@{ @"label": @"男", @"value": @(0) } mutableCopy];
     }
     return self;
 }

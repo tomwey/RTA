@@ -136,14 +136,14 @@
     if ( jsonError ) {
         [self handleError:jsonError];
     } else {
-        NSLog(@"------------------- 返回成功 -------------------\n%@\n", result);
+        NSLog(@"------------------- 返回成功 -------------------\n%@\n%@", result, result[@"resultdes"]);
         NSInteger code = [result[@"status"] integerValue];
         if ( code == 101 ) {
             if ( self.postCallback ) {
                 self.postCallback(result, nil);
             }
         } else {
-            NSError *error = [NSError errorWithDomain:@"出错了！" code:-101 userInfo:nil];
+            NSError *error = [NSError errorWithDomain:result[@"resultdes"] code:code userInfo:nil];
             [self handleError:error];
         }
     }

@@ -19,6 +19,12 @@
 
 @property (nonatomic, strong) UIView  *disableView;
 
+// 下面的属性用于禁用按钮功能
+@property (nonatomic, strong) NSTimer *countdownTimer;
+@property (nonatomic, assign) NSInteger counter;
+@property (nonatomic, copy) void (^countdownCompletionBlock)(AWButton *sender);
+@property (nonatomic, copy) NSString *originTitle;
+
 @end
 
 @implementation AWButton
@@ -139,6 +145,8 @@
         
         if ( _enabled == NO ) {
             self.disableView.hidden = NO;
+        } else {
+            self.disableView.hidden = YES;
         }
     }
     
@@ -162,6 +170,39 @@
     
     if ( titleAttributes[NSForegroundColorAttributeName] ) {
         self.titleLabel.textColor = titleAttributes[NSForegroundColorAttributeName];
+    }
+}
+
+- (void)disableDuration:(NSUInteger)duration completionBlock:(void (^)(AWButton *sender))completionBlock
+{
+    if ( duration == 0 ) {
+        return;
+    }
+    
+    self.counter = duration;
+    self.countdownCompletionBlock = completionBlock;
+    self.enabled = NO;
+    
+    self.originTitle = self.title;
+    
+    [self.countdownTimer setFireDate:[NSDate date]];
+}
+
+- (void)countdown
+{
+    self.title = [@(--self.counter) description];
+    if ( self.counter <= 0 ) {
+        
+        [self.countdownTimer invalidate];
+        _countdownTimer = nil;
+        
+        self.title = self.originTitle;
+        self.enabled = YES;
+        
+        if ( self.countdownCompletionBlock ) {
+            self.countdownCompletionBlock(self);
+            self.countdownCompletionBlock = nil;
+        }
     }
 }
 
@@ -191,12 +232,26 @@
         _disableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         _disableView.backgroundColor = [UIColor lightGrayColor];
-        _disableView.alpha = 0.8;
+        _disableView.alpha = 0.6;
     }
     
     [self bringSubviewToFront:_disableView];
     
     return _disableView;
+}
+
+- (NSTimer *)countdownTimer
+{
+    if ( !_countdownTimer ) {
+        _countdownTimer = [NSTimer timerWithTimeInterval:1.0
+                                                  target:self
+                                                selector:@selector(countdown)
+                                                userInfo:nil
+                                                 repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_countdownTimer forMode:NSRunLoopCommonModes];
+        [_countdownTimer setFireDate:[NSDate distantFuture]];
+    }
+    return _countdownTimer;
 }
 
 @end

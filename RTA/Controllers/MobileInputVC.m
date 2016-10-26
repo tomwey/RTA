@@ -11,6 +11,13 @@
 
 @interface MobileInputVC () <UITextFieldDelegate>
 
+@property (nonatomic, weak) UITextField *userField;
+@property (nonatomic, weak) UITextField *codeField;
+
+//@property (nonatomic, strong) NSTimer *countdownTimer;
+@property (nonatomic, weak) AWButton  *codeButton;
+//@property (nonatomic, assign) NSUInteger counter;
+
 @end
 
 @implementation MobileInputVC
@@ -41,12 +48,16 @@
     
     userField.delegate = self;
     
+    self.userField = userField;
+    
     // 获取验证码按钮
     AWButton *codeBtn = [AWButton buttonWithTitle:@"获取验证码" color:NAV_BAR_BG_COLOR];
     [inputBGView addSubview:codeBtn];
     codeBtn.frame = CGRectMake(0, 0, 100, 40);
     codeBtn.left = inputBGView.width - 5 - codeBtn.width;
     codeBtn.top  = userField.midY - codeBtn.height / 2;
+    
+    self.codeButton  = codeBtn;
     
     userField.width -= codeBtn.width;
     
@@ -68,6 +79,8 @@
     
     codeField.delegate = self;
     
+    self.codeField = codeField;
+    
     // 确定按钮
     AWButton *okButton = [AWButton buttonWithTitle:@"确定" color:NAV_BAR_BG_COLOR];
     [self.contentView addSubview:okButton];
@@ -84,13 +97,116 @@
 
 - (void)doNext
 {
-    UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"PasswordVC" params:nil];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ( [self.userField.text trim].length == 0 ) {
+        [self.contentView makeToast:@"手机号不能为空"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
+    
+    NSString* reg = @"^1[3|4|5|7|8][0-9]\\d{8}$";
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", reg];
+    if ( ![predicate evaluateWithObject:self.userField.text] ) {
+        [self.contentView makeToast:@"手机号不正确"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
+    
+    if ( [self.codeField.text trim].length == 0 ) {
+        [self.contentView makeToast:@"验证码不能为空"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
+    
+    __weak typeof(self) me = self;
+    [self.dataService POST:CHECK_VER_CODE params:@{ @"tel": self.userField.text,
+                                                    @"vercode": self.codeField.text
+                                                    }
+                completion:^(id result, NSError *error) {
+                    [MBProgressHUD hideAllHUDsForView:me.contentView animated:YES];
+                    
+                    if ( error ) {
+                        [me.contentView makeToast:error.domain
+                                           duration:2.0
+                                           position:CSToastPositionTop];
+                    } else {
+                        UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"PasswordVC"
+                                                                                    params:@{ @"mobile": me.userField.text,
+                                                                                              @"from": [self.navBar.title isEqualToString:@"注册"] ? @"signup" : @"forget"
+                                                                                              }];
+                        [me.navigationController pushViewController:vc animated:YES];
+                    }
+                }];
+    
 }
 
 - (void)doFetchCode:(AWButton *)sender
 {
+    if ( [self.userField.text trim].length == 0 ) {
+        [self.contentView makeToast:@"手机号不能为空"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
     
+    NSString* reg = @"^1[3|4|5|7|8][0-9]\\d{8}$";
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", reg];
+    if ( ![predicate evaluateWithObject:self.userField.text] ) {
+        [self.contentView makeToast:@"手机号不正确"
+                           duration:2.0
+                           position:CSToastPositionTop];
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
+    
+    __weak typeof(self) me = self;
+    
+    [self.dataService POST:IS_EXIST_USER_INFO params:@{ @"tel": self.userField.text } completion:^(id result, NSError *error) {
+//        [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
+        if ( [me.navBar.title isEqualToString:@"注册"] ) {
+            // 注册
+            if ( error ) {
+                [MBProgressHUD hideAllHUDsForView:me.contentView animated:YES];
+                [me.contentView makeToast:@"用户已存在" duration:2.0 position:CSToastPositionTop];
+            } else {
+                [me sendCode];
+            }
+        } else {
+            // 忘记密码
+            if ( error && error.code == 301 ) {
+                // 用户存在
+                [me sendCode];
+            } else {
+                // 用户未注册
+                [MBProgressHUD hideAllHUDsForView:me.contentView animated:YES];
+                [me.contentView makeToast:@"用户未注册" duration:2.0 position:CSToastPositionTop];
+            }
+        }
+    }];
+}
+
+- (void)sendCode
+{
+    __weak typeof(self) me = self;
+    [self.dataService POST:SEND_VER_CODE params:@{ @"tel": self.userField.text }
+                completion:^(id result, NSError *error) {
+                    [MBProgressHUD hideAllHUDsForView:me.contentView animated:YES];
+                    
+                    if ( !error ) {
+                        [me.contentView makeToast:@"验证码已发送" duration:2.0 position:CSToastPositionTop];
+                        
+                        [me.codeButton disableDuration:60 completionBlock:^(AWButton *sender) {
+                            NSLog(@"按钮可以用了");
+                        }];
+                    } else {
+                        [me.contentView makeToast:error.domain duration:2.0 position:CSToastPositionTop];
+                    }
+                }];
 }
 
 @end

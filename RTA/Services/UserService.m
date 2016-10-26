@@ -46,7 +46,7 @@
     
     User *user = self.user ?: [self userFromDetached];
 #if DEBUG
-    NSLog(@"uid: %@, token: %@", user.name, user.token);
+    NSLog(@"uid: %@, token: %@, name: %@, sex: %@, birth: %@", user.name, user.token, user.name, user.sex, user.birthday);
 #endif
     return user;
 }

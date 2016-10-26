@@ -27,6 +27,14 @@
 + (instancetype)buttonWithTitle:(NSString *)title color:(UIColor *)bgColor;
 
 /**
+ * 禁用按钮，常用于获取验证码等等功能
+ *
+ * @param duration 按钮被禁用的时间
+ * @param completionBlock 按钮禁用结束的回调块
+ */
+- (void)disableDuration:(NSUInteger)duration completionBlock:(void (^)(AWButton *sender))completionBlock;
+
+/**
  * 注意：参数target不会被强引用
  */
 - (void)addTarget:(id)target forAction:(SEL)action;

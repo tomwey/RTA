@@ -163,6 +163,10 @@
                                duration:2.0
                                position:CSToastPositionTop];
             [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [self.contentView makeToast:error.domain
+                               duration:2.0
+                               position:CSToastPositionTop];
         }
     }];
 }

@@ -44,7 +44,8 @@
         df.dateFormat = @"yyyy-MM-dd";
         
         self.birthday = [df dateFromString:[jsonResult[@"Birthday"] description]];
-        self.sex = jsonResult[@"Sex"];
+        
+        self.sex = [[jsonResult[@"Sex"] description] isEqualToString:@"<null>"] ? nil: jsonResult[@"Sex"];
         
         self.token = jsonResult[@"UserID"];
     }
@@ -99,12 +100,16 @@
 
 - (NSString *)hackMobile
 {
-    return [self.mobile stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    return self.mobile ? [self.mobile stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"] : @"请登录";
 }
 
 - (NSString *)nickname
 {
-    return self.name ?: [self hackMobile] ?: @"请登录";
+    if ( !self.name ) {
+        return [self hackMobile];
+    }
+    
+    return [self.name isEqualToString:self.mobile] ? [self hackMobile] : @"请登录";
 }
 
 - (NSString *)formatBirth
@@ -121,7 +126,11 @@
 
 - (NSString *)formatUsername
 {
-    return self.name ?: [self hackMobile];
+    if ( !self.name ) {
+        return [self hackMobile];
+    }
+    
+    return [self.name isEqualToString:self.mobile] ? [self hackMobile] : self.name;
 }
 
 - (BOOL)validateMobile
