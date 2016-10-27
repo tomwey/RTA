@@ -8,13 +8,8 @@
 
 #import "InquireVC.h"
 #import "Defines.h"
-#import <WebKit/WebKit.h>
 
-@interface InquireVC () <WKNavigationDelegate>
-
-@property (nonatomic, strong) WKWebView *webView;
-
-@property (nonatomic, assign) BOOL loadFail;
+@interface InquireVC ()
 
 @end
 
@@ -30,11 +25,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [self.webView removeObserver:self forKeyPath:@"loading"];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -43,66 +33,41 @@
     
     [self addLeftBarItemWithView:nil];
     
-    self.webView = [[WKWebView alloc] initWithFrame:self.contentView.bounds];
-    [self.contentView addSubview:self.webView];
-    self.webView.navigationDelegate = self;
+    self.contentView.backgroundColor = AWColorFromRGB(239, 239, 239);
     
-    self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
+    UIView *inputBg = [[UIView alloc] initWithFrame:CGRectMake(10, 10, self.contentView.width - 20, 88)];
+    inputBg.backgroundColor = [UIColor whiteColor];
+    inputBg.cornerRadius = 6;
+    [self.contentView addSubview:inputBg];
     
-    [self.webView addObserver:self
-                   forKeyPath:@"loading"
-                      options:NSKeyValueObservingOptionNew
-                      context:NULL];
+    InputCell *startCell = [[InputCell alloc] initWithIcon:@"icon_start.png" title:@"我的位置"];
+    [inputBg addSubview:startCell];
+    startCell.frame = CGRectMake(15, 0, inputBg.width - 30, inputBg.height / 2);
+    startCell.titleAttributes = @{ NSForegroundColorAttributeName: AWColorFromRGBA(50, 69, 255, 0.9) };
     
-    [self startLoad];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    if ( self.webView.isLoading ) {
-        
-    } else {
-        [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+    // 加一根线
+    AWHairlineView *line = [AWHairlineView horizontalLineWithWidth:inputBg.width
+                                                             color:self.contentView.backgroundColor
+                                                            inView:self.contentView];
+    line.center = CGPointMake(inputBg.width / 2, inputBg.height / 2);
     
-    if ( self.loadFail ) {
-        [self startLoad];
-    }
-}
-
-- (void)startLoad
-{
-    [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
+    InputCell *endCell = [[InputCell alloc] initWithIcon:@"icon_end.png" title:@"你要去哪儿？"];
+    [inputBg addSubview:endCell];
+    endCell.frame = startCell.frame;
+    endCell.top = startCell.bottom;
     
-    NSURL *pageURL = [NSURL URLWithString:TRANSFER_URL];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:pageURL]];
+    endCell.titleAttributes = @{ NSForegroundColorAttributeName: AWColorFromRGB(135,135,135) };
+    
+    // 确定
+    AWButton *okButton = [AWButton buttonWithTitle:@"确定" color:NAV_BAR_BG_COLOR];
+    [self.contentView addSubview:okButton];
+    okButton.frame = CGRectMake(30, inputBg.bottom + 20, self.contentView.width - 30 * 2, 44);
+    [okButton addTarget:self forAction:@selector(doQuery)];
 }
 
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+- (void)doQuery
 {
-    if ( [[navigationAction.request.URL absoluteString] hasSuffix:@"/search.html"] ) {
-        decisionHandler(WKNavigationActionPolicyAllow);
-    } else {
-        decisionHandler(WKNavigationActionPolicyCancel);
-        
-        WebViewVC *vc = [[WebViewVC alloc] initWithURL:navigationAction.request.URL title:@"换乘列表"];
-        [self.tabBarController.navigationController pushViewController:vc animated:YES];
-    }
-}
-
-- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
-{
-    self.loadFail = NO;
-}
-
-- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
-{
-    self.loadFail = YES;
+    
 }
 
 @end

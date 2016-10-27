@@ -138,6 +138,7 @@
 #import "SettingTableHeader.h"
 #import "DatePicker.h"
 #import "SexPicker.h"
+#import "InputCell.h"
 
 // Controllers
 #import "WebViewVC.h"
