@@ -34,7 +34,8 @@
     _iconImage = iconImage;
     
     self.iconView.image = AWImageNoCached(_iconImage);
-    [self.iconView sizeToFit];
+//    [self.iconView sizeToFit];
+    self.iconView.frame = CGRectMake(0, 0, 18, 18);
 }
 
 - (void)setTitle:(NSString *)title
@@ -49,7 +50,7 @@
     [super layoutSubviews];
     
     self.iconView.center = CGPointMake(self.iconView.width / 2, self.height / 2);
-    self.titleLabel.frame = CGRectMake(self.iconView.left + 10,
+    self.titleLabel.frame = CGRectMake(self.iconView.right + 10,
                                        0, self.width - self.iconView.width - 10,
                                        self.height);
 }

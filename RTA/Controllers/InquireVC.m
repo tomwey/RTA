@@ -35,7 +35,7 @@
     
     self.contentView.backgroundColor = AWColorFromRGB(239, 239, 239);
     
-    UIView *inputBg = [[UIView alloc] initWithFrame:CGRectMake(10, 10, self.contentView.width - 20, 88)];
+    UIView *inputBg = [[UIView alloc] initWithFrame:CGRectMake(10, 10, self.contentView.width - 20, 108)];
     inputBg.backgroundColor = [UIColor whiteColor];
     inputBg.cornerRadius = 6;
     [self.contentView addSubview:inputBg];
@@ -48,10 +48,11 @@
     // 加一根线
     AWHairlineView *line = [AWHairlineView horizontalLineWithWidth:inputBg.width
                                                              color:self.contentView.backgroundColor
-                                                            inView:self.contentView];
+                                                            inView:inputBg];
     line.center = CGPointMake(inputBg.width / 2, inputBg.height / 2);
     
-    InputCell *endCell = [[InputCell alloc] initWithIcon:@"icon_end.png" title:@"你要去哪儿？"];
+    InputCell *endCell = [[InputCell alloc] initWithIcon:@"icon_end.png"
+                                                   title:@"你要去哪儿？"];
     [inputBg addSubview:endCell];
     endCell.frame = startCell.frame;
     endCell.top = startCell.bottom;
