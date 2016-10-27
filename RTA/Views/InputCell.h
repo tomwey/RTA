@@ -14,6 +14,8 @@
 
 @property (nonatomic, copy) NSDictionary *titleAttributes;
 
+@property (nonatomic, copy) void (^clickBlock)(InputCell *sender);
+
 - (instancetype)initWithIcon:(NSString *)iconName title:(NSString *)title;
 
 @end

@@ -127,6 +127,8 @@
 
 #import "UIView+Toast.h"
 
+#import "AWTextField.h"
+
 // Models
 #import "User.h"
 

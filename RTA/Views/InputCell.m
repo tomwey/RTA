@@ -25,17 +25,25 @@
     if ( self = [super init] ) {
         self.title = title;
         self.iconImage = iconName;
+        
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)]];
     }
     return self;
+}
+
+- (void)tap
+{
+    if ( self.clickBlock ) {
+        self.clickBlock(self);
+    }
 }
 
 - (void)setIconImage:(NSString *)iconImage
 {
     _iconImage = iconImage;
     
-    self.iconView.image = AWImageNoCached(_iconImage);
-//    [self.iconView sizeToFit];
-    self.iconView.frame = CGRectMake(0, 0, 18, 18);
+    self.iconView.image = [UIImage imageNamed:iconImage];
+    [self.iconView sizeToFit];
 }
 
 - (void)setTitle:(NSString *)title
