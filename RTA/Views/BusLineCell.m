@@ -18,6 +18,10 @@
 //@property (nonatomic, strong) UILabel *stationsNumLabel;
 //@property (nonatomic, strong) UILabel *walkingDistanceLabel;
 
+@property (nonatomic, copy) void (^clickBlock)(UIView<AWTableDataConfig> *sender, id selectedData);
+
+@property (nonatomic, strong) id currentData;
+
 @end
 @implementation BusLineCell
 
@@ -32,6 +36,8 @@
 
 - (void)configData:(id)data selectBlock:(void (^)(UIView<AWTableDataConfig> *sender, id selectedData))selectBlock
 {
+    self.clickBlock = selectBlock;
+    
     NSDictionary *busLineInfo = [self parseBusLineInfo:data];
 //    • › 〉
     self.titleLabel.text = [self composeLineInfo:[busLineInfo objectForKey:@"names"]];
@@ -39,6 +45,20 @@
                            [self formatDuration:[[data valueForKey:@"duration"] doubleValue]],
                            [[busLineInfo objectForKey:@"total"] intValue],
                            [self formatWalkingDistance:[[data valueForKey:@"walking_distance"] intValue]]];
+    
+    NSMutableDictionary *dict = [data mutableCopy];
+    
+    [dict setObject:self.titleLabel.text forKey:@"formated_title"];
+    [dict setObject:self.bodyLabel.text forKey:@"formated_body"];
+    
+    self.currentData = [dict copy];
+}
+
+- (void)tap
+{
+    if ( self.clickBlock ) {
+        self.clickBlock(self, self.currentData);
+    }
 }
 
 - (void)layoutSubviews
@@ -120,6 +140,8 @@
         [self.contentView addSubview:_container];
         _container.backgroundColor = [UIColor whiteColor];
         _container.cornerRadius = 4;
+        
+        [_container addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)]];
     }
     return _container;
 }

@@ -60,8 +60,13 @@
         [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
         id transits = [[result objectForKey:@"route"] objectForKey:@"transits"];
         if ( transits && [transits isKindOfClass:[NSArray class]] ) {
-            self.dataSource.dataSource = transits;
-            [self.tableView reloadData];
+            if ( [transits count] > 0 ) {
+                self.dataSource.dataSource = transits;
+                [self.tableView reloadData];
+            } else {
+                [self finishLoading:LoadingStateEmptyResult];
+            }
+            
         }
     }];
 }
@@ -70,8 +75,10 @@
 {
     if ( !_dataSource ) {
         _dataSource = AWTableViewDataSourceCreate(nil, @"BusLineCell", @"cell.id");
+        __weak typeof(self) me = self;
         _dataSource.itemDidSelectBlock = ^(UIView <AWTableDataConfig> *sender, id selectedObj) {
-            
+            UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"BusLineDetailVC" params:@{ @"busline": selectedObj }];
+            [me.navigationController pushViewController:vc animated:YES];
         };
     }
     return _dataSource;

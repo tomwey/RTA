@@ -63,6 +63,7 @@
     container.clipsToBounds = YES;
     [superView addSubview:container];
     container.backgroundColor = [UIColor clearColor];
+    container.layer.borderWidth = 0;
     
     AWHairlineView *line = [[AWHairlineView alloc] initWithLineColor:lineColor];
     line.frame = CGRectMake(-1, 0, width + 2, 1);

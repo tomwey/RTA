@@ -111,7 +111,7 @@
                                                     self.errorOrEmptyView.bottom + 10 + self.errorOrEmptyLabel.height / 2);
         self.errorOrEmptyLabel.hidden = NO;
         
-        self.errorOrEmptyLabel.text = state == LoadingStateFail ? @"加载失败，点击重试" : @"数据为空，点击重试";
+        self.errorOrEmptyLabel.text = state == LoadingStateFail ? @"加载失败，点击重试" : @"数据为空";
     }
     
     self.state = state;
