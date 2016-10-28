@@ -39,6 +39,7 @@
 
 #define MAIN_BG_COLOR         [UIColor whiteColor]
 #define NAV_BAR_BG_COLOR      AWColorFromRGB(50, 69, 255)
+#define CONTENT_VIEW_BG_COLOR AWColorFromRGB(239, 239, 239)
 
 #define HOME_HAIRLINE_COLOR   MAIN_BG_COLOR//AWColorFromRGB(240, 240, 242)
 
@@ -131,6 +132,7 @@
 
 // Models
 #import "User.h"
+#import "Location.h"
 
 // Services
 #import "UserService.h"

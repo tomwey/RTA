@@ -11,6 +11,9 @@
 
 @interface InquireVC ()
 
+@property (nonatomic, strong) Location *startLocation;
+@property (nonatomic, strong) Location *endLocation;
+
 @end
 
 @implementation InquireVC
@@ -33,7 +36,7 @@
     
     [self addLeftBarItemWithView:nil];
     
-    self.contentView.backgroundColor = AWColorFromRGB(239, 239, 239);
+    self.contentView.backgroundColor = CONTENT_VIEW_BG_COLOR;
     
     UIView *inputBg = [[UIView alloc] initWithFrame:CGRectMake(10, 10, self.contentView.width - 20, 108)];
     inputBg.backgroundColor = [UIColor whiteColor];
@@ -44,6 +47,13 @@
     [inputBg addSubview:startCell];
     startCell.frame = CGRectMake(15, 0, inputBg.width - 30, inputBg.height / 2);
     startCell.titleAttributes = @{ NSForegroundColorAttributeName: AWColorFromRGBA(50, 69, 255, 0.9) };
+    
+    if ( ![[AWLocationManager sharedInstance] currentLocation] ) {
+        startCell.title = @"未定位";
+    } else {
+        self.startLocation = [[Location alloc] initWithCoordinate:[[AWLocationManager sharedInstance] currentLocation].coordinate title:@"我的位置"];
+//        self.startCoordinate = [[AWLocationManager sharedInstance] currentLocation].coordinate;
+    }
     
     __weak typeof(self) me = self;
     startCell.clickBlock = ^(InputCell *sender) {
@@ -69,6 +79,11 @@
             //        type = 0;
             //    }
             sender.title = [location valueForKey:@"title"];
+            
+            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[[location valueForKey:@"location"] valueForKey:@"lat"] doubleValue],
+                                                                           [[[location valueForKey:@"location"] valueForKey:@"lng"] doubleValue]);
+            self.startLocation = [[Location alloc] initWithCoordinate:coordinate title:[location valueForKey:@"title"]];
+            
         };
         UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"LocationSearchVC" params:@{ @"selectBlock": selectLocationBlock }];
         [me.tabBarController.navigationController pushViewController:vc animated:YES];
@@ -91,6 +106,10 @@
         void (^selectLocationBlock)(id location) = ^(id location) {
 //            NSLog(@"%@", location);
             sender.title = [location valueForKey:@"title"];
+            
+            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[[location valueForKey:@"location"] valueForKey:@"lat"] doubleValue],
+                                                                           [[[location valueForKey:@"location"] valueForKey:@"lng"] doubleValue]);
+            self.endLocation = [[Location alloc] initWithCoordinate:coordinate title:[location valueForKey:@"title"]];
         };
         UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"LocationSearchVC" params:@{ @"selectBlock": selectLocationBlock }];
         [me.tabBarController.navigationController pushViewController:vc animated:YES];
@@ -105,7 +124,20 @@
 
 - (void)doQuery
 {
+    if ( !CLLocationCoordinate2DIsValid(self.startLocation.coordinate) ) {
+        [self.contentView makeToast:@"无效的开始位置" duration:2.0 position:CSToastPositionTop];
+        return;
+    }
     
+    if ( !CLLocationCoordinate2DIsValid(self.endLocation.coordinate) ) {
+        [self.contentView makeToast:@"无效的结束位置" duration:2.0 position:CSToastPositionTop];
+        return;
+    }
+    
+    UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"BusLineVC" params:@{ @"start": self.startLocation,
+                                                                                              @"end": self.endLocation
+                                                                                              }];
+    [self.tabBarController.navigationController pushViewController:vc animated:YES];
 }
 
 @end

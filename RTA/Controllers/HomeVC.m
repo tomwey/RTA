@@ -88,6 +88,7 @@
             NSLog(@"获取位置失败：%@", error);
             self.stationNameLabel.text = @"定位失败";
         } else {
+            NSLog(@"%@", location.description);
             [self startFetchStation];
         }
     }];

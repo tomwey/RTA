@@ -47,7 +47,12 @@
                                                         } else {
                                                             NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
                                                             if ( resp.statusCode == 200 ) {
-                                                                [self parseData:data];
+                                                                if ( [uri isEqualToString:@"GetGdmp"] ) {
+                                                                    // 蛋疼的后台
+                                                                    [self handleResult:data];
+                                                                } else {
+                                                                    [self parseData:data];
+                                                                }
                                                             } else {
                                                                 if ( resp.statusCode == 202 ) {
                                                                     NSError *inError = [NSError errorWithDomain:@"参数异常" code:-202 userInfo:nil];
@@ -121,6 +126,30 @@
     return taskId;
 }
 
+- (void)handleResult: (NSData *)data
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *jsonResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        jsonResult = [jsonResult substringWithRange:NSMakeRange(1, jsonResult.length - 2)];
+        jsonResult = [jsonResult stringByReplacingOccurrencesOfString:@"\\"
+                                                           withString:@""];
+        
+        NSError *error = nil;
+        id result = [NSJSONSerialization JSONObjectWithData:[jsonResult dataUsingEncoding:NSUTF8StringEncoding]
+                                                    options:0
+                                                      error:&error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ( error ) {
+                [self handleError:error];
+            } else {
+                if ( self.postCallback ) {
+                    self.postCallback(result, nil);
+                }
+            }
+        });
+    });
+}
+
 - (void)handleError:(NSError *)error
 {
     if ( self.postCallback ) {
@@ -132,7 +161,7 @@
 {
     NSError *jsonError = nil;
     id result = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-    
+//    NSLog(@"text: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     if ( jsonError ) {
         [self handleError:jsonError];
     } else {

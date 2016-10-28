@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+FOUNDATION_EXTERN NSString * const AWLocationManagerDidFinishLocatingNotification;
+
 typedef NS_ENUM(NSInteger, AWLocationError) {
     AWLocationErrorUnknown    = -1, // 未知错误
     AWLocationErrorNotEnabled = 0,  // 定位功能服务无效
@@ -21,6 +23,9 @@ typedef NS_ENUM(NSInteger, AWLocationError) {
 
 /** 返回当前最新的位置 */
 @property (nonatomic, strong, readonly) CLLocation *currentLocation;
+
+/** 定位出错 */
+@property (nonatomic, strong, readonly) NSError    *locatedError;
 
 + (AWLocationManager *)sharedInstance;
 

@@ -12,6 +12,7 @@
 
 /** 返回当前最新的位置 */
 @property (nonatomic, strong, readwrite) CLLocation *currentLocation;
+@property (nonatomic, strong, readwrite) NSError    *locatedError;
 
 @property (nonatomic, copy) void (^completionBlock)(CLLocation *location, NSError *error);
 
@@ -20,6 +21,8 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
+
+NSString * const AWLocationManagerDidFinishLocatingNotification = @"AWLocationManagerDidFinishLocatingNotification";
 
 @implementation AWLocationManager
 
@@ -180,6 +183,10 @@
 
 - (void)handleCompletion:(CLLocation *)location error:(NSError *)error
 {
+    self.locatedError = error;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:AWLocationManagerDidFinishLocatingNotification object:self];
+    
     if ( self.completionBlock ) {
         self.completionBlock(location, error);
         self.completionBlock = nil;

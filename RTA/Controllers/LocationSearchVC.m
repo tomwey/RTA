@@ -28,7 +28,7 @@
     
     self.navBar.title = @"搜索";
     
-    self.contentView.backgroundColor = AWColorFromRGB(239,239,239);
+    self.contentView.backgroundColor = CONTENT_VIEW_BG_COLOR;
     
     // 搜索
     UIView *searchBg = [[UIView alloc] initWithFrame:CGRectMake(10, 10, self.contentView.width - 20, 50)];
