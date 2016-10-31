@@ -133,10 +133,13 @@
 // Models
 #import "User.h"
 #import "Location.h"
+#import "BuslineSearchHistory.h"
+#import "LocationSearchHistory.h"
 
 // Services
 #import "UserService.h"
 #import "VersionCheckService.h"
+#import "SearchHistoryService.h"
 
 // Views
 #import "SettingTableHeader.h"
