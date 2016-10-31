@@ -26,6 +26,7 @@
     return @{
              @"id_": @"INTEGER PRIMARY KEY AUTOINCREMENT",
              @"keyword": @"TEXT",
+             @"location": @"TEXT",
              @"time": @"INTEGER",
              };
 }

@@ -150,13 +150,13 @@
 {
     dispatch_async(self.insertQueue, ^{
         
-        NSError *countError = nil;
-        NSInteger count = [[self.lshTable countWithWhereCondition:@"keyword = :keyword"
-                                                  conditionParams:@{ @"keyword": history.keyword,
-                                                                     }
-                                                            error:&countError] integerValue];
+        CTPersistanceCriteria *criteria = [[CTPersistanceCriteria alloc] init];
+        criteria.whereCondition = @"keyword = :keyword";
+        criteria.whereConditionParams = @{ @"keyword": history.keyword,
+                                           };
+        id obj = [self.lshTable findFirstRowWithCriteria:criteria error:nil];
         
-        if ( count == 0 ) {
+        if ( !obj ) {
             NSError *inError = nil;
             [self.lshTable insertRecord:history error:&inError];
             if ( inError ) {

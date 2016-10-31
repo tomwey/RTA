@@ -22,7 +22,7 @@
 
 - (void)loadLatestSearchKeywordHistories:(void (^)(NSArray *results, NSError *error))completion;
 
-- (void)insertLocSearchHistory:(BuslineSearchHistory *)history
+- (void)insertLocSearchHistory:(LocationSearchHistory *)history
                     completion:(void (^)(BOOL succeed, NSError *error))completion;
 
 - (void)removeAllLocSearchHistories:(void (^)(BOOL succeed, NSError *error))completion;

@@ -66,6 +66,14 @@
     CGFloat top = 10;
     NSArray *segments = self.params[@"busline"][@"segments"];
     for (id seg in segments) {
+        id walking = seg[@"walking"];
+        if ( walking ) {
+            WalkingView *wView = [[WalkingView alloc] initWithWalkingData:walking];
+            [self.buslineContentView addSubview:wView];
+            wView.frame = CGRectMake(15, top + 5, self.contentView.width - 30, 60);
+            top = wView.bottom + 5;
+        }
+        
         id busline = [seg[@"bus"][@"buslines"] firstObject];
         if ( busline ) {
             BusLineView *bView = [[BusLineView alloc] initWithBuslineData:busline];
@@ -73,14 +81,6 @@
             bView.frame = CGRectMake(15, top, self.contentView.width - 30,
                                      150);
             top = bView.bottom;
-        }
-        
-        id walking = seg[@"walking"];
-        if ( walking ) {
-            WalkingView *wView = [[WalkingView alloc] initWithWalkingData:walking];
-            [self.buslineContentView addSubview:wView];
-            wView.frame = CGRectMake(15, top + 5, self.contentView.width - 30, 60);
-            top = wView.bottom + 5;
         }
     }
     

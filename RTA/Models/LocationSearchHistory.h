@@ -13,6 +13,8 @@
 @property (nonatomic, strong) NSNumber *id_;
 @property (nonatomic, copy) NSString *keyword;
 
+@property (nonatomic, copy) NSString *location;
+
 @property (nonatomic, strong) NSNumber *time;
 
 @end
