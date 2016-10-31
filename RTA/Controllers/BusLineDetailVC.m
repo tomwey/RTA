@@ -64,6 +64,26 @@
     [self.contentView addSubview:self.buslineContentView];
     
     CGFloat top = 10;
+    // 添加起点
+    UIImageView *startIconView = AWCreateImageView(@"icon_start.png");
+    [self.buslineContentView addSubview:startIconView];
+    startIconView.center = CGPointMake(55 + startIconView.width / 2, top + startIconView.height / 2);
+    
+    UILabel *startLabel = AWCreateLabel(CGRectZero,
+                                        nil,
+                                        NSTextAlignmentLeft,
+                                        AWSystemFontWithSize(15, NO),
+                                        AWColorFromRGB(135, 135, 135));
+    [self.buslineContentView addSubview:startLabel];
+    startLabel.frame = CGRectMake(startIconView.right + 15, startIconView.center.y - 15,
+                                     self.buslineContentView.width - startIconView.right - 15 - 20,
+                                     30);
+    
+    startLabel.text = [NSString stringWithFormat:@"起点(%@)", self.params[@"startName"]];
+    
+    top = startIconView.bottom;
+    
+    // 添加中间步骤
     NSArray *segments = self.params[@"busline"][@"segments"];
     for (id seg in segments) {
         id walking = seg[@"walking"];
@@ -83,6 +103,25 @@
             top = bView.bottom;
         }
     }
+    
+    // 添加终点
+    UIImageView *endIconView = AWCreateImageView(@"icon_end.png");
+    [self.buslineContentView addSubview:endIconView];
+    endIconView.center = CGPointMake(55 + endIconView.width / 2, top + endIconView.height / 2);
+    
+    UILabel *endLabel = AWCreateLabel(CGRectZero,
+                                        nil,
+                                        NSTextAlignmentLeft,
+                                        AWSystemFontWithSize(15, NO),
+                                        AWColorFromRGB(135, 135, 135));
+    [self.buslineContentView addSubview:endLabel];
+    endLabel.frame = CGRectMake(endIconView.right + 15, endIconView.center.y - 15,
+                                  self.buslineContentView.width - endIconView.right - 15 - 20,
+                                  30);
+    
+    endLabel.text = [NSString stringWithFormat:@"终点(%@)", self.params[@"endName"]];
+    
+    top = endIconView.bottom;
     
     self.buslineContentView.contentSize = CGSizeMake(self.contentView.width, top + 10);
 }

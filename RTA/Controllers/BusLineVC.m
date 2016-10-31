@@ -77,7 +77,11 @@
         _dataSource = AWTableViewDataSourceCreate(nil, @"BusLineCell", @"cell.id");
         __weak typeof(self) me = self;
         _dataSource.itemDidSelectBlock = ^(UIView <AWTableDataConfig> *sender, id selectedObj) {
-            UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"BusLineDetailVC" params:@{ @"busline": selectedObj }];
+            
+            Location *startLoc = me.params[@"start"];
+            Location *endLoc   = me.params[@"end"];
+            
+            UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"BusLineDetailVC" params:@{ @"busline": selectedObj, @"startName": startLoc.title, @"endName": endLoc.title }];
             [me.navigationController pushViewController:vc animated:YES];
         };
     }

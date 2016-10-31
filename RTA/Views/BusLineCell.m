@@ -122,8 +122,16 @@
 {
     NSInteger hour = duration / 3600;
     NSInteger minutes = ( duration - hour * 3600 ) / 60;
-    return hour > 0 ? [NSString stringWithFormat:@"%ld小时%ld分钟", (long)hour, (long)minutes] :
-            [NSString stringWithFormat:@"%ld分钟", (long)minutes];
+    
+    if ( hour > 0 ) {
+        if ( minutes > 0 ) {
+            return [NSString stringWithFormat:@"%ld小时%ld分钟", (long)hour, (long)minutes];
+        } else {
+            return [NSString stringWithFormat:@"%ld小时", (long)hour];
+        }
+    } else {
+        return [NSString stringWithFormat:@"%ld分钟", (long)minutes];
+    }
 }
 
 - (NSString *)formatWalkingDistance:(int)distance
