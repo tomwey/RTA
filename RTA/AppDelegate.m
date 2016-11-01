@@ -21,22 +21,29 @@
 
 @implementation AppDelegate
 
-+ (void)load
-{
+// 和share sdk冲突
+//+ (void)load
+//{
+//    // 设置缓存大小
+//    NSURLCache *urlCache = [[NSURLCache alloc] initWithMemoryCapacity:20 * 1024 * 1024
+//                                                         diskCapacity:100 * 1024 * 1024
+//                                                             diskPath:@"Images"];
+//    [NSURLCache setSharedURLCache:urlCache];
+//
+//    // 导航条
+////    [[UINavigationBar appearance] setBackgroundImage:AWImageFromColor(NAV_BAR_BG_COLOR)
+////                                       forBarMetrics:UIBarMetricsDefault];
+////    [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
+//}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     // 设置缓存大小
     NSURLCache *urlCache = [[NSURLCache alloc] initWithMemoryCapacity:20 * 1024 * 1024
                                                          diskCapacity:100 * 1024 * 1024
                                                              diskPath:@"Images"];
     [NSURLCache setSharedURLCache:urlCache];
-    
-    // 导航条
-//    [[UINavigationBar appearance] setBackgroundImage:AWImageFromColor(NAV_BAR_BG_COLOR)
-//                                       forBarMetrics:UIBarMetricsDefault];
-//    [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
-}
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
     // 状态条
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
