@@ -40,11 +40,20 @@
     
     NSDictionary *busLineInfo = [self parseBusLineInfo:data];
 //    • › 〉
+    NSLog(@"%@", [data valueForKey:@"walking_distance"]);
+    id obj = [data valueForKey:@"walking_distance"];
+    
+    NSInteger distance;
+    if ( [obj isKindOfClass:[NSNumber class]] ) {
+        distance = [obj intValue];
+    } else {
+        distance = 0;
+    }
     self.titleLabel.text = [self composeLineInfo:[busLineInfo objectForKey:@"names"]];
     self.bodyLabel.text = [NSString stringWithFormat:@"%@ • %d站 • %@",
                            [self formatDuration:[[data valueForKey:@"duration"] doubleValue]],
                            [[busLineInfo objectForKey:@"total"] intValue],
-                           [self formatWalkingDistance:[[data valueForKey:@"walking_distance"] intValue]]];
+                           [self formatWalkingDistance:distance]];
     
     NSMutableDictionary *dict = [data mutableCopy];
     

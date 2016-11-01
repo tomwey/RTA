@@ -8,11 +8,10 @@
 
 #import "InteractVC.h"
 #import "Defines.h"
-#import <WebKit/WebKit.h>
 
-@interface InteractVC () <WKNavigationDelegate>
+@interface InteractVC () <UIWebViewDelegate>
 
-@property (nonatomic, strong) WKWebView *webView;
+@property (nonatomic, strong) UIWebView *webView;
 
 @property (nonatomic, assign) BOOL loadFail;
 
@@ -42,28 +41,28 @@
     
     [self addLeftBarItemWithView:nil];
     
-    self.webView = [[WKWebView alloc] initWithFrame:self.contentView.bounds];
+    self.webView = [[UIWebView alloc] initWithFrame:self.contentView.bounds];
     [self.contentView addSubview:self.webView];
-    self.webView.navigationDelegate = self;
+    self.webView.delegate = self;
     
-    self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
+//    self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
     
-    [self.webView addObserver:self
-                   forKeyPath:@"loading"
-                      options:NSKeyValueObservingOptionNew
-                      context:NULL];
+//    [self.webView addObserver:self
+//                   forKeyPath:@"loading"
+//                      options:NSKeyValueObservingOptionNew
+//                      context:NULL];
     
     [self startLoad];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    if ( self.webView.isLoading ) {
-        
-    } else {
-        [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
-    }
-}
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+//{
+//    if ( self.webView.isLoading ) {
+//        
+//    } else {
+//        [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
+//    }
+//}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -82,16 +81,48 @@
     [self.webView loadRequest:[NSURLRequest requestWithURL:pageURL]];
 }
 
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+- (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    if ( [[navigationAction.request.URL absoluteString] isEqualToString:SQUARE_LIST_URL] ) {
-        decisionHandler(WKNavigationActionPolicyAllow);
-    } else {
-        decisionHandler(WKNavigationActionPolicyCancel);
-        
-        WebViewVC *vc = [[WebViewVC alloc] initWithURL:navigationAction.request.URL title:@"详情"];
-        [self.tabBarController.navigationController pushViewController:vc animated:YES];
-    }
+    
 }
+
+- (BOOL)webView:(UIWebView *)webView
+shouldStartLoadWithRequest:(NSURLRequest *)request
+ navigationType:(UIWebViewNavigationType)navigationType
+{
+    if ( [[request.URL absoluteString] isEqualToString:SQUARE_LIST_URL] ) {
+        return YES;
+    }
+    
+    WebViewVC *vc = [[WebViewVC alloc] initWithURL:request.URL title:@"详情"];
+    [self.tabBarController.navigationController pushViewController:vc animated:YES];
+    
+    return NO;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    self.loadFail = NO;
+    [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    self.loadFail = YES;
+    [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
+    [self.contentView makeToast:@"Oops, 出错了！" duration:2.0 position:CSToastPositionTop];
+}
+
+//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+//{
+//    if ( [[navigationAction.request.URL absoluteString] isEqualToString:SQUARE_LIST_URL] ) {
+//        decisionHandler(WKNavigationActionPolicyAllow);
+//    } else {
+//        decisionHandler(WKNavigationActionPolicyCancel);
+//        
+//        WebViewVC *vc = [[WebViewVC alloc] initWithURL:navigationAction.request.URL title:@"详情"];
+//        [self.tabBarController.navigationController pushViewController:vc animated:YES];
+//    }
+//}
 
 @end

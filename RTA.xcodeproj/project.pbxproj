@@ -83,7 +83,6 @@
 		97CF19091DC1F69B00ED8A73 /* icon_walk_l.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CF19011DC1F69B00ED8A73 /* icon_walk_l.png */; };
 		97CF190A1DC1F69B00ED8A73 /* icon_walk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 97CF19021DC1F69B00ED8A73 /* icon_walk@2x.png */; };
 		97CF190D1DC1FCA100ED8A73 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CF190C1DC1FCA100ED8A73 /* InputCell.m */; };
-		97CF190E1DC2D1AA00ED8A73 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97579AAA1DBE087900D99981 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		97CF192B1DC2D4FA00ED8A73 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97CF19101DC2D4FA00ED8A73 /* ShareSDK.framework */; };
 		97CF192C1DC2D4FA00ED8A73 /* ShareSDKConfigFile.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97CF19131DC2D4FA00ED8A73 /* ShareSDKConfigFile.bundle */; };
 		97CF192D1DC2D4FA00ED8A73 /* ShareSDKConfigFile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97CF19141DC2D4FA00ED8A73 /* ShareSDKConfigFile.framework */; };
@@ -608,7 +607,6 @@
 				97CF19321DC2D4FA00ED8A73 /* SMSConnector.framework in Frameworks */,
 				97CF19341DC2D4FA00ED8A73 /* TencentOpenAPI.framework in Frameworks */,
 				97CF19331DC2D4FA00ED8A73 /* WechatConnector.framework in Frameworks */,
-				97CF190E1DC2D1AA00ED8A73 /* WebKit.framework in Frameworks */,
 				97CF18D71DC088E100ED8A73 /* JavaScriptCore.framework in Frameworks */,
 				97CF19311DC2D4FA00ED8A73 /* QQConnector.framework in Frameworks */,
 				97CF18D51DC0851400ED8A73 /* libicucore.tbd in Frameworks */,
