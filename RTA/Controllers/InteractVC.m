@@ -45,6 +45,8 @@
     [self.contentView addSubview:self.webView];
     self.webView.delegate = self;
     
+//    self.webView.backgroundColor = [UIColor redColor];
+    
 //    self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
     
 //    [self.webView addObserver:self
@@ -71,6 +73,10 @@
     if ( self.loadFail ) {
         [self startLoad];
     }
+    
+    if ( !AWOSVersionIsLower(9.0) ) {
+        [self removeWebViewCompatity];
+    }
 }
 
 - (void)startLoad
@@ -79,6 +85,11 @@
     
     NSURL *pageURL = [NSURL URLWithString:SQUARE_LIST_URL];
     [self.webView loadRequest:[NSURLRequest requestWithURL:pageURL]];
+}
+
+- (void)removeWebViewCompatity
+{
+    self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -95,6 +106,9 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     }
     
     WebViewVC *vc = [[WebViewVC alloc] initWithURL:request.URL title:@"详情"];
+    vc.pageBackBlock = ^(id data) {
+        [self removeWebViewCompatity];
+    };
     [self.tabBarController.navigationController pushViewController:vc animated:YES];
     
     return NO;

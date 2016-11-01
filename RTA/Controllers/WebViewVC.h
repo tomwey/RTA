@@ -12,4 +12,6 @@
 
 - (instancetype)initWithURL:(NSURL *)pageURL title:(NSString *)title;
 
+@property (nonatomic, copy) void (^pageBackBlock)(id data);
+
 @end

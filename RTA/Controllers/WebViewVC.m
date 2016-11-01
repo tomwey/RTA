@@ -44,6 +44,15 @@
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.pageURL]];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if ( self.pageBackBlock ) {
+        self.pageBackBlock(nil);
+    }
+}
+
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
