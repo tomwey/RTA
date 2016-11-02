@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navBar.title = self.params[@"title"];
+    self.navBar.title = @"手机";//self.params[@"title"];
     
     // 用户输入背景
     UIView *inputBGView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.width - 30, 108)];
@@ -136,7 +136,7 @@
                     } else {
                         UIViewController *vc = [[AWMediator sharedInstance] openVCWithName:@"PasswordVC"
                                                                                     params:@{ @"mobile": me.userField.text,
-                                                                                              @"from": [self.navBar.title isEqualToString:@"注册"] ? @"signup" : @"forget"
+                                                                                              @"from": [self.params[@"title"] isEqualToString:@"注册"] ? @"signup" : @"forget"
                                                                                               }];
                         [me.navigationController pushViewController:vc animated:YES];
                     }
@@ -168,7 +168,7 @@
     
     [self.dataService POST:IS_EXIST_USER_INFO params:@{ @"tel": self.userField.text } completion:^(id result, NSError *error) {
 //        [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
-        if ( [me.navBar.title isEqualToString:@"注册"] ) {
+        if ( [me.params[@"title"] isEqualToString:@"注册"] ) {
             // 注册
             if ( error ) {
                 [MBProgressHUD hideAllHUDsForView:me.contentView animated:YES];
