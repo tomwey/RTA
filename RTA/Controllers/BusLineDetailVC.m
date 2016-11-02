@@ -59,7 +59,7 @@
 
 - (void)addBuslineContents
 {
-    self.buslineContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 95, self.contentView.width,
+    self.buslineContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 105, self.contentView.width,
                                                                              self.contentView.height - 95)];
     [self.contentView addSubview:self.buslineContentView];
     
@@ -67,7 +67,7 @@
     // 添加起点
     UIImageView *startIconView = AWCreateImageView(@"icon_start.png");
     [self.buslineContentView addSubview:startIconView];
-    startIconView.center = CGPointMake(55 + startIconView.width / 2, top + startIconView.height / 2);
+    startIconView.center = CGPointMake(73 + startIconView.width / 2, top + startIconView.height / 2);
     
     UILabel *startLabel = AWCreateLabel(CGRectZero,
                                         nil,
@@ -75,7 +75,7 @@
                                         AWSystemFontWithSize(15, NO),
                                         AWColorFromRGB(135, 135, 135));
     [self.buslineContentView addSubview:startLabel];
-    startLabel.frame = CGRectMake(startIconView.right + 15, startIconView.center.y - 15,
+    startLabel.frame = CGRectMake(startIconView.right + 14, startIconView.center.y - 15,
                                      self.buslineContentView.width - startIconView.right - 15 - 20,
                                      30);
     
@@ -107,7 +107,7 @@
     // 添加终点
     UIImageView *endIconView = AWCreateImageView(@"icon_end.png");
     [self.buslineContentView addSubview:endIconView];
-    endIconView.center = CGPointMake(55 + endIconView.width / 2, top + endIconView.height / 2);
+    endIconView.center = CGPointMake(73 + endIconView.width / 2, top + endIconView.height / 2);
     
     UILabel *endLabel = AWCreateLabel(CGRectZero,
                                         nil,
@@ -115,7 +115,7 @@
                                         AWSystemFontWithSize(15, NO),
                                         AWColorFromRGB(135, 135, 135));
     [self.buslineContentView addSubview:endLabel];
-    endLabel.frame = CGRectMake(endIconView.right + 15, endIconView.center.y - 15,
+    endLabel.frame = CGRectMake(endIconView.right + 14, endIconView.center.y - 15,
                                   self.buslineContentView.width - endIconView.right - 15 - 20,
                                   30);
     
@@ -123,7 +123,7 @@
     
     top = endIconView.bottom;
     
-    self.buslineContentView.contentSize = CGSizeMake(self.contentView.width, top + 10);
+    self.buslineContentView.contentSize = CGSizeMake(self.contentView.width, top + 30);
 }
 
 @end

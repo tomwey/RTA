@@ -43,20 +43,35 @@
     
     [self addLeftBarItemWithView:nil];
     
-    UIImageView *bgView = AWCreateImageView(nil);
-    bgView.image = AWImageNoCached(@"home_bg.jpg");
-    bgView.frame = self.contentView.bounds;
-    [self.contentView addSubview:bgView];
-    bgView.contentMode = UIViewContentModeScaleAspectFill;
-    bgView.clipsToBounds = YES;
+//    UIImageView *bgView = AWCreateImageView(nil);
+//    bgView.image = AWImageNoCached(@"home_bg.jpg");
+//    bgView.frame = self.contentView.bounds;
+//    [self.contentView addSubview:bgView];
+//    bgView.contentMode = UIViewContentModeScaleAspectFill;
+//    bgView.clipsToBounds = YES;
     
-    self.stationView.center = CGPointMake(self.contentView.width / 2, self.contentView.height * 0.22);
+    UIImageView *bg1View = AWCreateImageView(nil);
+    bg1View.image = AWImageNoCached(@"home_bg1.png");
+    bg1View.frame = CGRectMake(0, 0, self.contentView.width,
+                               self.contentView.width * 478 / 1080.0);
+    [self.contentView addSubview:bg1View];
+    
+    UIImageView *bg2View = AWCreateImageView(nil);
+    bg2View.image = AWImageNoCached(@"home_bg2.png");
+    bg2View.frame = CGRectMake(0, bg1View.bottom,
+                               bg1View.width,
+                               self.contentView.height - bg1View.height);
+    [self.contentView addSubview:bg2View];
+    bg2View.contentMode = UIViewContentModeScaleAspectFill;
+    bg2View.clipsToBounds = YES;
+    
+    self.stationView.center = CGPointMake(self.contentView.width / 2, bg1View.bottom - self.stationView.height / 2 - 15);
     
     self.stationTipLabel.hidden = NO;
     
     self.tableView = [[UITableView alloc] initWithFrame:self.contentView.bounds style:UITableViewStylePlain];
     [self.contentView addSubview:self.tableView];
-    self.tableView.top = self.stationView.bottom + 5;
+    self.tableView.top = self.stationView.bottom + 15;
     self.tableView.height = self.contentView.height - self.tableView.top;
     
     self.tableView.dataSource = self.dataSource;

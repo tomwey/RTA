@@ -146,7 +146,7 @@
 //    [params SSDKEnableUseClientShare];
     
     [params SSDKSetupShareParamsByText:nil
-                                images:[UIImage imageNamed:@"logo.png"]
+                                images:AWImageNoCached(@"logo.png")
                                    url:[self shareLink]
                                  title:@"不再傻等，掐点出门。哈密实时公交，您的掌上公交神器。"
                                   type:SSDKContentTypeWebPage];

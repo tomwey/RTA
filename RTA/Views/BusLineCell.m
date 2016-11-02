@@ -44,7 +44,8 @@
     id obj = [data valueForKey:@"walking_distance"];
     
     NSInteger distance;
-    if ( [obj isKindOfClass:[NSNumber class]] ) {
+    if ( [obj isKindOfClass:[NSNumber class]] ||
+        [obj isKindOfClass:[NSString class]]) {
         distance = [obj intValue];
     } else {
         distance = 0;

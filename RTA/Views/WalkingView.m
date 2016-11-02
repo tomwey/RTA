@@ -58,7 +58,7 @@
             dotView.tag = 1000 + i;
         }
         CGFloat padding = ( self.height - 10 * dotView.height ) / 9.0;
-        dotView.position = CGPointMake(self.iconView.right + 15 + dotView.width / 2, ( dotView.height + padding ) * i);
+        dotView.position = CGPointMake(self.iconView.right + 13 + dotView.width / 2, ( dotView.height + padding ) * i);
     }
     
     self.titleLabel.frame = CGRectMake(self.iconView.right + 15 + 20, 0, 0, 30);
