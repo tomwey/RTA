@@ -2096,7 +2096,7 @@
 					"$(PROJECT_DIR)/RTA/3rdLib/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hmgj.RTA;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.com.gkhb.zhsj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2123,7 +2123,7 @@
 					"$(PROJECT_DIR)/RTA/3rdLib/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hmgj.RTA;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.com.gkhb.zhsj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
