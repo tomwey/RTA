@@ -23,7 +23,7 @@
 
 @end
 
-#define kWIFIIndicatorSize CGSizeMake(60,50)
+#define kWIFIIndicatorSize CGSizeMake(120,120)
 
 @implementation LoadingView
 
@@ -107,11 +107,13 @@
         self.errorOrEmptyView.center = CGPointMake(self.width / 2, self.height / 2 - 20);
         self.errorOrEmptyView.hidden = NO;
         
+        self.errorOrEmptyView.image = state == LoadingStateFail ? AWImageNoCached(@"notransfer.png") : AWImageNoCached(@"nodata.png");
+        
         self.errorOrEmptyLabel.center = CGPointMake(self.width / 2,
                                                     self.errorOrEmptyView.bottom + 10 + self.errorOrEmptyLabel.height / 2);
         self.errorOrEmptyLabel.hidden = NO;
         
-        self.errorOrEmptyLabel.text = state == LoadingStateFail ? @"加载失败，点击重试" : @"数据为空";
+        self.errorOrEmptyLabel.text = state == LoadingStateFail ? @"Oops, 查询失败了！" : @"暂未查询到相关数据";
     }
     
     self.state = state;
@@ -139,7 +141,7 @@
 - (UIImageView *)errorOrEmptyView
 {
     if ( !_errorOrEmptyView ) {
-        _errorOrEmptyView = AWCreateImageView(@"icon_home_wifi_indicator_close.png");
+        _errorOrEmptyView = AWCreateImageView(nil);
         [self addSubview:_errorOrEmptyView];
         
         _errorOrEmptyView.frame = CGRectMake(0, 0, kWIFIIndicatorSize.width, kWIFIIndicatorSize.height);
@@ -154,7 +156,7 @@
                                            nil,
                                            NSTextAlignmentCenter,
                                            nil,
-                                           [UIColor blackColor]);
+                                           AWColorFromRGB(191, 192, 191));
         [self addSubview:_errorOrEmptyLabel];
     }
     

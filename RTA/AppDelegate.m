@@ -14,6 +14,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
+#import "AFNetworkReachabilityManager.h"
 
 @interface AppDelegate () <WXApiDelegate>
 
@@ -38,6 +39,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     // 设置缓存大小
     NSURLCache *urlCache = [[NSURLCache alloc] initWithMemoryCapacity:20 * 1024 * 1024
                                                          diskCapacity:100 * 1024 * 1024
@@ -49,6 +51,14 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if ( AFNetworkReachabilityStatusNotReachable == status ) {
+            [self.window makeToast:@"网络已经断开" duration:2.0 position:CSToastPositionTop];
+        } else {
+            
+        }
+    }];
     
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
     

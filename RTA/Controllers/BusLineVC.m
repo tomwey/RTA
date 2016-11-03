@@ -58,15 +58,20 @@
     [self.dataService POST:@"GetGdmp" params:params completion:^(id result, NSError *error) {
 //        NSLog(@"result: %@, error: %@", result, error);
         [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
-        id transits = [[result objectForKey:@"route"] objectForKey:@"transits"];
-        if ( transits && [transits isKindOfClass:[NSArray class]] ) {
-            if ( [transits count] > 0 ) {
-                self.dataSource.dataSource = transits;
-                [self.tableView reloadData];
-            } else {
-                [self finishLoading:LoadingStateEmptyResult];
+        
+        if ( error ) {
+            [self finishLoading:LoadingStateFail];
+        } else {
+            id transits = [[result objectForKey:@"route"] objectForKey:@"transits"];
+            if ( transits && [transits isKindOfClass:[NSArray class]] ) {
+                if ( [transits count] > 0 ) {
+                    self.dataSource.dataSource = transits;
+                    [self.tableView reloadData];
+                } else {
+                    [self finishLoading:LoadingStateEmptyResult];
+                }
+                
             }
-            
         }
     }];
 }

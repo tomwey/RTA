@@ -143,7 +143,8 @@
             self.historiesTable.hidden = NO;
             [self.historiesTable reloadData];
             
-            if ( self.historiesTable.contentSize.height <= self.historiesTable.height ) {
+            CGFloat height = self.contentView.height - self.okButton.bottom - 20 - 20;
+            if ( self.historiesTable.contentSize.height <= height ) {
                 self.historiesTable.height = self.historiesTable.contentSize.height;
                 self.historiesTable.scrollEnabled = NO;
             } else {
