@@ -55,20 +55,20 @@
 #define OFFICIAL_TELPHONE @"18108037442"
 #define OFFICIAL_QQ       @"2757801355"
 
-#define OFFICIAL_WECHAT_URL   @"http://tdzh.cddzgj.com:9091/weixin.html"
-#define FEEDBACK_URL          @"http://tdzh.cddzgj.com:9091/RTH/feedback.html"
+#define OFFICIAL_WECHAT_URL   @"http://rth.cddzgj.com/RTH/weixin.html"
+#define FEEDBACK_URL          @"http://rth.cddzgj.com/RTH/feedback.html"
 
 // 公交换乘地址
-#define TRANSFER_URL          @"http://tdzh.cddzgj.com:9091/RTH/search.html"
+#define TRANSFER_URL          @"http://rth.cddzgj.com/RTH/search.html"
 
 // 广场列表地址
-#define SQUARE_LIST_URL       @"http://tdzh.cddzgj.com:9091/RTH/squarelist.html"
+#define SQUARE_LIST_URL       @"http://rth.cddzgj.com/RTH/squarelist.html"
 
 // 线路详情地址
-#define LINE_DETAIL_URL       @"http://tdzh.cddzgj.com:9091/lineDetails.html"
+#define LINE_DETAIL_URL       @"http://rth.cddzgj.com/lineDetails.html"
 
 ////// API接口
-#define API_HOST      @"http://182.150.21.101:9091/RTI/RTIWCF.svc"
+#define API_HOST      @"http://rti.cddzgj.com/RTIWCF.svc"
 
 #define API_KEY    @"27654725447"
 #define API_SECRET @"dfjhskdhsiwnvhkjhdguwnvbxmn"
