@@ -54,6 +54,10 @@
 //                      options:NSKeyValueObservingOptionNew
 //                      context:NULL];
     
+    if ( !AWOSVersionIsLower(9.0) ) {
+        [self removeWebViewCompatity];
+    }
+    
     [self startLoad];
 }
 
@@ -72,10 +76,6 @@
     
     if ( self.loadFail ) {
         [self startLoad];
-    }
-    
-    if ( !AWOSVersionIsLower(9.0) ) {
-        [self removeWebViewCompatity];
     }
 }
 
