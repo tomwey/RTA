@@ -49,7 +49,7 @@
     
     self.iconView.center = CGPointMake(5 + self.iconView.width / 2, self.height / 2);
     
-    self.startIconView.position = CGPointMake(self.iconView.right + 15, 0);
+    self.startIconView.position = CGPointMake(self.iconView.right + 14, 0);
     self.endIconView.position = CGPointMake(self.startIconView.left,
                                             self.height - self.endIconView.height);
     

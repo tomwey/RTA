@@ -24,6 +24,8 @@
     
     self.navBar.title = @"路线详情";
     
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    
     id buslineInfo = self.params[@"busline"];
     
     CGFloat padding = 15;
@@ -67,7 +69,7 @@
     // 添加起点
     UIImageView *startIconView = AWCreateImageView(@"icon_start.png");
     [self.buslineContentView addSubview:startIconView];
-    startIconView.center = CGPointMake(73 + startIconView.width / 2, top + startIconView.height / 2);
+    startIconView.center = CGPointMake(51 + startIconView.width / 2, top + startIconView.height / 2);
     
     UILabel *startLabel = AWCreateLabel(CGRectZero,
                                         nil,
@@ -107,7 +109,7 @@
     // 添加终点
     UIImageView *endIconView = AWCreateImageView(@"icon_end.png");
     [self.buslineContentView addSubview:endIconView];
-    endIconView.center = CGPointMake(73 + endIconView.width / 2, top + endIconView.height / 2);
+    endIconView.center = CGPointMake(startIconView.midX, top + endIconView.height / 2);
     
     UILabel *endLabel = AWCreateLabel(CGRectZero,
                                         nil,
