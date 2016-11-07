@@ -169,7 +169,7 @@
         _stationNameLabel = AWCreateLabel(self.stationView.bounds,
                                           nil,
                                           NSTextAlignmentCenter,
-                                          AWSystemFontWithSize(18, YES),
+                                          AWSystemFontWithSize(20, NO),
                                           AWColorFromRGB(51, 51, 51));
         [self.stationView addSubview:_stationNameLabel];
         _stationNameLabel.height = 30;
@@ -187,7 +187,7 @@
                                           AWColorFromRGB(137, 137, 137));
         [self.stationView addSubview:_stationTipLabel];
         _stationTipLabel.height = 20;
-        _stationTipLabel.top = self.stationNameLabel.bottom - 2;
+        _stationTipLabel.top = self.stationNameLabel.bottom - 3;
     }
     return _stationTipLabel;
 }
@@ -202,7 +202,7 @@
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?stationid=%@&lineno=%@&lineType=%@",
                                                LINE_DETAIL_URL,
                                                [selectedData valueForKey:@"StationID"],
-                                               [[[selectedData valueForKey:@"BusLine"] description] trim],
+                                               [[[selectedData valueForKey:@"BusLine"] description] URLEncode],
                                                [selectedData valueForKey:@"LineType"]]];
             WebViewVC *page = [[WebViewVC alloc] initWithURL:url title:@"路线详情"];
             [me.tabBarController.navigationController pushViewController:page animated:YES];

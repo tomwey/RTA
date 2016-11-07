@@ -65,7 +65,7 @@
 #define SQUARE_LIST_URL       @"http://rth.cddzgj.com/RTH/squarelist.html"
 
 // 线路详情地址
-#define LINE_DETAIL_URL       @"http://rth.cddzgj.com/lineDetails.html"
+#define LINE_DETAIL_URL       @"http://rth.cddzgj.com/RTH/lineDetails.html"
 
 ////// API接口
 #define API_HOST      @"http://rti.cddzgj.com/RTIWCF.svc"
@@ -108,7 +108,7 @@
 #define BUS_LIST_TITLE_GRAY_COLOR  AWColorFromRGB(135,135,135)
 #define BUS_LIST_CONTAINER_BORDER_GRAY_COLOR  AWColorFromRGB(208,208,208)
 
-#define BUS_LIST_FONT_SMALL 15
+#define BUS_LIST_FONT_SMALL 14
 
 #import "ParamUtil.h"
 

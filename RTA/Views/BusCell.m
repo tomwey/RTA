@@ -169,7 +169,7 @@
         _busLineLabel = AWCreateLabel(CGRectZero,
                                       nil,
                                       NSTextAlignmentLeft,
-                                      AWSystemFontWithSize(24, YES),
+                                      AWSystemFontWithSize(22, NO),
                                       BUS_LIST_TITLE_BLACK_COLOR);
         [self.containerView addSubview:_busLineLabel];
     }
@@ -182,7 +182,7 @@
         _currentStationLabel = AWCreateLabel(CGRectZero,
                                       nil,
                                       NSTextAlignmentRight,
-                                      AWSystemFontWithSize(BUS_LIST_FONT_SMALL, YES),
+                                      AWSystemFontWithSize(16, YES),
                                       AWColorFromRGB(79, 150, 214));
         [self.containerView addSubview:_currentStationLabel];
     }
@@ -208,7 +208,7 @@
         _endStationLabel = AWCreateLabel(CGRectZero,
                                        nil,
                                        NSTextAlignmentLeft,
-                                       AWSystemFontWithSize(20, YES),
+                                       AWSystemFontWithSize(16, NO),
                                        AWColorFromRGB(135, 135, 135));
         [self.containerView addSubview:_endStationLabel];
     }
@@ -221,7 +221,7 @@
         _leftStationLabel = AWCreateLabel(CGRectZero,
                                          nil,
                                          NSTextAlignmentRight,
-                                         AWSystemFontWithSize(24, YES),
+                                         AWSystemFontWithSize(20, NO),
                                          BUS_LIST_TITLE_BLACK_COLOR);
         [self.containerView addSubview:_leftStationLabel];
     }
