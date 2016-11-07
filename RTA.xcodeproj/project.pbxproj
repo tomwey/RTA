@@ -149,6 +149,9 @@
 		975822D41DCACE3B00CA1476 /* nodata.png in Resources */ = {isa = PBXBuildFile; fileRef = 975822D31DCACE3B00CA1476 /* nodata.png */; };
 		975822D61DCACE4300CA1476 /* notransfer.png in Resources */ = {isa = PBXBuildFile; fileRef = 975822D51DCACE4300CA1476 /* notransfer.png */; };
 		978B69BF1DD01E560013E6B0 /* icon_search1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 978B69BE1DD01E560013E6B0 /* icon_search1@3x.png */; };
+		978B69C21DD022170013E6B0 /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 978B69C11DD022170013E6B0 /* FeedbackVC.m */; };
+		978B69C61DD0233D0013E6B0 /* UITextView+AWPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 978B69C51DD0233D0013E6B0 /* UITextView+AWPlaceholder.m */; };
+		978B69CA1DD026CF0013E6B0 /* NSObject+AWDeallocBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 978B69C91DD026CF0013E6B0 /* NSObject+AWDeallocBlock.m */; };
 		97AC4C931DBDA9FD00DBBA74 /* InviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AC4C921DBDA9FD00DBBA74 /* InviteVC.m */; };
 		97AC4CA61DBDC73500DBBA74 /* UserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AC4CA51DBDC73500DBBA74 /* UserVC.m */; };
 		97BF23D51DBD8E1C0009F46C /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF23D41DBD8E1C0009F46C /* WebViewVC.m */; };
@@ -442,6 +445,12 @@
 		975822D31DCACE3B00CA1476 /* nodata.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodata.png; sourceTree = "<group>"; };
 		975822D51DCACE4300CA1476 /* notransfer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notransfer.png; sourceTree = "<group>"; };
 		978B69BE1DD01E560013E6B0 /* icon_search1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_search1@3x.png"; sourceTree = "<group>"; };
+		978B69C01DD022170013E6B0 /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
+		978B69C11DD022170013E6B0 /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
+		978B69C41DD0233D0013E6B0 /* UITextView+AWPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+AWPlaceholder.h"; sourceTree = "<group>"; };
+		978B69C51DD0233D0013E6B0 /* UITextView+AWPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+AWPlaceholder.m"; sourceTree = "<group>"; };
+		978B69C81DD026CF0013E6B0 /* NSObject+AWDeallocBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AWDeallocBlock.h"; sourceTree = "<group>"; };
+		978B69C91DD026CF0013E6B0 /* NSObject+AWDeallocBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AWDeallocBlock.m"; sourceTree = "<group>"; };
 		97AC4C911DBDA9FD00DBBA74 /* InviteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteVC.h; sourceTree = "<group>"; };
 		97AC4C921DBDA9FD00DBBA74 /* InviteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteVC.m; sourceTree = "<group>"; };
 		97AC4CA41DBDC73500DBBA74 /* UserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserVC.h; sourceTree = "<group>"; };
@@ -1060,6 +1069,24 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		978B69C31DD0231E0013E6B0 /* AWTextView */ = {
+			isa = PBXGroup;
+			children = (
+				978B69C41DD0233D0013E6B0 /* UITextView+AWPlaceholder.h */,
+				978B69C51DD0233D0013E6B0 /* UITextView+AWPlaceholder.m */,
+			);
+			path = AWTextView;
+			sourceTree = "<group>";
+		};
+		978B69C71DD026AF0013E6B0 /* AWDeallocBlock */ = {
+			isa = PBXGroup;
+			children = (
+				978B69C81DD026CF0013E6B0 /* NSObject+AWDeallocBlock.h */,
+				978B69C91DD026CF0013E6B0 /* NSObject+AWDeallocBlock.m */,
+			);
+			path = AWDeallocBlock;
+			sourceTree = "<group>";
+		};
 		97CF18641DC0737700ED8A73 /* 3rdLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -1238,6 +1265,8 @@
 				97CF19401DC2E5B500ED8A73 /* BusLineVC.m */,
 				97CF19451DC33D6B00ED8A73 /* BusLineDetailVC.h */,
 				97CF19461DC33D6B00ED8A73 /* BusLineDetailVC.m */,
+				978B69C01DD022170013E6B0 /* FeedbackVC.h */,
+				978B69C11DD022170013E6B0 /* FeedbackVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1310,6 +1339,8 @@
 		97F130391DAB18C500806E8A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				978B69C71DD026AF0013E6B0 /* AWDeallocBlock */,
+				978B69C31DD0231E0013E6B0 /* AWTextView */,
 				97579AB91DBF573C00D99981 /* Toast */,
 				97F1303A1DAB18C500806E8A /* AWAPIManager */,
 				97579A941DBDD62B00D99981 /* AWButton */,
@@ -1885,6 +1916,7 @@
 				97F130FA1DAB1C8800806E8A /* HomeVC.m in Sources */,
 				97579AB51DBF2FD700D99981 /* UITableView+RefreshControl.m in Sources */,
 				97F130E01DAB18D300806E8A /* AFURLResponseSerialization.m in Sources */,
+				978B69C61DD0233D0013E6B0 /* UITextView+AWPlaceholder.m in Sources */,
 				97AC4CA61DBDC73500DBBA74 /* UserVC.m in Sources */,
 				97AC4C931DBDA9FD00DBBA74 /* InviteVC.m in Sources */,
 				97CF194A1DC343AF00ED8A73 /* WalkingView.m in Sources */,
@@ -1921,12 +1953,14 @@
 				97F130D91DAB18D300806E8A /* AFHTTPRequestOperation.m in Sources */,
 				97579A8B1DBDCE5C00D99981 /* LoginVC.m in Sources */,
 				97F130A11DAB18C500806E8A /* AWLocationManager.m in Sources */,
+				978B69CA1DD026CF0013E6B0 /* NSObject+AWDeallocBlock.m in Sources */,
 				97579AAE1DBF164B00D99981 /* RTIDataService.m in Sources */,
 				97579ABC1DBF573C00D99981 /* UIView+Toast.m in Sources */,
 				975820EF1DC6E4A800CA1476 /* CTPersistanceTable+Insert.m in Sources */,
 				975820E01DC6E4A700CA1476 /* NSString+SQL.m in Sources */,
 				97F130A01DAB18C500806E8A /* AWKeyboardManager.m in Sources */,
 				97F130951DAB18C500806E8A /* APIManager.m in Sources */,
+				978B69C21DD022170013E6B0 /* FeedbackVC.m in Sources */,
 				97F131851DAB2F5E00806E8A /* SettingTableHeader.m in Sources */,
 				97CF18631DC05FF300ED8A73 /* AppInfo.m in Sources */,
 				975820E41DC6E4A700CA1476 /* CTPersistanceMigrator.m in Sources */,
