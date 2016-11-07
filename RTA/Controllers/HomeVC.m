@@ -105,6 +105,16 @@
         } else {
             NSLog(@"%@", location.description);
             [self startFetchStation];
+            [[AWLocationManager sharedInstance] startGeocodingLocation:location
+                                                            completion:^(id result, NSError *error)
+            {
+                if ( error ) {
+                    NSLog(@"位置逆编码失败：%@", error);
+                } else {
+                    NSLog(@"位置逆编码成功: %@", result);
+                }
+                
+            }];
         }
     }];
 }

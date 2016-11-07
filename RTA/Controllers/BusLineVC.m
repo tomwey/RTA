@@ -49,11 +49,12 @@
     Location *startLoc = self.params[@"start"];
     Location *endLoc   = self.params[@"end"];
     
+    NSString *city = [[[[AWLocationManager sharedInstance] currentGeocodeLocation] objectForKey:@"ad_info"] objectForKey:@"city"] ?: @"哈密";
     NSDictionary *params = @{ @"originlng": @(startLoc.coordinate.longitude),
                               @"originlat": @(startLoc.coordinate.latitude),
                               @"destinationlng": @(endLoc.coordinate.longitude),
                               @"destinationlat": @(endLoc.coordinate.latitude),
-                              @"city": @"哈密"
+                              @"city": city
                               };
     [self.dataService POST:@"GetGdmp" params:params completion:^(id result, NSError *error) {
 //        NSLog(@"result: %@, error: %@", result, error);

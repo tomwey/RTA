@@ -28,6 +28,7 @@ static NSString * const QQLBSServiceAPIKey = @"5TXBZ-RDMH3-6GN36-3YZ6J-2QJYK-XIF
 
 static NSString * const QQGeocodeAPI       = @"/ws/geocoder/v1";
 static NSString * const QQPOISearchAPI     = @"/ws/place/v1/search";
+static NSString * const QQPOISuggestionAPI     = @"/ws/place/v1/suggestion";
 
 - (void)parseLocation:(CLLocation *)aLocation completion:(void (^)(id result, NSError *error))completion
 {
@@ -61,13 +62,10 @@ static NSString * const QQPOISearchAPI     = @"/ws/place/v1/search";
     
     self.POISearchCompletionBlock = completion;
     
-    NSString *cityValue = [NSString stringWithFormat:@"region(%@,0)", boundary ?: @"成都"];
-    APIRequest* request = APIRequestCreate(QQPOISearchAPI, RequestMethodGet, @{@"keyword" : keyword,
-                                                                               @"boundary" : cityValue,
+//    NSString *cityValue = [NSString stringWithFormat:@"region(%@,0)", boundary ?: @"成都"];
+    APIRequest* request = APIRequestCreate(QQPOISuggestionAPI, RequestMethodGet, @{@"keyword" : keyword,
+                                                                               @"region" : boundary,
                                                                                @"key" : QQLBSServiceAPIKey,
-                                                                               //@"orderby" : @"_distance",
-                                                                               @"page_index" : @(1),
-                                                                               @"page_size" : @(20),
                                                                                });
     [self.POISearchAPIManager sendRequest:request];
 }

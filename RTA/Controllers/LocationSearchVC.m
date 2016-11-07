@@ -10,7 +10,7 @@
 #import "Defines.h"
 #import "LocationService.h"
 
-@interface LocationSearchVC () <UITableViewDataSource, UITableViewDelegate>
+@interface LocationSearchVC () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, weak) UIView *searchBg;
@@ -21,6 +21,10 @@
 
 @property (nonatomic, strong) UITableView *searchTableView;
 @property (nonatomic, strong) NSArray *searchDataSource;
+
+@property (nonatomic, assign) BOOL searching;
+
+@property (nonatomic, strong) NSURLSessionDataTask *suggestionTask;
 
 @end
 @implementation LocationSearchVC
@@ -54,11 +58,21 @@
     [searchBg addSubview:searchInput];
     searchInput.placeholder = @"输入地址";
     searchInput.autocorrectionType = UITextAutocorrectionTypeNo;
+    searchInput.returnKeyType = UIReturnKeyDone;
     
     [searchInput addTarget:self action:@selector(doSearch:)
           forControlEvents:UIControlEventEditingChanged];
+//    searchInput.delegate = self;
+    
+    [searchInput addTarget:self action:@selector(returnEnd:)
+          forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self loadSearchHistories];
+}
+
+- (void)returnEnd:(UITextField *)textField
+{
+    [textField resignFirstResponder];
 }
 
 - (void)loadSearchHistories
@@ -91,24 +105,43 @@
     if ( sender.text.trim.length == 0 ) {
         self.dataSource = @[];
         self.tableView.hidden = YES;
+        [self.tableView reloadData];
         self.searchTableView.hidden = NO;
     } else {
-        if ( !self.locationService ) {
-            self.locationService = [[LocationService alloc] init];
-        }
         
-        [self.locationService POISearch:sender.text.trim boundary:@"哈密" completion:^(NSArray *locations, NSError *aError) {
-//            NSLog(@"result: %@", locations);
-            self.dataSource = locations;
-            if ( [self.dataSource count] > 0 ) {
-                self.tableView.hidden = NO;
-                self.searchTableView.hidden = YES;
-                [self.tableView reloadData];
-            } else {
-                self.tableView.hidden = YES;
-                self.searchTableView.hidden = NO;
-            }
+        self.tableView.hidden = NO;
+        self.searchTableView.hidden = YES;
+        
+        [self.suggestionTask cancel];
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:
+                                 [NSURLSessionConfiguration defaultSessionConfiguration]];
+        NSString *city = [[[[AWLocationManager sharedInstance] currentGeocodeLocation] objectForKey:@"ad_info"] objectForKey:@"city"] ?: @"哈密";
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://apis.map.qq.com/ws/place/v1/suggestion?key=5TXBZ-RDMH3-6GN36-3YZ6J-2QJYK-XIFZI&keyword=%@&region=%@",[sender.text.trim URLEncode], [city URLEncode]]];
+        self.suggestionTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ( error ) {
+                    
+                } else {
+                    id obj = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                    self.dataSource = obj[@"data"];
+                    [self.tableView reloadData];
+                }
+            });
         }];
+        
+        [self.suggestionTask resume];
+        
+//        if ( !self.locationService ) {
+//            self.locationService = [[LocationService alloc] init];
+//        }
+//        
+//        NSString *city = [[[[AWLocationManager sharedInstance] currentGeocodeLocation] objectForKey:@"ad_info"] objectForKey:@"city"] ?: @"哈密";
+//        [self.locationService POISearch:sender.text.trim boundary:city completion:^(NSArray *locations, NSError *aError) {
+//            self.dataSource = locations;
+//            [self.tableView reloadData];
+//            NSLog(@"error: %@", aError);
+//        }];
     }
 }
 
@@ -126,6 +159,19 @@
         if ( !cell ) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell.id"];
         }
+        
+//        adcode = 510107;
+//        address = "\U56db\U5ddd\U7701\U6210\U90fd\U5e02\U6b66\U4faf\U533a\U5929\U5e9c\U4e8c\U8857368\U53f7";
+//        city = "\U6210\U90fd\U5e02";
+//        district = "\U6b66\U4faf\U533a";
+//        id = 2226525573170941485;
+//        location =     {
+//            lat = "30.55235";
+//            lng = "104.05955";
+//        };
+//        province = "\U56db\U5ddd\U7701";
+//        title = "\U7eff\U5730\U4e4b\U7a97";
+//        type = 0;
         
         cell.textLabel.text = [self.dataSource[indexPath.row] valueForKey:@"title"];
         
