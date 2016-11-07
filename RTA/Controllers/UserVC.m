@@ -250,6 +250,14 @@ UINavigationControllerDelegate>
                      otherButtonTitles:nil] show];
 }
 
+- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size {
+    UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return destImage;
+}
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
@@ -258,10 +266,13 @@ UINavigationControllerDelegate>
     
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
     
+    UIImage *resizeImage = [self imageWithImage:editedImage convertToSize:CGSizeMake(200, 200)];
+    
     NSString *imageString =
-    [UIImagePNGRepresentation(editedImage) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [UIImagePNGRepresentation(resizeImage) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 //    NSLog(@"imageString: \n%@", imageString);
     [MBProgressHUD showHUDAddedTo:self.contentView animated:YES];
+    
     [[UserService sharedInstance] updateAvatar:@{ @"image": imageString }
                                     completion:^(User *aUser, NSError *error) {
                                         [MBProgressHUD hideAllHUDsForView:self.contentView animated:YES];
@@ -270,7 +281,8 @@ UINavigationControllerDelegate>
                                             
                                             self.user = aUser;
                                             
-                                            [self.tableView reloadData];
+                                            self.avatarView.image = editedImage;
+//                                            [self.tableView reloadData];
                                         } else {
                                             [self.contentView makeToast:@"头像设置失败" duration:2.0 position:CSToastPositionTop];
                                         }

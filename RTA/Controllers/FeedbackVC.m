@@ -58,7 +58,9 @@
                                                   } completion:^(id result, NSError *error) {
                                                       [MBProgressHUD hideHUDForView:self.contentView animated:YES];
                                                       if ( !error ) {
-                                                          [self.contentView makeToast:@"提交成功" duration:2.0 position:CSToastPositionTop];
+                                                          [AWAppWindow() makeToast:@"意见反馈成功，感谢您宝贵的意见"
+                                                                             duration:2.0
+                                                                             position:CSToastPositionCenter];
                                                           [self.navigationController popViewControllerAnimated:YES];
                                                       } else {
                                                           [self.contentView makeToast:@"提交失败" duration:2.0 position:CSToastPositionTop];

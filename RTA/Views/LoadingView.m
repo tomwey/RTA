@@ -104,7 +104,7 @@
     } else {
         self.hidden = NO;
         
-        self.errorOrEmptyView.center = CGPointMake(self.width / 2, self.height / 2 - 20);
+        self.errorOrEmptyView.center = CGPointMake(self.width / 2, self.height / 2 - 30);
         self.errorOrEmptyView.hidden = NO;
         
         self.errorOrEmptyView.image = state == LoadingStateFail ? AWImageNoCached(@"notransfer.png") : AWImageNoCached(@"nodata.png");
@@ -113,7 +113,7 @@
                                                     self.errorOrEmptyView.bottom + 10 + self.errorOrEmptyLabel.height / 2);
         self.errorOrEmptyLabel.hidden = NO;
         
-        self.errorOrEmptyLabel.text = state == LoadingStateFail ? @"Oops, 查询失败了！" : @"暂未查询到相关数据";
+        self.errorOrEmptyLabel.text = state == LoadingStateFail ? @"很抱歉，经过努力\n未找到合适的换乘方案" : @"很抱歉，经过努力\n未找到合适的换乘方案";
     }
     
     self.state = state;
@@ -158,6 +158,7 @@
                                            nil,
                                            AWColorFromRGB(191, 192, 191));
         [self addSubview:_errorOrEmptyLabel];
+        _errorOrEmptyLabel.numberOfLines = 2;
     }
     
     return _errorOrEmptyLabel;
