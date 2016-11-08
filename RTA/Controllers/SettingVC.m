@@ -47,6 +47,10 @@
     self.tableView.tableHeaderView = [[SettingTableHeader alloc] init];
     self.tableHeader = (SettingTableHeader *)self.tableView.tableHeaderView;
     
+    self.tableView.separatorColor = AWColorFromHex(@"#e5e5e5");
+    
+    self.tableView.sectionHeaderHeight = 10;
+    self.tableView.sectionFooterHeight = 0;
     __weak typeof(self) me = self;
     self.tableHeader.didSelectCallback = ^(SettingTableHeader *sender) {
         [me gotoUserProfile];

@@ -34,7 +34,7 @@
     
     AWButton *saveBtn = [AWButton buttonWithTitle:@"保存" color:NAV_BAR_BG_COLOR];
     saveBtn.frame = textField.frame;
-    saveBtn.height = 44;
+    saveBtn.height = 40;
     saveBtn.top = textField.bottom + 20;
     
     [self.contentView addSubview:saveBtn];

@@ -83,7 +83,7 @@
     if ( !_nickname ) {
         _nickname = AWCreateLabel(CGRectZero, @"请登录",
                                   NSTextAlignmentLeft,
-                                  AWSystemFontWithSize(20, NO),
+                                  AWSystemFontWithSize(18, NO),
                                   [UIColor whiteColor]);
         [self addSubview:_nickname];
     }

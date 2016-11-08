@@ -36,7 +36,7 @@
     
     AWButton *sendBtn = [AWButton buttonWithTitle:@"提交" color:NAV_BAR_BG_COLOR];
     sendBtn.frame = textView.frame;
-    sendBtn.height = 44;
+    sendBtn.height = 40;
     sendBtn.top = textView.bottom  + 20;
     [self.contentView addSubview:sendBtn];
     

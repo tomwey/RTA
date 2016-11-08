@@ -123,7 +123,7 @@
     // 确定
     AWButton *okButton = [AWButton buttonWithTitle:@"确定" color:NAV_BAR_BG_COLOR];
     [self.contentView addSubview:okButton];
-    okButton.frame = CGRectMake(30, inputBg.bottom + 20, self.contentView.width - 30 * 2, 44);
+    okButton.frame = CGRectMake(30, inputBg.bottom + 20, self.contentView.width - 30 * 2, 40);
     [okButton addTarget:self forAction:@selector(doQuery)];
     
     self.okButton = okButton;

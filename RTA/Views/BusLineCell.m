@@ -170,7 +170,7 @@
         _titleLabel = AWCreateLabel(CGRectZero,
                                     nil,
                                     NSTextAlignmentLeft,
-                                    AWSystemFontWithSize(20, NO),
+                                    AWSystemFontWithSize(16, NO),
                                     AWColorFromRGB(57, 57, 57));
         [self.container addSubview:_titleLabel];
     }
@@ -182,7 +182,7 @@
     if ( !_bodyLabel ) {
         _bodyLabel = AWCreateLabel(CGRectZero, nil,
                                    NSTextAlignmentLeft,
-                                   AWSystemFontWithSize(15, NO),
+                                   AWSystemFontWithSize(14, NO),
                                    AWColorFromRGB(135, 135, 135));
         [self.container addSubview:_bodyLabel];
     }

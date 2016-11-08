@@ -182,7 +182,7 @@
         _currentStationLabel = AWCreateLabel(CGRectZero,
                                       nil,
                                       NSTextAlignmentRight,
-                                      AWSystemFontWithSize(16, YES),
+                                      AWSystemFontWithSize(BUS_LIST_FONT_SMALL, YES),
                                       AWColorFromRGB(79, 150, 214));
         [self.containerView addSubview:_currentStationLabel];
     }

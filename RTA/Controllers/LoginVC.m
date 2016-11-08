@@ -30,7 +30,7 @@
     [self.contentView addSubview:inputBGView];
     inputBGView.backgroundColor = [UIColor whiteColor];
     
-    inputBGView.layer.borderColor = [IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR CGColor];
+    inputBGView.layer.borderColor = [AWColorFromHex(@"#e5e5e5") CGColor];
     inputBGView.layer.borderWidth = 0.5;//( 1.0 / [[UIScreen mainScreen] scale] ) / 2;
     
     inputBGView.clipsToBounds = YES;
@@ -55,7 +55,7 @@
     userField.width -= iconView.width - 10;
     
     UIView *hairLine = [AWHairlineView horizontalLineWithWidth:inputBGView.width
-                                                         color:IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR
+                                                         color:AWColorFromHex(@"#e5e5e5")
                                                         inView:inputBGView];
     hairLine.center = CGPointMake(hairLine.width / 2, inputBGView.height / 2);
     
@@ -85,14 +85,15 @@
                                              self,
                                              @selector(forgetPassword));
     [self.contentView addSubview:forgetBtn];
-    forgetBtn.position = CGPointMake(inputBGView.right - forgetBtn.width,
+    forgetBtn.position = CGPointMake(inputBGView.right - forgetBtn.width + 5,
                                      inputBGView.bottom + 5);
+    forgetBtn.titleLabel.font = AWSystemFontWithSize(15, NO);
 
     // 注册按钮
     CGFloat buttonWidth = ( self.contentView.width - 15 * 2 - 20 ) / 2;
     AWButton *signupButton = [AWButton buttonWithTitle:@"注册" color:NAV_BAR_BG_COLOR];
     [self.contentView addSubview:signupButton];
-    signupButton.frame = CGRectMake(15, forgetBtn.bottom + 20, buttonWidth, 50);
+    signupButton.frame = CGRectMake(15, forgetBtn.bottom + 20, buttonWidth, 40);
     signupButton.outline = YES;
     signupButton.cornerRadius = 4;
     

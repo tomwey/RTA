@@ -29,7 +29,7 @@
     [self.contentView addSubview:inputBGView];
     inputBGView.backgroundColor = [UIColor whiteColor];
     
-    inputBGView.layer.borderColor = [IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR CGColor];
+    inputBGView.layer.borderColor = [AWColorFromHex(@"#e5e5e5") CGColor];//[IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR CGColor];
     inputBGView.layer.borderWidth = 0.5;//( 1.0 / [[UIScreen mainScreen] scale] ) / 2;
     
     inputBGView.clipsToBounds = YES;
@@ -46,7 +46,7 @@
     self.password1Field = userField;
     
     UIView *hairLine = [AWHairlineView horizontalLineWithWidth:inputBGView.width
-                                                         color:IOS_DEFAULT_CELL_SEPARATOR_LINE_COLOR
+                                                         color:AWColorFromHex(@"#e5e5e5")
                                                         inView:inputBGView];
     hairLine.center = CGPointMake(hairLine.width / 2, inputBGView.height / 2);
     
@@ -63,7 +63,7 @@
     // 确定按钮
     AWButton *okButton = [AWButton buttonWithTitle:@"完成" color:NAV_BAR_BG_COLOR];
     [self.contentView addSubview:okButton];
-    okButton.frame = CGRectMake(15, inputBGView.bottom  + 15, inputBGView.width, 50);
+    okButton.frame = CGRectMake(15, inputBGView.bottom  + 15, inputBGView.width, 40);
     [okButton addTarget:self forAction:@selector(done)];
 
 }
