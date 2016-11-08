@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, AWLocationError) {
 
 @interface AWLocationManager : NSObject
 
-/** 返回当前最新的位置 */
+/** 返回当前最新的位置，火星坐标 */
 @property (nonatomic, strong, readonly) CLLocation *currentLocation;
 
 /** 返回当前最新的位置逆编码信息 */

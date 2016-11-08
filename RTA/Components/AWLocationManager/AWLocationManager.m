@@ -117,7 +117,9 @@ NSString * const AWLocationManagerDidFinishGeocodingLocationNotification = @"AWL
                              [NSURLSessionConfiguration defaultSessionConfiguration]];
     
     NSString* locationVal = [NSString stringWithFormat:@"%.06lf,%.06lf", aLocation.coordinate.latitude, aLocation.coordinate.longitude];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?location=%@&key=%@&coord_type=1",
+    // coord_type = 1表示GPS坐标
+    // coord_type = 5表示火星坐标
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@?location=%@&key=%@&coord_type=5",
                                        QQLBSServer, QQGeocodeAPI, locationVal, QQLBSServiceAPIKey]];
 #if DEBUG
     NSLog(@"开始解析位置：%@", url);
