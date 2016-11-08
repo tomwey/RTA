@@ -48,6 +48,8 @@
 #define WX_APP_ID     @"wx0a45255c7eb48647"
 #define WX_APP_SECRET @"31130acde0e69ede9e6850f86f0050d8"
 
+#define AMAP_API_KEY  @"6f4e24990a00e6aa94c66671cbb3a82d"
+
 #define QQ_APP_ID     @"1105708415"
 #define QQ_APP_SECRET @"QDJvHqvcyZ5eod53"
 

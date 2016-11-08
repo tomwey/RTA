@@ -117,14 +117,51 @@
         NSURLSession *session = [NSURLSession sessionWithConfiguration:
                                  [NSURLSessionConfiguration defaultSessionConfiguration]];
         NSString *city = [[[[AWLocationManager sharedInstance] currentGeocodeLocation] objectForKey:@"ad_info"] objectForKey:@"city"] ?: @"哈密";
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://apis.map.qq.com/ws/place/v1/suggestion?key=5TXBZ-RDMH3-6GN36-3YZ6J-2QJYK-XIFZI&keyword=%@&region=%@",[sender.text.trim URLEncode], [city URLEncode]]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://restapi.amap.com/v3/assistant/inputtips?city=%@&keywords=%@&key=6f4e24990a00e6aa94c66671cbb3a82d",[city URLEncode], [sender.text.trim URLEncode]]];
         self.suggestionTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ( error ) {
                     
                 } else {
                     id obj = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                    self.dataSource = obj[@"data"];
+//                    id: "B001C7WEYU",
+//                name: "天府广场",
+//                district: "四川省成都市青羊区",
+//                adcode: "510105",
+//                location: "104.065837,30.657349",
+//                address: "人民东路",
+//                typecode: "110105"
+//                    {
+//                        id: [ ],
+//                    name: "招商银行",
+//                    district: [ ],
+//                    adcode: [ ],
+//                    location: [ ],
+//                    address: [ ],
+//                    typecode: [ ]
+//                    }
+//                    self.dataSource = obj[@"tips"];
+                    NSArray *result = obj[@"tips"];
+                    NSMutableArray *ds = [NSMutableArray array];
+                    for (id dict in result) {
+                        if ( ![dict objectForKey:@"location"] ||
+                            [[dict objectForKey:@"location"] isEqual:[NSNull null]] ||
+                            [[dict objectForKey:@"location"] isKindOfClass:[NSArray class]] ||
+                            [[dict objectForKey:@"location"] isKindOfClass:[NSNull class]]) {
+                            continue;
+                        }
+                        
+                        NSDictionary *newDict = @{ @"title": dict[@"name"],
+                                                   @"location": @{
+                                                           @"lat": [[dict[@"location"] componentsSeparatedByString:@","] lastObject] ?: @"0",
+                                                           @"lng": [[dict[@"location"] componentsSeparatedByString:@","] firstObject] ?: @"0"
+                                                           }};
+                        [ds addObject:newDict];
+                        
+                    }
+                    
+                    self.dataSource = ds;
+                    
                     [self.tableView reloadData];
                 }
             });

@@ -37,7 +37,7 @@
         [self addSubview:self.endIconView];
         
         self.startLabel.text = [NSString stringWithFormat:@"%@ 上车", buslineData[@"departure_stop"][@"name"]];
-        self.totalLabel.text = [NSString stringWithFormat:@"共%@站", buslineData[@"via_num"]];
+        self.totalLabel.text = [NSString stringWithFormat:@"共%d站", [buslineData[@"via_num"] intValue] + 1];
         self.endLabel.text   = [NSString stringWithFormat:@"%@ 下车",buslineData[@"arrival_stop"][@"name"]];
     }
     return self;

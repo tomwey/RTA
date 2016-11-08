@@ -88,8 +88,9 @@
     // 添加中间步骤
     NSArray *segments = self.params[@"busline"][@"segments"];
     for (id seg in segments) {
+        NSLog(@"seg: %@", seg);
         id walking = seg[@"walking"];
-        if ( walking ) {
+        if ( walking && [walking isKindOfClass:[NSDictionary class]] ) {
             WalkingView *wView = [[WalkingView alloc] initWithWalkingData:walking];
             [self.buslineContentView addSubview:wView];
             wView.frame = CGRectMake(15, top + 5, self.contentView.width - 30, 60);
@@ -97,7 +98,7 @@
         }
         
         id busline = [seg[@"bus"][@"buslines"] firstObject];
-        if ( busline ) {
+        if ( busline && [busline isKindOfClass:[NSDictionary class]] ) {
             BusLineView *bView = [[BusLineView alloc] initWithBuslineData:busline];
             [self.buslineContentView addSubview:bView];
             bView.frame = CGRectMake(15, top, self.contentView.width - 30,

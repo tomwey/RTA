@@ -101,9 +101,9 @@
                     id busline = [buslinesArr firstObject];
                     
                     //                NSLog(@"busline: %@", busline);
-                    total += [busline[@"via_num"] integerValue];
+                    total += [busline[@"via_num"] integerValue] + 1;
                     NSString *name = [busline[@"name"] description];
-                    
+                    NSLog(@"name: %@", name);
                     NSInteger location = [name rangeOfString:@"("].location;
                     if ( location != NSNotFound ) {
                         name = [name substringToIndex:location];
