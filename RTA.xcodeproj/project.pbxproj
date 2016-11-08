@@ -152,6 +152,7 @@
 		978B69C21DD022170013E6B0 /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 978B69C11DD022170013E6B0 /* FeedbackVC.m */; };
 		978B69C61DD0233D0013E6B0 /* UITextView+AWPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 978B69C51DD0233D0013E6B0 /* UITextView+AWPlaceholder.m */; };
 		978B69CA1DD026CF0013E6B0 /* NSObject+AWDeallocBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 978B69C91DD026CF0013E6B0 /* NSObject+AWDeallocBlock.m */; };
+		978B69D81DD1B3CE0013E6B0 /* WGS84ToGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 978B69D71DD1B3CE0013E6B0 /* WGS84ToGCJ02.m */; };
 		97AC4C931DBDA9FD00DBBA74 /* InviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AC4C921DBDA9FD00DBBA74 /* InviteVC.m */; };
 		97AC4CA61DBDC73500DBBA74 /* UserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AC4CA51DBDC73500DBBA74 /* UserVC.m */; };
 		97BF23D51DBD8E1C0009F46C /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF23D41DBD8E1C0009F46C /* WebViewVC.m */; };
@@ -451,6 +452,8 @@
 		978B69C51DD0233D0013E6B0 /* UITextView+AWPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+AWPlaceholder.m"; sourceTree = "<group>"; };
 		978B69C81DD026CF0013E6B0 /* NSObject+AWDeallocBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AWDeallocBlock.h"; sourceTree = "<group>"; };
 		978B69C91DD026CF0013E6B0 /* NSObject+AWDeallocBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AWDeallocBlock.m"; sourceTree = "<group>"; };
+		978B69D61DD1B3CE0013E6B0 /* WGS84ToGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84ToGCJ02.h; sourceTree = "<group>"; };
+		978B69D71DD1B3CE0013E6B0 /* WGS84ToGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84ToGCJ02.m; sourceTree = "<group>"; };
 		97AC4C911DBDA9FD00DBBA74 /* InviteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteVC.h; sourceTree = "<group>"; };
 		97AC4C921DBDA9FD00DBBA74 /* InviteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteVC.m; sourceTree = "<group>"; };
 		97AC4CA41DBDC73500DBBA74 /* UserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserVC.h; sourceTree = "<group>"; };
@@ -1463,6 +1466,8 @@
 			children = (
 				97F1306B1DAB18C500806E8A /* AWLocationManager.h */,
 				97F1306C1DAB18C500806E8A /* AWLocationManager.m */,
+				978B69D61DD1B3CE0013E6B0 /* WGS84ToGCJ02.h */,
+				978B69D71DD1B3CE0013E6B0 /* WGS84ToGCJ02.m */,
 			);
 			path = AWLocationManager;
 			sourceTree = "<group>";
@@ -1987,6 +1992,7 @@
 				975820E31DC6E4A700CA1476 /* CTPersistanceDatabasePool.m in Sources */,
 				991443DC1DC2492F0037B424 /* LocationService.m in Sources */,
 				97F12FEF1DAB15AA00806E8A /* main.m in Sources */,
+				978B69D81DD1B3CE0013E6B0 /* WGS84ToGCJ02.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

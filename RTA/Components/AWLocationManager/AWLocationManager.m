@@ -7,6 +7,7 @@
 //
 
 #import "AWLocationManager.h"
+#import "WGS84ToGCJ02.h"
 
 @interface AWLocationManager () <CLLocationManagerDelegate>
 
@@ -185,9 +186,21 @@ NSString * const AWLocationManagerDidFinishGeocodingLocationNotification = @"AWL
 {
     CLLocation *location = [locations lastObject];
     
-    self.currentLocation = location;
+//    NSLog(@"转换前：%@", location);
+    // 转换成火星坐标
+    self.currentLocation = [[CLLocation alloc] initWithCoordinate:[self transformWGS84ToGCJ:location.coordinate]
+                                                         altitude:location.altitude
+                                               horizontalAccuracy:location.horizontalAccuracy
+                                                 verticalAccuracy:location.verticalAccuracy
+                                                           course:location.course
+                                                            speed:location.speed
+                                                        timestamp:location.timestamp];
     
-    [self handleCompletion:location error:nil];
+    //[[CLLocation alloc] initWithLatitude:[self transformWGS84ToGCJ:location.coordinate].latitude
+      //                                                longitude:[self transformWGS84ToGCJ:location.coordinate].longitude];
+//    NSLog(@"转换后：%@", self.currentLocation);
+    
+    [self handleCompletion:self.currentLocation error:nil];
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -284,6 +297,11 @@ NSString * const AWLocationManagerDidFinishGeocodingLocationNotification = @"AWL
 #if DEBUG
     NSLog(@"<%@:(%d)> %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__,msg);
 #endif
+}
+
+- (CLLocationCoordinate2D)transformWGS84ToGCJ:(CLLocationCoordinate2D)wgs84Loc
+{
+    return [WGS84ToGCJ02 transformFromWGSToGCJ:wgs84Loc];
 }
 
 @end
