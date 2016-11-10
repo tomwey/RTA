@@ -89,6 +89,7 @@
     
     if ( ![obj valueForKey:@"action"] ) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType  = UITableViewCellAccessoryNone;
     }
     
     cell.imageView.image = [UIImage imageNamed:[[obj valueForKey:@"icon"] description]];
